@@ -1,0 +1,5 @@
+Manifest.toml
+tcode.jl
+tmp*
+env/
+*/__pycache__

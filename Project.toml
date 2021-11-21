@@ -1,0 +1,4 @@
+[deps]
+ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
+QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
+QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"

@@ -1,0 +1,3 @@
+We have installed juliacall in editable mode.
+This can also be installed via pypi with pip, as usual.
+-e git+https://github.com/cjdoris/PythonCall.jl@bd775f937b7ca7b5c106f99526f201d32a17a8ec#egg=juliacall
