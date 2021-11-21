@@ -3,3 +3,5 @@ tcode.jl
 tmp*
 env/
 */__pycache__
+qiskit-terra/
+

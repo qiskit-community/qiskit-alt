@@ -1,3 +1,14 @@
+### pyjulia and juliacall
+
+We may use pyjulia or juliacall or both. At the moment, it looks like pyjulia
+is preferred.
+
+However, we have installed juliacll.
 We have installed juliacall in editable mode.
 This can also be installed via pypi with pip, as usual.
 -e git+https://github.com/cjdoris/PythonCall.jl@bd775f937b7ca7b5c106f99526f201d32a17a8ec#egg=juliacall
+
+### qiskit-terra
+
+We need a development version of qiskit-terra. So we clone the repo into qiskit-terra in the
+toplevel and cd into qiskit-terra and do "pip -e ."
