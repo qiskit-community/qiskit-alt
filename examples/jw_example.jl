@@ -1,5 +1,7 @@
 # # Jordan-Wigner transform
 
+ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
+
 # Load the interface to electronic structure packages.
 # As with Qiskit and OpenFermion driver libraries, `ElectronicStructure` does
 # a bit of calculation, as well.
@@ -29,7 +31,7 @@ geoms = (
 );
 
 # Choose one of the geometries, 1, 2, or 3.
-geom = geoms[1]
+geom = geoms[3]
 
 # Choose a orbital basis set.
 basis = "sto-3g";

@@ -12,5 +12,7 @@ api.init_julia()
 from julia import Main
 from julia import Base
 
+from os.path import dirname
+toplevel = dirname(dirname(__file__))
 from julia import Pkg
-Pkg.activate(".") # Use package data in Project.toml
+Pkg.activate(toplevel) # Use package data in Project.toml
