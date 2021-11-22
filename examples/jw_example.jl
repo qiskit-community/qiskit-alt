@@ -34,8 +34,8 @@ geoms = (
 geom = geoms[3]
 
 # Choose a orbital basis set.
-basis = "sto-3g";
-## basis = "631g"
+# basis = "sto-3g";
+basis = "631g"
 
 # We have chosen the crudest basis set and the smallest molecule. Otherwise
 # the size of the data structures is too large to display in a demonstration.
@@ -74,3 +74,4 @@ using QuantumOps: jordan_wigner
 # Compute the Jordan-Wigner transform
 pauli_op = jordan_wigner(fermi_op)
 
+nothing;
