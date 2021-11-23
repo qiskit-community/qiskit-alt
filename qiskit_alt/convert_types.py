@@ -44,7 +44,7 @@ def Geometry(qiskit_geometry):
     return Main.qiskt_geometry_to_Geometry(qiskit_geometry)
 
 def qubit_hamiltonian(geometry, basis):
-    jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure
+    jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
     pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
