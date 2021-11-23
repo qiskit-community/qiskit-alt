@@ -18,13 +18,12 @@ def jlSparsePauliOp(sp):
     pl = PauliList.from_symplectic(sp.pauli_list.z, sp.pauli_list.x)
     return SparsePauliOp(pl, sp.coeffs)
 
-
 from os.path import dirname
 toplevel = dirname(dirname(__file__))
 julia_dir = toplevel + "/julia"
 
+# TODO: This could probably be moved to QiskitQuantumInfo.jl
 Main.eval('include("' + julia_dir + '/electronic_structure.jl")')
-
 
 def Geometry(qiskit_geometry):
     """
@@ -49,22 +48,12 @@ def fermionic_hamiltonian(geometry, basis):
     return fermi_op
 
 def qubit_hamiltonian(fermi_op):
-    # jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
-    # pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
-#    fermi_op = fermionic_hamiltonian(geometry, basis)
     pauli_op = Main.qubit_hamiltonian(fermi_op)
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop
 
-# def qubit_hamiltonian(geometry, basis):
-#     # jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
-#     # pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
-#     fermi_op = fermionic_hamiltonian(geometry, basis)
-#     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
-#     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
-#     return spop
-
+# TODO: bitrot. this is broken. Easy to fix
 # This is only a bit faster than above. The two final conversions are typically relatively very fast.
 def qubit_hamiltonian_no_convert(geometry, basis):
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry

@@ -56,9 +56,12 @@ distributing a pre-compiled system image.
 * Python side: This package is developed using an environment created via `python -m venv ./env`. It may be compatible with
 other management systems.
 
+* The path to the Julia binary is hardcoded in `./qiskit_alt/activate_julia.py`
+
 * The Julia package requirements are handled using the standard `Project.toml` file. This seems to work when using
-`pyjulia` to call Julia from Python. There is a way to install the required Julia packages via python, but we have
-not done this. At the moment you need to start Julia and to `Pkg.activate(".")` and `Pkg.instantiate()`.
+`pyjulia` to call Julia from Python. At the moment you need to start Julia and to `Pkg.activate(".")` and `Pkg.instantiate()`. This
+only has to be done once. There is a way to install the required Julia packages via python, but we have
+not done this. 
 
 * The Julia repos `QuantumOps` and `ElectronicStructure` are not registered. You need to install the master branch of each
 
@@ -66,7 +69,7 @@ not done this. At the moment you need to start Julia and to `Pkg.activate(".")` 
   and `pip list --not-required` both seem to erroneously omit some required pacakges and to erroneously include
   some dependencies of installed packages.
 
-* We often use this incantation at the top of Julia code `ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")` to get the correct python
+* We sometimes use this incantation at the top of Julia code `ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")` to get the correct python
 interpreter. Note that the built-in Julia shell and Julia `Sys` report different paths for python. In particular the Julia shell
 does not inherit the path from the system shell from which Julia was invoked.
 
