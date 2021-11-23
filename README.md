@@ -15,7 +15,10 @@ methods for calling dynamically linked libraries. We have not yet explored this.
 ### Demonstration
 
 A demonstration of computing a qubit Hamiltonian representing the electronic structure of a molecule starting with
-the description of the molecule is provided. In the following benchmark the Julia version runs about 60 times faster
+the description of the molecule is provided. The following demo has been superceded by
+this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+
+In the following benchmark the Julia version runs about 60 times faster
 than the equivalent calculation in qiskit-nature.
 
 First you need to install the python and Julia components.
