@@ -5,8 +5,6 @@ using ElectronicStructure: Atom, Geometry, MolecularSpec,
 
 using QuantumOps: jordan_wigner, FermiSum
 
-println("Loading electronic_structure.jl")
-
 """
     qiskt_geometry_to_Geometry(geometry::Matrix)
 
@@ -39,7 +37,7 @@ function qiskt_geometry_to_Geometry(geometry::Matrix)
     return Geometry(atoms...)
 end
 
-function qubit_hamiltonian(geometry::Geometry, basis)
+function fermionic_hamiltonian(geometry::Geometry, basis)
     # Construct the specification of the electronic structure problem.
     mol_spec = MolecularSpec(geometry=geometry, basis=basis)
 
@@ -47,7 +45,16 @@ function qubit_hamiltonian(geometry::Geometry, basis)
     # `mol_pyscf` holds a constant, a rank-two tensor, and a rank-four tensor.
     mol_pyscf = MolecularData(PySCF, mol_spec);
     iop = InteractionOperator(mol_pyscf);
-    fermi_op = FermiSum(iop)
+    return FermiSum(iop)
+end
+
+function qubit_hamiltonian(fermi_op)
     pauli_op = jordan_wigner(fermi_op)
     return pauli_op
 end
+
+# function qubit_hamiltonian(geometry::Geometry, basis)
+#     fermi_op = fermionic_hamiltonian(geometry::Geometry, basis)
+#     pauli_op = jordan_wigner(fermi_op)
+#     return pauli_op
+# end

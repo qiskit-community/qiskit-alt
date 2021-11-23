@@ -10,7 +10,8 @@ geometry = [['O', [0., 0., 0.]],
 
 
 #basis = 'sto3g'
-basis = '631g'
+#basis = '631g'
+basis = 'dzvp2'
 
 molecule = Molecule(geometry=geometry,
                      charge=0, multiplicity=1)
@@ -24,4 +25,4 @@ es_problem = ElectronicStructureProblem(driver)
 second_q_op = es_problem.second_q_ops()
 
 qubit_converter = QubitConverter(mapper=JordanWignerMapper())
-qubit_op = qubit_converter.convert(second_q_op[0])
+nature_qubit_op = qubit_converter.convert(second_q_op[0])

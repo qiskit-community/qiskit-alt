@@ -43,12 +43,27 @@ def Geometry(qiskit_geometry):
     """
     return Main.qiskt_geometry_to_Geometry(qiskit_geometry)
 
-def qubit_hamiltonian(geometry, basis):
+def fermionic_hamiltonian(geometry, basis):
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
-    pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
+    fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
+    return fermi_op
+
+def qubit_hamiltonian(fermi_op):
+    # jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
+    # pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
+#    fermi_op = fermionic_hamiltonian(geometry, basis)
+    pauli_op = Main.qubit_hamiltonian(fermi_op)
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop
+
+# def qubit_hamiltonian(geometry, basis):
+#     # jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
+#     # pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
+#     fermi_op = fermionic_hamiltonian(geometry, basis)
+#     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
+#     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
+#     return spop
 
 # This is only a bit faster than above. The two final conversions are typically relatively very fast.
 def qubit_hamiltonian_no_convert(geometry, basis):
