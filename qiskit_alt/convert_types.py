@@ -50,3 +50,8 @@ def qubit_hamiltonian(geometry, basis):
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop
 
+# This is only a bit faster than above. The two final conversions are typically relatively very fast.
+def qubit_hamiltonian_no_convert(geometry, basis):
+    jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
+    pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
+    return pauli_op

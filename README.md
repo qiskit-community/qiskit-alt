@@ -44,7 +44,9 @@ distributing a pre-compiled system image.
 * The phase of the Pauli operators is computed incorrectly. But, correcting this will have a negligible impact on performance.
 
 * The efficiency of the qiskit-nature version could be improved by a more efficient implementation of Fermi operators. The
-  efficiency of this package, qiskit_alt, could be improved by reducing the amount of copying.
+  efficiency of this package, qiskit_alt, could be improved by reducing the amount of copying. EDIT:
+  of the 773ms above, about 2.5ms are spent translating the result of the JW transform through two different representations
+  and then copying buffers to a Python object.
 
 ### Installation/configuration notes
 
