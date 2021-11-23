@@ -81,6 +81,15 @@ julia> Sys.which("python")
 "/home/lapeyre/myrepos/quantum_repos/qiskit_alt/env/bin/python"
 ```
 
+* One way to enable Julia threads (on linux, and maybe other platforms) is by setting an environment variable.
+For example `export JULIA_NUM_THREADS=4`. You can check that the threads are available like this.
+```python
+In [1]: from qiskit_alt import Main  # You could just as well import `Base`
+
+In [2]: Main.Threads.nthreads()
+Out[2]: 12
+```
+
 ### Required packages
 
 Eventually, we should construct a proper requirements.txt file and whatever other manifest and configuration files are necessary.
