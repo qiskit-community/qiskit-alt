@@ -48,6 +48,9 @@ distributing a pre-compiled system image.
   of the 773ms above, about 2.5ms are spent translating the result of the JW transform through two different representations
   and then copying buffers to a Python object.
 
+* The benchmark above used the "631g" basis. If we instead use the "dzvp2" basis, then the qiskit_alt computation of the Pauli Hamiltonian
+  finishes in 18s. The qiskit-nature computation finishes in 5730s.
+
 ### Installation/configuration notes
 
 * Python side: This package is developed using an environment created via `python -m venv ./env`. It may be compatible with
