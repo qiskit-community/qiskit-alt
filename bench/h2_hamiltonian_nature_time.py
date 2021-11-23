@@ -13,9 +13,6 @@ h2o_geometry = [['O', [0., 0., 0.]],
             ['H', [-0.757, 0.586, 0.]]]
 
 basis = {basis}
-#basis = '631g'
-#basis = 'dzvp'
-#basis = '631++g'
 
 molecule = Molecule(geometry={geometry},
                      charge=0, multiplicity=1)
