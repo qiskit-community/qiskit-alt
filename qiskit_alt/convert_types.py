@@ -18,6 +18,11 @@ def jlSparsePauliOp(sp):
     pl = PauliList.from_symplectic(sp.pauli_list.z, sp.pauli_list.x)
     return SparsePauliOp(pl, sp.coeffs)
 
+def PauliSum_to_SparsePauliOp(ps):
+    spop_jl = QiskitQuantumInfo.SparsePauliOp(ps) # Convert to QiskitQuantumInfo.SparsePauliOp
+    spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
+    return spop
+
 from os.path import dirname
 toplevel = dirname(dirname(__file__))
 julia_dir = toplevel + "/julia"

@@ -14,9 +14,11 @@ methods for calling dynamically linked libraries. We have not yet explored this.
 
 ### Demonstration
 
+The demo in this section  has been superceded by several demos
+in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+
 A demonstration of computing a qubit Hamiltonian representing the electronic structure of a molecule starting with
-the description of the molecule is provided. The following demo has been superceded by
-this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+the description of the molecule is provided.
 
 In the following benchmark the Julia version runs about 60 times faster
 than the equivalent calculation in qiskit-nature.
