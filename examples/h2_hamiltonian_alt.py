@@ -4,7 +4,7 @@ geometry = [['H', [0., 0., 0.]], ['H', [0., 0., 0.7414]]]
 basis = '631++g'
 
 fermi_op = qiskit_alt.fermionic_hamiltonian(geometry, basis)
-pauli_op = qiskit_alt.qubit_hamiltonian(fermi_op)
+pauli_op = qiskit_alt.jordan_wigner(fermi_op)
 
 #basis = '631g'
 #basis = 'dzvp'
@@ -12,8 +12,5 @@ pauli_op = qiskit_alt.qubit_hamiltonian(fermi_op)
 # Too big
 #basis = 'dzp'
 #basis = 'dzvp2'
-
-#code = "qiskit_alt.qubit_hamiltonian_no_convert(geometry, basis)"
-#pauli_op = qiskit_alt.qubit_hamiltonian_no_convert(geometry, basis)
 
 

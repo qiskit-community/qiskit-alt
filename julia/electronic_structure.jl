@@ -3,7 +3,7 @@
 using ElectronicStructure: Atom, Geometry, MolecularSpec,
     InteractionOperator, PySCF, MolecularData
 
-using QuantumOps: jordan_wigner, FermiSum
+using QuantumOps: FermiSum
 
 """
     qiskt_geometry_to_Geometry(geometry::Matrix)
@@ -48,10 +48,12 @@ function fermionic_hamiltonian(geometry::Geometry, basis)
     return FermiSum(iop)
 end
 
-function qubit_hamiltonian(fermi_op)
-    pauli_op = jordan_wigner(fermi_op)
-    return pauli_op
-end
+
+# Not useful. Just call jordan_wigner(fermi_op) directly
+# function qubit_hamiltonian(fermi_op)
+#     pauli_op = jordan_wigner(fermi_op)
+#     return pauli_op
+# end
 
 # function qubit_hamiltonian(geometry::Geometry, basis)
 #     fermi_op = fermionic_hamiltonian(geometry::Geometry, basis)

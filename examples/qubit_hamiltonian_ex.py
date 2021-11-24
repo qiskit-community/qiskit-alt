@@ -10,5 +10,4 @@ geometry = [['O', [0., 0., 0.]],
 #basis = '631g'
 basis = 'dzvp2'
 
-#pauli_op = qiskit_alt.qubit_hamiltonian_no_convert(geometry, basis)
-pauli_op = qiskit_alt.qubit_hamiltonian(geometry, basis)
+pauli_op = qiskit_alt.jordan_wigner(geometry, basis)

@@ -52,8 +52,9 @@ def fermionic_hamiltonian(geometry, basis):
     fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
     return fermi_op
 
-def qubit_hamiltonian(fermi_op):
-    pauli_op = Main.qubit_hamiltonian(fermi_op)
+def jordan_wigner(fermi_op):
+    pauli_op = QuantumOps.jordan_wigner(fermi_op)
+#    pauli_op = Main.qubit_hamiltonian(fermi_op)
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop
