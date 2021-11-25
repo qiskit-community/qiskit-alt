@@ -66,7 +66,12 @@ other management systems.
 * The Julia package requirements are handled using the standard `Project.toml` file. This seems to work when using
 `pyjulia` to call Julia from Python. At the moment you need to start Julia and to `Pkg.activate(".")` and `Pkg.instantiate()`. This
 only has to be done once. There is a way to install the required Julia packages via python, but we have
-not done this. 
+not done this. Well, you can also use `Pkg` from pyjulia directly.
+
+* The `Manifest.toml` file is included in this repository because it includes information on where to get the packages, which
+  allows them to found automatically when doing `Pkg.instantiate()`.
+  Since some packages, namely `QuantumOps`, `ElectronicStructure`, and , `QiskitQuantumInfo`, are not registered, you
+  need `Manifest.toml`.
 
 * The Julia repos `QuantumOps` and `ElectronicStructure` are not registered. You need to install the master branch of each
 
