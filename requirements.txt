@@ -1,3 +1,3 @@
-qiskit-terra>=0.18.3
+git+https://github.com/Qiskit/qiskit-terra.git@{main}
 julia>=0.5.7
 pyscf>=2.0.1
