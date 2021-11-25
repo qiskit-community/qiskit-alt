@@ -442,7 +442,7 @@ version = "1.92.5"
 
 [[deps.QiskitQuantumInfo]]
 deps = ["ElectronicStructure", "QuantumOps"]
-git-tree-sha1 = "dc6060055cad2ec6cb6ddb55b083520223c40741"
+git-tree-sha1 = "d77556b21f1edfc3c99db702f73b80b57e915463"
 repo-rev = "main"
 repo-url = "https://github.com/jlapeyre/QiskitQuantumInfo.jl"
 uuid = "8d55b643-9899-48dd-ae5e-3f792c55f725"
