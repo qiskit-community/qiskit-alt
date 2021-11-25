@@ -19,8 +19,8 @@ for k in (10, 100):
         if n >= 10_000:
             number = 1
         t = timeit(lambda: SparsePauliOp(PauliList(label)).simplify(), number=number)
-        t /= number
+        t = t * 1000 / number
         quantum_info_times.append(t)
-        print(f'k={k}, n={n}, {t} sec')
+        print(f'k={k}, n={n}, {t} ms')
 
 quantum_info_times

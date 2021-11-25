@@ -18,8 +18,8 @@ for k in (10, 100):
         PauliSum_to_SparsePauliOp(QuantumOps.PauliSum(label))
         number = 20
         t = timeit(lambda: PauliSum_to_SparsePauliOp(QuantumOps.PauliSum(label)), number=number)
-        t /= number
+        t = t * 1000 / number
         qkalt_times.append(t)
-        print(f'k={k}, n={n}, {t} sec')
+        print(f'k={k}, n={n}, {t} ms')
 
 qkalt_times
