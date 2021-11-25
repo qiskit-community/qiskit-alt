@@ -1,4 +1,4 @@
-git+https://github.com/Qiskit/qiskit-terra.git@{main}
+git+https://github.com/Qiskit/qiskit-terra.git@main
 julia>=0.5.7
 pyscf>=2.0.1
 qiskit-nature>=0.2.2
