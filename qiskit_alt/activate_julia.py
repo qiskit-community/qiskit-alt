@@ -11,7 +11,7 @@ else:
     julia_path = ""
 
 local_install_path = toplevel + "/julia/bin/julia"
-if os.path.exists(local_install_path) and not julia_path == "":
+if os.path.exists(local_install_path) and julia_path == "":
     julia_path = local_install_path
 
 # TODO: support mac and win here
