@@ -49,4 +49,6 @@ def compile_qiskit_alt():
     Main.eval('ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")')
     Pkg.activate(syspath)
     Main.cd(syspath)
+    Pkg.resolve()
+    Pkg.instantiate()
     Main.eval('include("compile_quantum.jl")')
