@@ -1,5 +1,13 @@
 # qiskit_alt
-Components of Qiskit written in Julia
+
+## ATTENTION
+
+This pacakge is NOT part of Qiskit. You can find the [Qiskit repositories here](https://github.com/Qiskit).
+And here is [how to install Qiskit](https://qiskit.org/documentation/getting_started.html).
+
+`qiskit_alt` is an experimental package that might be interesting to **expert** Qiskit users.
+
+## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
 standard Qiskit.

@@ -1,0 +1,7 @@
+[molecular_data]
+git-tree-sha1 = "20757ca79195c50804487b629cd0355bdd2eabbc"
+lazy = true
+
+    [[molecular_data.download]]
+    url = "https://github.com/jlapeyre/electronic_structure_data/raw/master/molecular_data_examples.jld2.tar.gz"
+    sha256 = "fdc655e524cb89ae0317bc202c54c7b89992c8281ca1c9c0cd720ba7f05faa11"

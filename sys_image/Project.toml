@@ -1,0 +1,12 @@
+[deps]
+ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
+JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
+QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"
+SparseArraysN = "7d983096-c313-11eb-0b95-579bee092dbe"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+JLD2 = ">= 0.4.9"
