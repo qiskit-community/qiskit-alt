@@ -25,7 +25,7 @@ def PauliSum_to_SparsePauliOp(ps):
 
 from os.path import dirname
 toplevel = dirname(dirname(__file__))
-julia_dir = toplevel + "/julia"
+julia_dir = toplevel + "/julia_src"
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
 Main.eval('include("' + julia_dir + '/electronic_structure.jl")')

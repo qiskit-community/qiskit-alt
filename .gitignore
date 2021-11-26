@@ -3,4 +3,11 @@ tmp*
 env/
 */__pycache__
 qiskit-terra/
+qiskit_alt/julia_path.py
+Manifest.toml
+sys_image/*.so
+repl_history.jl
+bin/
+demos/.ipynb_checkpoints/
+.envrc
 
