@@ -10,7 +10,7 @@ import os
 toplevel = os.path.dirname(os.path.dirname(__file__))
 
 # TODO: support mac and win here
-sys_image_path = toplevel + "/sys_quantum.so"
+sys_image_path = toplevel + "/sys_image/sys_quantum.so"
 if os.path.exists(sys_image_path):
     from julia import Julia
     jl = Julia(sysimage= sys_image_path)
@@ -25,3 +25,8 @@ from julia import Base
 
 from julia import Pkg
 Pkg.activate(toplevel) # Use package data in Project.toml
+
+is_instantiated = Main.eval('any(x -> x.name == "QuantumOps" && x.is_direct_dep, values(Pkg.dependencies()))')
+
+if not is_instantiated:
+    Pkg.instantiate()
