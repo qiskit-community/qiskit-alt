@@ -10,7 +10,7 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
-standard Qiskit.
+standard Qiskit. This package is a proof of concept with little high-level code.
 
 ### Demonstration
 
@@ -29,18 +29,20 @@ This package is developed in a virtual environment. The following instructions a
 
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
-* Install Julia. The easiest and recommended way is to download a [prebuilt Julia distribution](https://julialang.org/downloads/).
+* Install Julia. An easy way is to download a [prebuilt Julia distribution](https://julialang.org/downloads/).
   Unzip/untar the distribution file in the toplevel of the `qiskit_alt` distribution. Change the name of the
   distribution folder to `julia` (or make a symlink). For example `mv julia-1.7.0-rc3 julia`.
   When `qiskit_alt` is imported, it will look for julia in this location.
 
 * Alternatively, you can set the full pathname of the Julia executable in a file `./qiskit_alt/julia_path.py`, as a variable named `julia_path`.
-If `julia_path` is set in this file and is not equal to `""`, then it will override the folder `julia` described
+ If `julia_path` is set in this file and is not equal to `""`, then it will override the folder `julia` described
  in the previous item.
   For example, on a Mac, this might be
   ```python
   julia_path = "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia"
   ```
+  This method works well with the [Julia installer jill](https://github.com/johnnychen94/jill.py) which is [available on pypi](https://pypi.org/project/jill/).
+    
 
 * Alternatively, install Julia somewhere and [add the location of the executable to your path](https://julialang.org/downloads/platform/).
 
