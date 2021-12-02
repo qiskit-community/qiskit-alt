@@ -69,8 +69,7 @@ and building and installing is quite easy.
 
 * You may need to start python and do `import julia` and `julia.install()` after pip-installing `pyjulia`.
 
-* The Julia packages are installed the first time you import `qiskit_alt`, that is the first time you
-run `import qiskit_alt` from Python. See the manual steps below if this fails.
+* The Julia packages are installed the first time you run `import qiskit_alt` from Python. See the manual steps below if this fails.
 
 *  To speed up loading and reduce delays due to just-in-time compilation, you can precompile `qiskit_alt` as follows.
 `import qiskit_alt`, `qiskit_alt.compile_qiskit_alt()`. This takes several minutes. The new Julia system image will be found
