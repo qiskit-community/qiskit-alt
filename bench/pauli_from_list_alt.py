@@ -1,4 +1,4 @@
-# Benchmark creating a SparsePauliOp from a list of strings using qiskit_alt
+# Benchmark qiskit_alt creating a SparsePauliOp from a list of strings.
 
 import random
 from timeit import timeit

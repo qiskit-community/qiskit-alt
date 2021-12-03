@@ -1,3 +1,5 @@
+# Benchmark qiskit_alt constructing Fermionic operators from pyscf integrals.
+
 import timeit
 
 def make_setup_code(basis, geometry):

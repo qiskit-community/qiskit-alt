@@ -1,3 +1,4 @@
+import os
 from .activate_julia import julia
 
 from julia import QuantumOps
@@ -25,10 +26,10 @@ def PauliSum_to_SparsePauliOp(ps):
 
 from os.path import dirname
 toplevel = dirname(dirname(__file__))
-julia_dir = toplevel + "/julia_src"
+julia_dir = os.path.join(toplevel, "julia_src")
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
-Main.eval('include("' + julia_dir + '/electronic_structure.jl")')
+Main.eval('include("' + os.path.join(julia_dir, 'electronic_structure.jl') + '")')
 
 def Geometry(qiskit_geometry):
     """
@@ -47,6 +48,8 @@ def Geometry(qiskit_geometry):
     """
     return Main.qiskt_geometry_to_Geometry(qiskit_geometry)
 
+
+# TODO: move these to another file
 def fermionic_hamiltonian(geometry, basis):
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
     fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
@@ -54,7 +57,6 @@ def fermionic_hamiltonian(geometry, basis):
 
 def jordan_wigner(fermi_op):
     pauli_op = QuantumOps.jordan_wigner(fermi_op)
-#    pauli_op = Main.qubit_hamiltonian(fermi_op)
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop

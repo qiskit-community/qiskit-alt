@@ -1,4 +1,4 @@
-# Benchmark creating a SparsePauliOp from a list of strings using quantum_info
+# Benchmark quantum_info creating a SparsePauliOp from a list of strings.
 
 import random
 from timeit import timeit

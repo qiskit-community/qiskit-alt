@@ -5,7 +5,7 @@
 This package is NOT part of Qiskit. You can find the [Qiskit repositories here](https://github.com/Qiskit).
 And here is [how to install Qiskit](https://qiskit.org/documentation/getting_started.html).
 
-`qiskit_alt` is an experimental package that might be interesting to **expert** Qiskit users.
+`qiskit_alt` is an experimental package.
 
 ## qiskit_alt
 
@@ -14,12 +14,11 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 
 ### Demonstration
 
-There are a few demos in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+* There are a few demos in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+
+* The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
 
 ### Installation/configuration notes
-
-
-**ONLY INSTALL `qiskit_alt` IF YOU ARE AN EXPERT Qiskit USER.**
 
 `qisit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
 to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
@@ -29,32 +28,30 @@ This package is developed in a virtual environment. The following instructions a
 
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
-* Install Julia. An easy way is to download a [prebuilt Julia distribution](https://julialang.org/downloads/).
-  Unzip/untar the distribution file in the toplevel of the `qiskit_alt` distribution. Change the name of the
-  distribution folder to `julia` (or make a symlink). For example `mv julia-1.7.0-rc3 julia`.
-  When `qiskit_alt` is imported, it will look for julia in this location.
+* Install Julia. Some possibilities are
+    * The [Julia installer `jill`](https://github.com/johnnychen94/jill.py) works for most common platforms. `pip install jill`, then `jill install`.
+      This [table](https://github.com/johnnychen94/jill.py#about-installation-and-symlink-directories) shows where jill installs
+      and symlinks julia on various platforms.
+    * [juliaup](https://github.com/JuliaLang/juliaup) for MSWin uses the Windows store.
+    * Download a [prebuilt Julia distribution](https://julialang.org/downloads/)
 
-* Alternatively, you can set the full pathname of the Julia executable in a file `./qiskit_alt/julia_path.py`, as a variable named `julia_path`.
- If `julia_path` is set in this file and is not equal to `""`, then it will override the folder `julia` described
- in the previous item.
-  For example, on a Mac, this might be
-  ```python
-  julia_path = "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia"
-  ```
-  This method works well with the [Julia installer jill](https://github.com/johnnychen94/jill.py) which is [available on pypi](https://pypi.org/project/jill/).
-    
+* To allow `qiskit_alt` to find the julia executable you can do one of
+    * Unpack, move, or symlink the julia installation to the toplevel of this `qiskit_alt` package.
+      For example `jill` installs to `/home/username/packages/julias/julia-1.7/` under linux, so you
+      could make a symlink `julia -> /home/username/packages/julias/julia-1.7/`.
+    * Write the path to the julia exectuable in `./qiskit_alt/julia_path.py`
+       For example, on a Mac, this might be
+      ```python
+       julia_path = "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia"
+       ```
+       Specifying the executable path here will override the folder `julia` described in the previous item.
+    * Ensure that the julia executable is in your `PATH` environment variable. For example, under
+      linux, `jill` makes a symlink to `/home/username/.local/bin/julia`.
+      [More information is here](https://julialang.org/downloads/platform/).
 
-* Alternatively, install Julia somewhere and [add the location of the executable to your path](https://julialang.org/downloads/platform/).
-
-* **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above. So, you may
-  want to rename or delete the system image in `./sys_image/sys_quantum.so` if you want to change the location or version of the
-  Julia executable.
-
-If you are happy with the stable distribution, skip to the next item.
-At the time of writing, a Julia v1.6.x is the latest stable version. I develop `qiskit_alt` with Julia versions 1.7.x.
-In principle development versions 1.8.x should work. But, importing `julia` (the Python `pyjulia` package)
-failed for me for v1.8.x., although it is claimed to be supported. I find that cloning the [Julia repo](https://github.com/JuliaLang/julia)
-and building and installing is quite easy.
+* **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
+  You must rename or delete the system image in `./sys_image/sys_quantum.so` if you want to change the location or version of the
+  Julia executable. If an incompatible system image is loaded, julia will crash.
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
@@ -69,10 +66,15 @@ and building and installing is quite easy.
 
 * You may need to start python and do `import julia` and `julia.install()` after pip-installing `pyjulia`.
 
-* The Julia packages are installed the first time you run `import qiskit_alt` from Python. See the manual steps below if this fails.
+* You need to do one of the following
+    * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
+    * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
+
+* The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
+  see the log file qiskit_alt.log and the manual steps below.
 
 *  To speed up loading and reduce delays due to just-in-time compilation, you can precompile `qiskit_alt` as follows.
-`import qiskit_alt`, `qiskit_alt.compile_qiskit_alt()`. This takes several minutes. The new Julia system image will be found
+`import qiskit_alt`, `qiskit_alt.compile_qiskit_alt()`. This takes five to ten minutes. The new Julia system image will be found
 the next time you import `qiskit_alt`. However, if you don't pre-compile, jit delays are relatively small for `qiskit_alt`.
 **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_quantum.so` if you later want to use
 a different version or location of Julia.
@@ -98,9 +100,9 @@ One detail that is a bit out of the ordinary is that (only temporarily) the deve
      is followed.
     * Most of the Julia packages needed are not registered in the General Registry (This is the counterpart to registering a Python
       package with pypi). They are registered in a registry that will be added to your private Julia installation via the `Pkg` cli command:
-      `registry add git@github.com:jlapeyre/QuantumRegistry.git`. You can also add the registry by hand from Julia. A less desirable, but
+      `registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git`. You can also add the registry by hand from Julia. A less desirable, but
       workable solution, if the registry fails to install, is to install each package listed in `Project.toml` at the Julia `Pkg` cli or function interface. For
-      example `import Pkg; Pkg.add(url="https://github.com/jlapeyre/QuantumOps.jl")`.
+      example `import Pkg; Pkg.add(url="git@github.ibm.com:IBM-Q-Software/QuantumOps.jl.git")`.
     * After the registry `QuantumRegistry` is installed, the Julia project is `activate`d, `resolve`d, and `instantiate`d.
       You can also do each of these steps by hand.
 
@@ -127,7 +129,7 @@ shell> which python
 /usr/sbin/python
 
 julia> Sys.which("python")
-"/home/lapeyre/myrepos/quantum_repos/qiskit_alt/env/bin/python"
+"/home/username/myrepos/quantum_repos/qiskit_alt/env/bin/python"
 ```
 
 * One way to enable Julia threads (on linux, and maybe other platforms) is by setting an environment variable.
@@ -141,9 +143,9 @@ Out[2]: 12
 
 #### Julia packages
 
-* The Julia repos [`QuantumOps.jl`](https://github.com/jlapeyre/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.com/jlapeyre/ElectronicStructure.jl),
-and [`QiskitQuantumInfo.jl`](https://github.com/jlapeyre/QiskitQuantumInfo.jl),
-are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.com/jlapeyre/QuantumRegistry) which contains just
+* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/IBM-Q-Software/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/IBM-Q-Software/ElectronicStructure.jl),
+and [`QiskitQuantumInfo.jl`](https://github.ibm.com/IBM-Q-Software/QiskitQuantumInfo.jl),
+are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/IBM-Q-Software/QuantumRegistry) which contains just
 a handful of packages for this project.
 
 #### Communication between Python and Julia

@@ -1,3 +1,5 @@
+# Benchmark qiskit_alt peforming the Jordan-Wigner transform on a Fermi operator.
+
 import timeit
 
 def make_setup_code(basis, geometry):

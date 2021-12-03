@@ -1,3 +1,4 @@
+# Benchmark qiskit_alt transforming an operator from the computational- to the Pauli basis.
 import timeit
 
 def make_setup_code(nqubits):
