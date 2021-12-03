@@ -22,20 +22,27 @@ logger.addHandler(fh)
 import os
 toplevel = os.path.dirname(os.path.dirname(__file__))
 
+logger.info("importing qiskit_alt.")
+
 # The user may specify the path to the executable
 if os.path.exists(os.path.join(toplevel, "qiskit_alt", "julia_path.py")):
     from .julia_path import julia_path
     logger.info('julia_path.py exists')
     if julia_path == "":
         logger.info('julia_path.julia_path=="".')
+    else:
+        logger.info('Non-empty julia_path.julia_path=="%s".', julia_path)
 else:
     julia_path = ""
+    logger.info('julia_path.py does not exist')
 
 # The canonical place to look for a Julia installation is ./julia/bin/julia
 local_install_path = os.path.join(toplevel, "julia", "bin", "julia")
 if os.path.exists(local_install_path) and julia_path == "":
     julia_path = local_install_path
-    logger.info("Using existing executable '%s'", julia_path)
+    logger.info("Using existing executable '%s'.", julia_path)
+else:
+    logger.info("No installation found at '%s'.", local_install_path)
 
 # If the binary does not exist, the standard search path will be used
 from julia.api import LibJulia
