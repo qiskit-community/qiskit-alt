@@ -44,8 +44,8 @@ julia_manifest_path = os.path.join(toplevel, "Manifest.toml")
 is_instantiated = os.path.exists(julia_manifest_path) and Main.eval('any(x -> x.name == "QuantumOps" && x.is_direct_dep, values(Pkg.dependencies()))')
 
 if not is_instantiated:
-    print("Julia packages not found, installing...")
-    Main.eval('Pkg.pkg"registry add git@github.com:jlapeyre/QuantumRegistry.git"')
+    print("Julia packages not installed, installing...")
+    Main.eval('Pkg.pkg"registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"')
     Pkg.resolve()
     Pkg.instantiate()
 
