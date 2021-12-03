@@ -7,10 +7,18 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 `qiskit_alt` is an experimental package.
 
+[Demonstration](#demonstration)
 
 [Installation and configuration notes](#installation-and-configuration-notes)
 
+[Manual Steps](#manual-steps)
+
+[Notes](#notes)
+
 [Julia Packages](#julia-packages)
+
+[Communication between Python and Julia](#communication-between-python-and-julia)
+
 
 ## qiskit_alt
 
@@ -84,7 +92,7 @@ the next time you import `qiskit_alt`. However, if you don't pre-compile, jit de
 **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_quantum.so` if you later want to use
 a different version or location of Julia.
 
-### Manual steps
+### Manual Steps
 
 The installation should be as simple as the steps above. But, here is a more detailed account of what happens.
 It may be useful in case the automated installation fails.
