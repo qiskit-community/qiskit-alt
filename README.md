@@ -7,6 +7,9 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 `qiskit_alt` is an experimental package.
 
+
+[Julia Packages](#julia-packages)
+
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
