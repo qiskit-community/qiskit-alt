@@ -8,7 +8,7 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 `qiskit_alt` is an experimental package.
 
 
-[Installation/configuration notes](#installation)
+[Installation and configuration notes](#installation-and-configuration-notes)
 
 [Julia Packages](#julia-packages)
 
@@ -23,7 +23,7 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 
 * The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
 
-### Installation/configuration notes
+### Installation and Configuration Notes
 
 `qisit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
 to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
