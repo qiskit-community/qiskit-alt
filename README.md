@@ -8,7 +8,7 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 `qiskit_alt` is an experimental package.
 
 
-[Installation/configuration notes](#installation/configuration-notes)
+[Installation/configuration notes](#installation)
 
 [Julia Packages](#julia-packages)
 
