@@ -225,7 +225,10 @@ Out[5]:
 SparsePauliOp(['YYI', 'ZZY', 'XYZ', 'YZZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
-This gives a brief, low-level view of how `qiskit_alt` works.
+**TODO** do phase conversion properly so that the last result is not wrong. This bug does
+not affect the Jordan-Wigner transform.
+
+This was a brief, low-level view of how `qiskit_alt` works.
 The overhead of calling a julia function via `pyjulia` is about 200 micro-s.
 This in part determines the scale for useful higher-level functions.
 Converting types between Julia and Python is also costly.
