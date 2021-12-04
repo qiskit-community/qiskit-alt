@@ -134,7 +134,9 @@ This package is developed in a virtual environment. The following instructions a
 
 * **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
   You must rename or delete the system image in `./sys_image/sys_quantum.so` if you want to change the location or version of the
-  Julia executable. If an incompatible system image is loaded, julia will crash.
+  Julia executable. If an incompatible system image is loaded, julia will crash. It wouldn't take much effort (but some!) to
+  detect incompatibilites and issue a user-friendly warning, or error, or take action. In fact, developing a Julia and/or Python
+  package for compiling and managing system images might be worthwhile. For the moment, we are rolling our own within qiskit_alt.
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
