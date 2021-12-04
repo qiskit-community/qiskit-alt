@@ -85,7 +85,7 @@ by pyjulia. You can call existing Julia modules or define them from Python. For 
 In [1]  from julia import Main
 In [2]: Main.eval("""
     ...: module Foo
-    ...: calc(array, num) = array .+ num
+    ...:     calc(array, num) = array .+ num
     ...: end""");
 In [3]: Main.Foo.calc([1, 2, 3], 4)
 Out[3]: array([5, 6, 7], dtype=int64)
