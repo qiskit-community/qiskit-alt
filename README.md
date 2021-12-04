@@ -77,7 +77,7 @@ involved trying to write both efficient and generic code in a hot location.
     * So, compared to the Python solution, the code would be far more generic, take far less engineering effort (none), and be
     far more efficient.
     I see similar issues arise over and over in Qiskit development. The productivity gain in developing Qiskit algorithms
-    in Julia rather than Python would be, by my rough, not-quite-semi-quantitative, estimate about ten times. I mean
+    in Julia rather than Python would be, by my rough, not-quite-semi-quantitative, estimate, about ten times. I mean
     medium scale development. Larger than the Jordan-Wigner implementation below, but less than reproducing all of Qiskit.
     It would be interesting, but very difficult, to try to support this estimate with evidence. I think a better approach
     is to carry out experiments such as qiskit_alt.
