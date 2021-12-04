@@ -197,7 +197,7 @@ This is a very brief introduction.
 This is because `import julia` will circumvent the facilities described above for choosing the julia executable and the
 compiled system image.
 
-* Julia modules are loaded like this. `import qiskit_alt`, `import julia`, `from julia import PkgName`. (For convenience
+* Julia modules are loaded like this. `import qiskit_alt`; `import julia`; `from julia import PkgName`. (For convenience
 the Julia modules `Main` and `Base` are imported and reexported into and from `qiskit_alt`.)
 After this, all functions and symbols in `PkgName` are available.
 You can do, for example
