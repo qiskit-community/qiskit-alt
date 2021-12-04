@@ -56,7 +56,7 @@ else:
 sys_image_path = os.path.join(toplevel, "sys_image", "sys_quantum.so")
 if os.path.exists(sys_image_path):
     api.sysimage = sys_image_path
-    logger.info("Using system image %s", sys_image_path)
+    logger.info("Loading system image %s", sys_image_path)
 else:
     logger.info("No custom system image found.")
 
@@ -68,6 +68,9 @@ api.init_julia()
 from julia import Main
 from julia import Base
 logger.info("Julia version %s", Main.string(Main.VERSION))
+
+loaded_sys_image_path = Main.eval('unsafe_string(Base.JLOptions().image_file)')
+logger.info("Probed system image path %s", loaded_sys_image_path)
 
 # Activate the Julia project
 
