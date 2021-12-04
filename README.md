@@ -65,7 +65,9 @@ involved trying to write both efficient and generic code in a hot location.
     * [Fixed #4791: Explicity checked for several int types #4810](https://github.com/Qiskit/qiskit-terra/pull/4810)
     1 comment
 
-    The solution was to enumerate possible types and take a small performance hit. In constrast, in Julia,
+    The solution was to enumerate possible types and take a small performance hit. Presumably, if further numpy derivatives
+    need to be supported, we could weigh the benefit of supporting them vs the cost of adding more checks to the list.
+    In constrast, in Julia,
     * Regarding different types of integers, `Int64`, `Int32`, etc.; one would, idiomatically, with little consideration,
       use a parametric type, possibly constrained by the supertype `Integer`.
     * Standard Julia arrays and all kinds of exotic arrays use the same set of integer types, so the issue of supporting
