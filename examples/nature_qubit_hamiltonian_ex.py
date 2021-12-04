@@ -1,8 +1,12 @@
 from qiskit_nature.drivers import UnitsType, Molecule
 from qiskit_nature.drivers.second_quantization import ElectronicStructureDriverType, ElectronicStructureMoleculeDriver
 
+# geometry = [['H', [0., 0., 0.]],
+#             ['H', [0., 0., 0.735]]]
+
 geometry = [['H', [0., 0., 0.]],
-            ['H', [0., 0., 0.735]]]
+            ['H', [0., 0., 0.7414]]] # same as used in QuantuOps.jl example
+
 
 # geometry = [['O', [0., 0., 0.]],
 #             ['H', [0.757, 0.586, 0.]],
