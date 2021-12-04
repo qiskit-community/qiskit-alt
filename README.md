@@ -39,7 +39,8 @@ A successful full-stack [web framework](https://github.com/GenieFramework/Genie.
 is written in Julia.
 
 * Julia is a dynamic language. It is as well suited as Python, I would argue better suited, for rapidly
-exploring ideas.
+exploring ideas. This project shows that experimenting with writing Qiskit functionality in Julia,
+and exposing it via a Python package, can be done quickly and fruitfully.
 
 * Idiomatic, straightforward, Julia code executes as fast as statically compiled languages.
 In addition Julia offers many opportunities for further optimization without leaving the language;
@@ -75,7 +76,11 @@ involved trying to write both efficient and generic code in a hot location.
     * because of compilation and inlining, the check would take, rather than microseconds, strictly no time; it would be elided.
     * So, compared to the Python solution, the code would be far more generic, take far less engineering effort (none), and be
     far more efficient.
-    I see similar issues arise over and over in Qiskit development.
+    I see similar issues arise over and over in Qiskit development. The productivity gain in developing Qiskit algorithms
+    in Julia rather than Python would be, by my rough, not-quite-semi-quantitative, estimate about ten times. I mean
+    medium scale development. Larger than the Jordan-Wigner implementation below, but less than reproducing all of Qiskit.
+    It would be interesting, but very difficult, to try to support this estimate with evidence. I think a better approach
+    is to carry out experiments such as qiskit_alt.
 
 * There are a few good options for using Python and Julia together. The approach here is
 pyjulia, which offers the Python module `julia`. This allows mixing Julia and Python modules
@@ -93,7 +98,6 @@ Out[3]: array([5, 6, 7], dtype=int64)
 Here, we have defined a function `calc` in a  Julia module `Foo`.
 The input Python list is converted to a Julia array. And the returned Julia array is converted to
 a numpy array.
-
 
 ### Demonstration
 
