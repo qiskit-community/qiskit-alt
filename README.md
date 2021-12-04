@@ -76,6 +76,7 @@ involved trying to write both efficient and generic code in a hot location.
     * because of compilation and inlining, the check would take, rather than microseconds, strictly no time; it would be elided.
     * So, compared to the Python solution, the code would be far more generic, take far less engineering effort (none), and be
     far more efficient.
+
     I see similar issues arise over and over in Qiskit development. The productivity gain in developing Qiskit algorithms
     in Julia rather than Python would be, by my rough, not-quite-semi-quantitative, estimate, about ten times. I mean
     medium scale development. Larger than the Jordan-Wigner implementation below, but less than reproducing all of Qiskit.
