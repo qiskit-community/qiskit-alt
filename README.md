@@ -225,7 +225,7 @@ Out[5]:
 SparsePauliOp(['YYI', 'ZZY', 'XYZ', 'YZZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
-**TODO** do phase conversion properly so that the last result is not wrong. This bug does
+**TODO** Do phase conversion properly so that the last result is not wrong. However, this bug does
 not affect the Jordan-Wigner transform.
 
 This was a brief, low-level view of how `qiskit_alt` works.
