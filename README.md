@@ -165,7 +165,7 @@ At the moment
     In fact, we use it to get around a hard dependency on `pyscf`, but I will likely make `pyscf` a hard dependency.
     * One can make a fully AOT-compiled system image. Currently, we can build this locally in `qiskit_alt` in less than five minutes.
     The basic tooling is there, and improving, but could be more polished.
-    We are rolling-our own functions and scripts. How robust is it, is a crucial
+    We are rolling-our own functions and scripts. How robust it is, is a crucial
     question. During development, currently, you *cannot* use the system image. The compiled-in package cannot be replaced dynamically.
     For development, we instead rely on [Revise](./Development.md).
 
