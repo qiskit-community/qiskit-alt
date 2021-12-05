@@ -8,7 +8,8 @@ The following enables a workflow, which is explained in more detail further belo
 
 * clone `qiskit_alt`
 * clone the packages in the [QuantumRegistry](https://github.ibm.com/IBM-Q-Software/QuantumRegistry). `QuantumOps`, `ElectronicStructure`, `QiskitQuantumInfo`.
-You can also use the Julia package manager to do this, via `Pkg.develop("QuantumOps")` it will clone to `~/.julia/dev/` and also make the changes in the next item.
+You can also use the Julia package manager to do this, via `Pkg.develop("QuantumOps")`, it will clone to `~/.julia/dev/` and also make the changes in the next item.
+But, I prefer to do the steps separately.
 * Start the Julia REPL, enter the package manager mode with `]`. Then do `dev ~/path/to/QuantumOps`. Repeat this for each package you want to develop.
 * Start ipython. Before doing `import qiskit_alt`, enable the magics listed in the section [Revise](#revise).
 
