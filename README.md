@@ -182,6 +182,7 @@ However, some of the [most ancient (9 years old), large packages](https://github
 have weathered the changes relatively well and are still widely used.
 
 * The key creator of Julia, Jeff Bezanson, can tell you [What's bad about Julia](https://www.youtube.com/watch?v=TPuJsgyu87U) in 2019.
+This covers the points above and many others.
 
 ## Demonstration
 
