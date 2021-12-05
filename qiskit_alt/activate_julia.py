@@ -60,7 +60,7 @@ if os.path.exists(sys_image_path):
 else:
     logger.info("No custom system image found.")
 
-# Both the path and possibly the sysimage have been set. Now initialize Julia
+# Both the path and possibly the sysimage have been set. Now initialize Julia.
 logger.info("Initializing julia")
 api.init_julia()
 
@@ -86,7 +86,9 @@ if not is_instantiated:
     print("Julia packages not installed, installing...")
     logger.info("Julia packages not installed or found.")
     logger.info("Installing registry from github.ibm.com:IBM-Q-Software/QuantumRegistry.git")
-    Main.eval('Pkg.pkg"registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"')
+    Pkg.Registry
+    # Main.eval('Pkg.pkg"registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"')
+    Pkg.Registry.add(Pkg.RegistrySpec(url = "git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"))
     logger.info("Installing Julia packages")
     Pkg.resolve()
     Pkg.instantiate()
