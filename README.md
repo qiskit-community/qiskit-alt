@@ -214,24 +214,22 @@ In [3]: from qiskit_alt import QuantumOps # or from julia import QuantumOps
 In [4]: pauli_sum = QuantumOps.rand_op_sum(QuantumOps.Pauli, 3, 4); pauli_sum
 Out[4]: 
 <PyCall.jlwrap 4x3 QuantumOps.PauliSum{Vector{Vector{QuantumOps.Paulis.Pauli}}, Vector{Complex{Int64}}}:
-IIY * (1 + 0im)
-IYZ * (1 + 0im)
-ZXI * (1 + 0im)
-ZYI * (1 + 0im)>
+IIZ * (1 + 0im)
+XYI * (1 + 0im)
+YIX * (1 + 0im)
+ZIZ * (1 + 0im)>
 ```
 In the last example above, `PauliSum` is a Julia object. The `PauliSum` can be converted to
 a Qiskit `SparsePauliOp` like this.
 ```python
 In [5]: qiskit_alt.PauliSum_to_SparsePauliOp(pauli_sum)
 Out[5]: 
-SparsePauliOp(['YYI', 'ZZY', 'XYZ', 'YZZ'],
+SparsePauliOp(['ZII', 'IYX', 'XIY', 'ZIZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
-**TODO** Do phase conversion properly so that the last result is not wrong. However, this bug does
-not affect the Jordan-Wigner transform.
 
 This was a brief, low-level view of how `qiskit_alt` works.
-The overhead of calling a julia function via `pyjulia` is about 200 micro-s.
+The overhead of calling a julia function via `pyjulia` is about 200 micro-seconds.
 This in part determines the scale for useful higher-level functions.
 Converting types between Julia and Python is also costly.
 There are ways to avoid copying, which we have not yet explored.
