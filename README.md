@@ -11,14 +11,14 @@ The highlights thus far are in [benchmark code](./bench/), which is
 presented in the [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb).
 
 * The Jordan-Wigner transform in qiskit_alt is 30 or so times faster than in qiskit-nature.
-* Computing a Fermionic hamiltonian from pyscf integrals is several times faster, with the factor increasing
+* Computing a Fermionic Hamiltonian from pyscf integrals is several times faster, with the factor increasing
   with the problem size.
 * Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
   is many times faster with the factor increasing rapidly in the number of qubits.
 
 The benchmarks are interesting, but in a sense, only mark the state of development of the two implementations.
 There are more general questions than the significance of these particular performance gains.
-For instance, how easy is it to develop a robust Python-Julia package for Qikit? How complex is it? How plugable is it?
+For instance, how easy is it to develop a robust Python-Julia package for Qiskit? How complex is it? How plugable is it?
 What are the advantages and disadvantages vis-a-vis C++/Rust? To whom and at what level should such a package be exposed?
 Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
@@ -56,13 +56,13 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 
 ## Motivations
 
-I judge it highly probable that Julia provides a uniquely high-productivty environment for developing high-performance
-Qiskit features. By high-productivty, I mean higher than Python. By high-performance, I mean
-competitive with C or Rust. I base the judgement both on the nature of Julia and of Qiskit. In particular,
+I judge it highly probable that Julia provides a uniquely high-productivity environment for developing high-performance
+Qiskit features. By high-productivity, I mean higher than Python. By high-performance, I mean
+competitive with C or Rust. I base the judgment both on the nature of Julia and of Qiskit. In particular,
 Qiskit is built around a large number of complicated pure-Python types, rather than thin wrappers around
-standard numerical code. In the following, I present a selection of individual pieces of evidence to back up the judgement,
+standard numerical code. In the following, I present a selection of individual pieces of evidence to back up the judgment,
 omitting some of the most important because they require a longer discussion.
-However, the overall argument is inevitably rather polemical. The only way to test the judgement is through
+However, the overall argument is inevitably rather polemical. The only way to test the judgment is through
 experiments, such as this package.
 
 * Julia is developed largely by applied mathematicians. It is dedicated to correct, performant, technical, computing.
@@ -176,7 +176,7 @@ some [basic guidelines](https://docs.julialang.org/en/v1/manual/performance-tips
 to employ, but are not optional. So, a good Julia project requires a certain amount of Julia culture. Is it more than that required
 for a quality Python project? I think likely not, but it is an important question.
 
-* Julia does not (yet) have multiple inheritance. More generally, understanding how to best use multiple dispatch, traits, various macro-based embellishements
+* Julia does not (yet) have multiple inheritance. More generally, understanding how to best use multiple dispatch, traits, various macro-based embellishments
 to the type system is perhaps not as mature as the understanding of design in Python.
 However, some of the [most ancient (9 years old), large packages](https://github.com/JuliaStats/Distributions.jl)
 have weathered the changes relatively well and are still widely used.
@@ -427,5 +427,9 @@ methods for calling dynamically linked libraries. We have not yet explored this.
  -->
 <!--  LocalWords:  PauliSum im IYZ ZXI ZYI SparsePauliOp YYI ZZY XYZ YZZ TODO
  -->
-<!--  LocalWords:  PackageName
+<!--  LocalWords:  PackageName Fermionic qubits plugable vis jlPauliList JAOT
+ -->
+<!--  LocalWords:  PauliList invalidations ok AOT numba Bezanson JuliaCon IIZ
+ -->
+<!--  LocalWords:  XYI YIX ZIZ ZII IYX XIY
  -->
