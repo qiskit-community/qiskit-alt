@@ -92,7 +92,6 @@ else:
     logger.info("Julia packages not installed or found.")
     logger.info("Installing registry from github.ibm.com:IBM-Q-Software/QuantumRegistry.git")
     Pkg.Registry
-    # Main.eval('Pkg.pkg"registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"')
     Pkg.Registry.add(Pkg.RegistrySpec(url = "git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"))
     logger.info("Installing Julia packages")
     Pkg.resolve()
@@ -113,4 +112,4 @@ def compile_qiskit_alt():
     Main.cd(syspath)
     Pkg.resolve()
     Pkg.instantiate()
-    Main.eval('include("compile_quantum.jl")')
+    Main.include("compile_quantum.jl")

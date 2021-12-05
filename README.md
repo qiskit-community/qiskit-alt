@@ -175,9 +175,9 @@ This package is developed in a virtual environment. The following instructions a
 
 In [2]: qiskit_alt.compile_qiskit_alt()
 ```
-Compilation takes five to ten minutes. The new Julia system image will be found  the next time you import `qiskit_alt`.
+Compilation takes about four minutes. The new Julia system image will be found  the next time you import `qiskit_alt`.
 
-* `import qiskit_alt` takes about 8.5s before compilation, and 1.5s after compilation.
+* `import qiskit_alt` takes about 8.5s before compilation, and 1.4s after compilation.
 
 * The code is "exercised" during compilation by running the test suites of some of the included packages. Code paths
 that are exercised during compilation will suffer no delay in the future, just like statically compiled libraries.
