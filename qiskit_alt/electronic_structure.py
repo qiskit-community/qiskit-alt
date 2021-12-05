@@ -21,24 +21,23 @@ def Geometry(qiskit_geometry):
     Out[2]: <PyCall.jlwrap Geometry{Float64}(Atom{Float64}[Atom{Float64}(:O, (0.0, 0.0, 0.0)), Atom{Float64}(:H, (0.757, 0.586, 0.0)), Atom{Float64}(:H, (-0.757, 0.586, 0.0))])>
     ```
     """
-    return Main.qiskt_geometry_to_Geometry(qiskit_geometry)
+    return Main.qiskit_geometry_to_Geometry(qiskit_geometry)
 
-
-# TODO: move these to another file
 def fermionic_hamiltonian(geometry, basis):
+    """
+    Given a qiskit-nature molecular geometry specification and basis set, return
+    the Hamiltonian as a QuantumOps.FermiSum.
+    """
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
     fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
     return fermi_op
 
 def jordan_wigner(fermi_op):
+    """
+    Compute the Jordan-Wigner transform of a QuantumOps.FermiSum representing a Fermionic Hamiltonian.
+    Return a qiskit.SparsePauliOp.
+    """
     pauli_op = QuantumOps.jordan_wigner(fermi_op)
     spop_jl = QiskitQuantumInfo.SparsePauliOp(pauli_op) # Convert to QiskitQuantumInfo.SparsePauliOp
     spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
     return spop
-
-# TODO: bitrot. this is broken. Easy to fix
-# This is only a bit faster than above. The two final conversions are typically relatively very fast.
-def qubit_hamiltonian_no_convert(geometry, basis):
-    jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
-    pauli_op = Main.qubit_hamiltonian(jlgeometry, basis) # Compute Pauli operator as QuantumOps.PauliSum
-    return pauli_op

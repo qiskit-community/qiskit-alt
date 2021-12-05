@@ -1,12 +1,13 @@
 # ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
 
+using PyCall
 using ElectronicStructure: Atom, Geometry, MolecularSpec,
     InteractionOperator, PySCF, MolecularData
 
 using QuantumOps: FermiSum
 
 """
-    qiskt_geometry_to_Geometry(geometry::Matrix)
+    qiskit_geometry_to_Geometry(geometry::Matrix)
 
 Convert a geometry specification that originated in Python in the qiskit-nature format to
 an `ElectronicStructure.Geometry` object. pyjulia will have translated the python input to
@@ -18,11 +19,11 @@ In [1]: geometry = [['O', [0., 0., 0.]],
    ...:             ['H', [0.757, 0.586, 0.]],
    ...:             ['H', [-0.757, 0.586, 0.]]]
 
-In [2]: Main.qiskt_geometry_to_Geometry(geometry)
+In [2]: Main.qiskit_geometry_to_Geometry(geometry)
 Out[2]: <PyCall.jlwrap Geometry{Float64}(Atom{Float64}[Atom{Float64}(:O, (0.0, 0.0, 0.0)), Atom{Float64}(:H, (0.757, 0.586, 0.0)), Atom{Float64}(:H, (-0.757, 0.586, 0.0))])>
 ```
 """
-function qiskt_geometry_to_Geometry(geometry::Matrix)
+function qiskit_geometry_to_Geometry(geometry::Matrix)
     (num_atoms, num_components_per_atom) = size(geometry)
     if num_components_per_atom != 2
         throw(ArgumentError("Expecting two elements to specify geometry of a single Atom. Got ", num_components_per_atom))
