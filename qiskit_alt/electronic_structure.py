@@ -26,7 +26,9 @@ def Geometry(qiskit_geometry):
 def fermionic_hamiltonian(geometry, basis):
     """
     Given a qiskit-nature molecular geometry specification and basis set, return
-    the Hamiltonian as a QuantumOps.FermiSum.
+    the electronic Hamiltonian as a QuantumOps.FermiSum.
+
+    The integrals are computed by pyscf.
     """
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
     fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
