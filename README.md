@@ -25,6 +25,7 @@ Can and should fruitful designs be ported to C++ or Rust?, Etc.
 * [Motivations](#motivations)
     * [The Problem with Python](#the-problem-with-python) a case study
     * [Dynamic Python Julia interface](#dynamic-python-julia-interface)
+    * [Caveats](#caveats)
 
 * [Demonstration](#demonstration)
     * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
@@ -143,6 +144,44 @@ def jlPauliList(pauli_list):
     """
     return PauliList.from_symplectic(pauli_list.z, pauli_list.x)
 ```
+
+### Caveats
+
+* Julia is neither purely interpreted nor traditionally statically compiled. What it "is" evolves;
+just-ahead-of-time compiled is a useful description.
+But, it doesn't have all the advantages of a language that is largely committed to one (Python) or the other (Rust) model.
+In the past, JIT the (or JAOT) penalty was typically large and there weren't a lot of good ways to mitigate it.
+The situation today is much, much, improved on several fronts. But, it is still an issue.
+At the moment
+    * The JIT penalty for qiskit_alt is not great (for someone who started using Julia in 2015).
+    First, about 8 seconds to import `qiskit_alt`. Then there are various delays
+    for compiling code paths. There are large Julia dependencies that might be attractive, but that incur larger JIT penalties. One
+    would have to weigh the consequences of adopting them.
+    * But, the penalty is not static, rather it is improving. Ongoing developments include switching to the interpreter;
+    more fine-grained optimization and code specialization levels; techniques to avoid cache-invalidations in the method table,
+    a huge source of compilation cost.
+    * One can reduce the start-up penalty by loading on demand. The [current system](https://github.com/JuliaPackaging/Requires.jl)
+    is ok, but a bit ad-hoc and limited. There is talk about improving it, which should require only ordinary engineering effort.
+    In fact, we use it to get around a hard dependency on `pyscf`, but I will likely make `pyscf` a hard dependency.
+    * One can make a fully AOT-compiled system image. Currently, we can build this locally in `qiskit_alt` in less than five minutes.
+    The basic tooling is there, and improving, but could be more polished.
+    We are rolling-our own functions and scripts. How robust is it, is a crucial
+    question. During development, currently, you *cannot* use the system image. The compiled-in package cannot be replaced dynamically.
+    For development, we instead rely on [Revise](./Development.md).
+
+* Julia is not magic, performance-pixie-dust. This should go without saying, but the misconception is encountered frequently enough to
+be dangerous to projects. I have seen a relatively small amount of not-to-obscure numba code easily outperform a Julia package.
+Using Julia effectively requires learning
+some [basic guidelines](https://docs.julialang.org/en/v1/manual/performance-tips/). They are not really difficult to learn and
+to employ, but are not optional. So, a good Julia project requires a certain amount of Julia culture. Is it more than that required
+for a quality Python project? I think likely not, but it is an important question.
+
+* Julia does not (yet) have multiple inheritance. More generally, understanding how to best use multiple dispatch, traits, various macro-based embellishements
+to the type system is perhaps not as mature as the understanding of design in Python.
+However, some of the [most ancient (9 years old), large packages](https://github.com/JuliaStats/Distributions.jl)
+have weathered the changes relatively well and are still widely used.
+
+* The key creator of Julia, Jeff Bezanson, can tell you [What's bad about Julia](https://www.youtube.com/watch?v=TPuJsgyu87U) in 2019.
 
 ## Demonstration
 
