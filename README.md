@@ -100,7 +100,14 @@ Out[3]: array([5, 6, 7], dtype=int64)
 ```
 Here, we have defined a function `calc` in a  Julia module `Foo`.
 The input Python list is converted to a Julia array. And the returned Julia array is converted to
-a numpy array.
+a numpy array. Here is an example of how we convert a user defined type from Julia to Python.
+```python
+def jlPauliList(pauli_list):
+    """
+    Convert a QiskitQuantumInfo.PauliList to a qiskit.quantum_info.PauliList
+    """
+    return PauliList.from_symplectic(pauli_list.z, pauli_list.x)
+```
 
 ### Demonstration
 
