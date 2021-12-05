@@ -36,7 +36,7 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 ### Motivations
 
 * Julia is developed largely by applied mathematicians. It is dedicated to correct, performant, technical, computing.
-But devs are committed to providing a complete ecosystem, as expected of any ambitious modern language.
+But the developers are committed to providing a complete ecosystem, as expected of any ambitious modern language.
 A successful full-stack [web framework](https://github.com/GenieFramework/Genie.jl)
 is written in Julia.
 
@@ -70,7 +70,7 @@ involved trying to write both efficient and generic code in a hot location.
 
     The solution was to enumerate possible types and take a small performance hit. Presumably, if further numpy derivatives
     need to be supported, we could weigh the benefit of supporting them vs the cost of adding more checks to the list.
-    In constrast, in Julia,
+    In contrast, in Julia,
     * Regarding different types of integers, `Int64`, `Int32`, etc.; one would, idiomatically, with little consideration,
       use a parametric type, possibly constrained by the supertype `Integer`.
     * Standard Julia arrays and all kinds of exotic arrays use the same set of integer types, so the issue of supporting
@@ -142,7 +142,7 @@ This package is developed in a virtual environment. The following instructions a
 * **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
   You must rename or delete the system image in `./sys_image/sys_quantum.so` if you want to change the location or version of the
   Julia executable. If an incompatible system image is loaded, julia will crash. It wouldn't take much effort (but some!) to
-  detect incompatibilites and issue a user-friendly warning, or error, or take action. In fact, developing a Julia and/or Python
+  detect incompatibilities and issue a user-friendly warning, or error, or take action. In fact, developing a Julia and/or Python
   package for compiling and managing system images might be worthwhile. For the moment, we are rolling our own within qiskit_alt.
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
@@ -179,8 +179,8 @@ Compilation takes five to ten minutes. The new Julia system image will be found 
 
 * `import qiskit_alt` takes about 8.5s before compilation, and 1.5s after compilation.
 
-* The code is "exercised" during compilation by running the test suites of some of the included pacakges. Code paths
-that are exercised during compilation will suffer no delay in the futre, just like statically compiled libraries.
+* The code is "exercised" during compilation by running the test suites of some of the included packages. Code paths
+that are exercised during compilation will suffer no delay in the future, just like statically compiled libraries.
 More test suites and exercise scripts can be included in the compilation.
 And more Julia code can be moved from `qiskit_alt` into compiled modules.
 
@@ -333,7 +333,17 @@ methods for calling dynamically linked libraries. We have not yet explored this.
  -->
 <!--  LocalWords:  precompile terra executables toml cli url QuantumRegistry jl
  -->
-<!--  LocalWords:  jit toplevel sys PYCALL repl linux NUM pyscf repos PyCall
+<!--  LocalWords:  jit toplevel sys PYCALL repl linux NUM pyscf repos PyCall ji
  -->
 <!--  LocalWords:  QuantumOps ElectronicStructure QiskitQuantumInfo juliacall
+ -->
+<!--  LocalWords:  numpy QuantumRegister Explicity supertype GPUs inlining eval
+ -->
+<!--  LocalWords:  calc num dtype jill symlink symlinks juliaup MSWin prebuilt
+ -->
+<!--  LocalWords:  keyscan precompiled precompilation PkgName pauli jlwrap IIY
+ -->
+<!--  LocalWords:  PauliSum im IYZ ZXI ZYI SparsePauliOp YYI ZZY XYZ YZZ TODO
+ -->
+<!--  LocalWords:  PackageName
  -->
