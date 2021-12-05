@@ -47,7 +47,7 @@ Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
 * [Troubleshooting](#troubleshooting)
 
-* [Development](./Development.md) link to another document in the `qiskit_alt` repo.
+* [Development](./Development.md). Link to another document in the `qiskit_alt` repo.
 
 ## qiskit_alt
 
