@@ -32,8 +32,16 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 This Python package uses a backend written in Julia to implement high performance features for
 standard Qiskit. This package is a proof of concept with little high-level code.
 
-
 ### Motivations
+
+I judge it highly probable that Julia provides a uniquely high-productivty environment for developing high-performance
+Qiskit features. By high-productivty, I mean higher than Python. By high-performance, I mean
+competitive with C or Rust. I base the judgement both on the nature of Julia and of Qiskit. In particular,
+Qiskit is built around a large number of complicated pure-Python types, rather than thin wrappers around
+standard numerical code. In the following, I present a selection of individual pieces of evidence to back up the judgement,
+omitting some of the most important because they require a longer discussion.
+However, the overall argument is inevitably rather polemical. The only way to test the judgement is through
+experiments, such as this package.
 
 * Julia is developed largely by applied mathematicians. It is dedicated to correct, performant, technical, computing.
 But the developers are committed to providing a complete ecosystem, as expected of any ambitious modern language.
