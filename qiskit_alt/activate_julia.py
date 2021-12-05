@@ -93,6 +93,11 @@ if not is_instantiated:
 else:
     logger.info("Julia quantum packages found.")
 
+
+from os.path import dirname
+toplevel = dirname(dirname(__file__))
+julia_src_dir = os.path.join(toplevel, "julia_src")
+
 def compile_qiskit_alt():
     """
     Compile a Julia system image with all requirements for qiskit_alt.

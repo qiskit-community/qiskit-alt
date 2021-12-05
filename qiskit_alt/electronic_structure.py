@@ -1,35 +1,10 @@
 import os
-from .activate_julia import julia
-
-from julia import QuantumOps
-from julia import QiskitQuantumInfo
-from julia import Main
-
-from qiskit.quantum_info import Pauli, SparsePauliOp, PauliList
-
-def jlPauli(data):
-    if isinstance(data, str):
-        data = QiskitQuantumInfo.Pauli(data)
-    return Pauli((data.x, data.z, data.phase))
-
-def jlPauliList(pl):
-    return PauliList.from_symplectic(pl.z, pl.x)
-
-def jlSparsePauliOp(sp):
-    pl = PauliList.from_symplectic(sp.pauli_list.z, sp.pauli_list.x)
-    return SparsePauliOp(pl, sp.coeffs)
-
-def PauliSum_to_SparsePauliOp(ps):
-    spop_jl = QiskitQuantumInfo.SparsePauliOp(ps) # Convert to QiskitQuantumInfo.SparsePauliOp
-    spop = jlSparsePauliOp(spop_jl)  # Convert to qisit.quantum_info.SparsePauliOp
-    return spop
-
-from os.path import dirname
-toplevel = dirname(dirname(__file__))
-julia_dir = os.path.join(toplevel, "julia_src")
+from .activate_julia import julia, julia_src_dir
+from julia import Main, QuantumOps, QiskitQuantumInfo
+from .pauli_operators import jlSparsePauliOp
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
-Main.eval('include("' + os.path.join(julia_dir, 'electronic_structure.jl') + '")')
+Main.eval('include("' + os.path.join(julia_src_dir, 'electronic_structure.jl') + '")')
 
 def Geometry(qiskit_geometry):
     """
