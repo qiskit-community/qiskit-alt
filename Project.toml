@@ -3,8 +3,9 @@ ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
 QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 ZChop = "8603256b-76ad-53fe-b511-38a38e6437cd"
 
 [compat]
-ZChop = ">= 0.3.10"
 ElectronicStructure = ">= 0.1.2"
+ZChop = ">= 0.3.10"
