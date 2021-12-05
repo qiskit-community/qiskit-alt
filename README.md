@@ -85,7 +85,7 @@ involved trying to write both efficient and generic code in a hot location.
     It would be interesting, but very difficult, to try to support this estimate with evidence. I think a better approach
     is to carry out experiments such as qiskit_alt.
 
-* There are a few good options for using Python and Julia together. The approach here is
+* There are a few good options for using Python and Julia together. The approach here uses
 pyjulia, which offers the Python module `julia`. This allows mixing Julia and Python modules
 dynamically and rapidly with no interface code required. Conversions of data types is handled
 by pyjulia. You can call existing Julia modules or define them from Python. For example,
