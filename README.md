@@ -27,6 +27,8 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 [Troubleshooting](#troubleshooting)
 
+[Development](./Development.md)
+
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
