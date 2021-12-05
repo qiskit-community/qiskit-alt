@@ -54,7 +54,10 @@ else:
 
 # TODO: support mac and win here
 sys_image_path = os.path.join(toplevel, "sys_image", "sys_quantum.so")
-if os.path.exists(sys_image_path):
+
+sys_image_path_exists = os.path.exists(sys_image_path)
+
+if sys_image_path_exists:
     api.sysimage = sys_image_path
     logger.info("Loading system image %s", sys_image_path)
 else:
@@ -80,9 +83,11 @@ Pkg.activate(toplevel) # Use package data in Project.toml
 ### Instantiate Julia project, i.e. download packages, etc.
 
 julia_manifest_path = os.path.join(toplevel, "Manifest.toml")
-is_instantiated = os.path.exists(julia_manifest_path) and Main.eval('any(x -> x.name == "QuantumOps" && x.is_direct_dep, values(Pkg.dependencies()))')
 
-if not is_instantiated:
+# Assume that if sys_quantum.so exists, then Julia packages are installed.
+if sys_image_path_exists or os.path.exists(julia_manifest_path):
+    logger.info("Julia quantum packages found.")
+else:
     print("Julia packages not installed, installing...")
     logger.info("Julia packages not installed or found.")
     logger.info("Installing registry from github.ibm.com:IBM-Q-Software/QuantumRegistry.git")
@@ -92,9 +97,6 @@ if not is_instantiated:
     logger.info("Installing Julia packages")
     Pkg.resolve()
     Pkg.instantiate()
-else:
-    logger.info("Julia quantum packages found.")
-
 
 from os.path import dirname
 toplevel = dirname(dirname(__file__))
