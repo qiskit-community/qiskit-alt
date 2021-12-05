@@ -7,34 +7,53 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 `qiskit_alt` is an experimental package.
 
-[Motivations](#motivations)
+The highlights thus far are in [benchmark code](./bench/), which is
+presented in the [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb).
 
-[Demonstration](#demonstration)
+* The Jordan-Wigner transform in qiskit_alt is 30 or so times faster than in qiskit-nature.
+* Computing a Fermionic hamiltonian from pyscf integrals is several times faster, with the factor increasing
+  with the problem size.
+* Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
+  is many times faster with the factor increasing rapidly in the number of qubits.
 
-[Installation and configuration notes](#installation-and-configuration-notes)
+The benchmarks are interesting, but in a sense, only mark the state of development of the two implementations.
+There are more general questions than the significance of these particular performance gains.
+For instance, how easy is it to develop a robust Python-Julia package for Qikit? How complex is it? How plugable is it?
+What are the advantages and disadvantages vis-a-vis C++/Rust? To whom and at what level should such a package be exposed?
+Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
-[Compilation](#compilation)
+* [Motivations](#motivations)
+    * [The Problem with Python](#the-problem-with-python) a case study
+    * [Dynamic Python Julia interface](#dynamic-python-julia-interface)
 
-[Using qiskit_alt](#using-qiskit_alt)
+* [Demonstration](#demonstration)
+    * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
+      same thing as the main demonstration in qiskit_alt.
 
-[Manual Steps](#manual-steps)
+* [Installation and configuration notes](#installation-and-configuration-notes)
 
-[Notes](#notes)
+    * [Compilation](#compilation)
 
-[Julia Packages](#julia-packages)
+    * [Using qiskit_alt](#using-qiskit_alt)
 
-[Communication between Python and Julia](#communication-between-python-and-julia)
+    * [Manual Steps](#manual-steps)
 
-[Troubleshooting](#troubleshooting)
+* [Julia Packages](#julia-packages)
 
-[Development](./Development.md)
+* [Notes](#notes)
+
+* [Communication between Python and Julia](#communication-between-python-and-julia)
+
+* [Troubleshooting](#troubleshooting)
+
+* [Development](./Development.md) link to another document in the `qiskit_alt` repo.
 
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
 standard Qiskit. This package is a proof of concept with little high-level code.
 
-### Motivations
+## Motivations
 
 I judge it highly probable that Julia provides a uniquely high-productivty environment for developing high-performance
 Qiskit features. By high-productivty, I mean higher than Python. By high-performance, I mean
@@ -66,6 +85,10 @@ types.
 
 * Julia is fully committed to a single, coherent, type system in all aspects of the language.
 
+### The Problem with Python
+
+A case study
+
 * A large amount of Qiskit development effort is expended working around the fact that Python lacks the
 features above. An example is the following sequence (and several issues linked within). The issue
 involved trying to write both efficient and generic code in a hot location.
@@ -95,6 +118,8 @@ involved trying to write both efficient and generic code in a hot location.
     It would be interesting, but very difficult, to try to support this estimate with evidence. I think a better approach
     is to carry out experiments such as qiskit_alt.
 
+### Dynamic Python Julia interface
+
 * There are a few good options for using Python and Julia together. The approach here uses
 pyjulia, which offers the Python module `julia`. This allows mixing Julia and Python modules
 dynamically and rapidly with no interface code required. Conversions of data types is handled
@@ -119,13 +144,16 @@ def jlPauliList(pauli_list):
     return PauliList.from_symplectic(pauli_list.z, pauli_list.x)
 ```
 
-### Demonstration
+## Demonstration
 
 * There are a few demos in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
 
 * The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
 
-### Installation and Configuration Notes
+* [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
+  same thing as the main demonstration in qiskit_alt. This is from JuliaCon 2020.
+
+## Installation and Configuration Notes
 
 `qiskit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
 to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
@@ -208,7 +236,7 @@ But, this is not the kind of compilation we are considering here.
 * **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_quantum.so` if you later want to use
 a different version or location of Julia.
 
-### Using qiskit_alt
+## Using qiskit_alt
 
 This is a very brief introduction.
 
@@ -251,7 +279,7 @@ This in part determines the scale for useful higher-level functions.
 Converting types between Julia and Python is also costly.
 There are ways to avoid copying, which we have not yet explored.
 
-#### Managing Julia packages
+### Managing Julia packages
 
 * Available Julia modules are those in the standard library and those listed in [Project.toml](./Project.toml).
 You can add more packages (and record them in `Project.toml`) by doing `import julia`, `julia.Pkg.add("PackageName")`.
@@ -295,6 +323,13 @@ Pkg.activate(".")
 include("compile_quantum.jl")
 ```
 
+## Julia packages
+
+* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/IBM-Q-Software/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/IBM-Q-Software/ElectronicStructure.jl),
+and [`QiskitQuantumInfo.jl`](https://github.ibm.com/IBM-Q-Software/QiskitQuantumInfo.jl),
+are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/IBM-Q-Software/QuantumRegistry) which contains just
+a handful of packages for this project.
+
 ### Notes
 
 * We sometimes use this incantation at the top of Julia code `ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")` to get the correct python
@@ -320,14 +355,7 @@ In [2]: Main.Threads.nthreads()
 Out[2]: 12
 ```
 
-#### Julia packages
-
-* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/IBM-Q-Software/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/IBM-Q-Software/ElectronicStructure.jl),
-and [`QiskitQuantumInfo.jl`](https://github.ibm.com/IBM-Q-Software/QiskitQuantumInfo.jl),
-are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/IBM-Q-Software/QuantumRegistry) which contains just
-a handful of packages for this project.
-
-#### Communication between Python and Julia
+### Communication between Python and Julia
 
 * We are currently using `pyjulia` to call Julia from Python, and its dependency `PyCall.jl`. The latter
 is also used to call Python from Julia.
