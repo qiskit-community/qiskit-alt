@@ -1,6 +1,6 @@
 ### Resources
 
-* [Incorporating Julia Into Python Programs](https://www.peterbaumgartner.com/blog/incorporating-julia-into-python-programs/)
+* [Incorporating Julia Into Python Programs](https://www.peterbaumgartner.com/blog/incorporating-julia-into-python-programs/) discusses using pyjulia and Docker.
 
 ### Development environment
 
