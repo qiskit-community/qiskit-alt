@@ -110,7 +110,7 @@ a numpy array.
 
 ### Installation and Configuration Notes
 
-`qisit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
+`qiskit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
 to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
 
 `qiskit_alt` is not available on pypi.
@@ -129,7 +129,7 @@ This package is developed in a virtual environment. The following instructions a
     * Unpack, move, or symlink the julia installation to the toplevel of this `qiskit_alt` package.
       For example `jill` installs to `/home/username/packages/julias/julia-1.7/` under linux, so you
       could make a symlink `julia -> /home/username/packages/julias/julia-1.7/`.
-    * Write the path to the julia exectuable in `./qiskit_alt/julia_path.py`
+    * Write the path to the julia executable in `./qiskit_alt/julia_path.py`
        For example, on a Mac, this might be
       ```python
        julia_path = "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia"
@@ -156,7 +156,7 @@ This package is developed in a virtual environment. The following instructions a
 
 * Install `qiskit_alt` in editable mode, `pip install -e .`
 
-* You may need to start python and do `import julia` and `julia.install()` after pip-installing `pyjulia`.
+* You may need to start python and do `import julia` and `julia.install()` after pip-installing `julia`.
 
 * You need to do one of the following
     * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
@@ -260,7 +260,7 @@ One detail that is a bit out of the ordinary is that (only temporarily) the deve
     * If a compiled Julia system image is found in `./sys_image/sys_quantum.so`, then it is loaded. Otherwise the standard
       image that ships with Julia is used.
     * The file `Manifest.toml` is created by Julia when first installing packages. If it is missing, it is assumed that nothing
-    has been installed. In this case, the [standard procudure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
+    has been installed. In this case, the [standard procedure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
      is followed.
     * Most of the Julia packages needed are not registered in the General Registry (This is the counterpart to registering a Python
       package with pypi). They are registered in a registry that will be added to your private Julia installation via the `Pkg` cli command:
@@ -314,7 +314,7 @@ a handful of packages for this project.
 
 #### Communication between Python and Julia
 
-* We are currently using `pyjulia` to call Julia from Python, and it's dependency `PyCall.jl`. The latter
+* We are currently using `pyjulia` to call Julia from Python, and its dependency `PyCall.jl`. The latter
 is also used to call Python from Julia.
 
 * An alternative Python package is `juliacall`. This may have some advantages and we may use it in the future.
