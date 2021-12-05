@@ -56,7 +56,7 @@ types.
 
 * Julia is fully committed to a single, coherent, type system in all aspects of the language.
 
-* A very large amount of Qiskit development effort is expended working around the fact that Python lacks the
+* A large amount of Qiskit development effort is expended working around the fact that Python lacks the
 features above. An example is the following sequence (and several issues linked within). The issue
 involved trying to write both efficient and generic code in a hot location.
     * [Using a numpy integer type as an index for a QuantumRegister fails #3929](https://github.com/Qiskit/qiskit-terra/issues/3929)
