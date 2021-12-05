@@ -25,6 +25,8 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 [Communication between Python and Julia](#communication-between-python-and-julia)
 
+[Troubleshooting](#troubleshooting)
+
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
@@ -319,6 +321,13 @@ is also used to call Python from Julia.
 
 * An alternative is to create a C-compatible interface on the Julia side and then call it using using Python
 methods for calling dynamically linked libraries. We have not yet explored this.
+
+### Troubleshooting
+
+* To get the most recent Julia packages, try some of
+    * Delete `Manifest.toml` and `./sys_image/Manifest.toml`.
+    * Start with a fresh clone of `qiskit_alt`.
+    * Start Julia at the command line. And do `Pkg.update()`.
 
 <!--  LocalWords:  qiskit backend qisit pyjulia pypi julia cd venv env txt repo
  -->
