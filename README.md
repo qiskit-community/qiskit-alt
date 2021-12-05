@@ -150,7 +150,7 @@ def jlPauliList(pauli_list):
 * Julia is neither purely interpreted nor traditionally statically compiled. What it "is" evolves;
 just-ahead-of-time compiled is a useful description.
 But, it doesn't have all the advantages of a language that is largely committed to one (Python) or the other (Rust) model.
-In the past, JIT the (or JAOT) penalty was typically large and there weren't a lot of good ways to mitigate it.
+In the past, the JIT (or JAOT) penalty was typically large and there weren't a lot of good ways to mitigate it.
 The situation today is much, much, improved on several fronts. But, it is still an issue.
 At the moment
     * The JIT penalty for qiskit_alt is not great (for someone who started using Julia in 2015).
