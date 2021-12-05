@@ -74,7 +74,7 @@ involved trying to write both efficient and generic code in a hot location.
     * Regarding different types of integers, `Int64`, `Int32`, etc.; one would, idiomatically, with little consideration,
       use a parametric type, possibly constrained by the supertype `Integer`.
     * Standard Julia arrays and all kinds of exotic arrays use the same set of integer types, so the issue of supporting
-      different numerical packages, GPUs, AD, etc. would not arise.
+      different numerical packages, GPUs, AD, etc. in this context would not arise.
     * because of compilation and inlining, the check would take, rather than microseconds, strictly no time; it would be elided.
     * So, compared to the Python solution, the code would be far more generic, take far less engineering effort (none), and be
     far more efficient.
