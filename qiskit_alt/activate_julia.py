@@ -80,10 +80,12 @@ logger.info("Probed system image path %s", loaded_sys_image_path)
 # Activate the Julia project
 
 # Maybe useful
-# julia_cmd = Base.julia_cmd()
+julia_cmd = Base.julia_cmd()
+logger.info("Probed julia command: %s", julia_cmd)
 
 from julia import Pkg
 Pkg.activate(toplevel) # Use package data in Project.toml
+logger.info("Probed Project.toml path: %s", Pkg.project().path)
 
 ### Instantiate Julia project, i.e. download packages, etc.
 
@@ -114,6 +116,7 @@ def compile_qiskit_alt():
     syspath = os.path.join(toplevel, "sys_image")
     Main.eval('ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")')
     Pkg.activate(syspath)
+    logger.info("Compiling: probed Project.toml path: %s", Pkg.project().path)
     Main.cd(syspath)
     Pkg.resolve()
     Pkg.instantiate()
