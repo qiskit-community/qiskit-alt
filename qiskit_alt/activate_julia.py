@@ -79,6 +79,9 @@ logger.info("Probed system image path %s", loaded_sys_image_path)
 
 # Activate the Julia project
 
+# Maybe useful
+# julia_cmd = Base.julia_cmd()
+
 from julia import Pkg
 Pkg.activate(toplevel) # Use package data in Project.toml
 
