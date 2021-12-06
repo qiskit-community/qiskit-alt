@@ -5,10 +5,11 @@ PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
 QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SparseArraysN = "7d983096-c313-11eb-0b95-579bee092dbe"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-JLD2 = ">= 0.4.9"
 ElectronicStructure = ">= 0.1.2"
+JLD2 = ">= 0.4.9"

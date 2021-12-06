@@ -72,7 +72,8 @@ from julia import Main
 from julia import Base
 logger.info("Julia version %s", Main.string(Main.VERSION))
 
-Main.eval("using Revise")
+# This does not work here. Has to be called with a magic
+# Main.eval("using Revise")
 
 loaded_sys_image_path = Main.eval('unsafe_string(Base.JLOptions().image_file)')
 logger.info("Probed system image path %s", loaded_sys_image_path)
