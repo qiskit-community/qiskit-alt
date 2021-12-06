@@ -37,19 +37,30 @@ else:
     logger.info('julia_path.py does not exist')
 
 # The canonical place to look for a Julia installation is ./julia/bin/julia
-local_install_path = os.path.join(toplevel, "julia", "bin", "julia")
-if os.path.exists(local_install_path) and julia_path == "":
-    julia_path = local_install_path
-    logger.info("Using existing executable '%s'.", julia_path)
+
+julia_directory_in_toplevel = os.path.join(toplevel, "julia")
+julia_executable_under_toplevel = os.path.join(julia_directory_in_toplevel, "bin", "julia")
+if os.path.exists(julia_executable_under_toplevel) and julia_path == "":
+    julia_path = julia_executable_under_toplevel
+    logger.info("Using executable from julia installation in qiskit_alt toplevel '%s'.", julia_path)
+elif os.path.exists(julia_directory_in_toplevel):
+    if os.path.isdir(julia_directory_in_toplevel):
+        msg = "WARNING: directory ./julia/ found under toplevel, but ./julia/bin/julia not found."
+        logger.info(msg)
+        print(msg)
+    else:
+        msg = "WARNING: ./julia found under toplevel, but it is not a directory as expected."
+        logger.info(msg)
+        print(msg)
 else:
-    logger.info("No installation found at '%s'.", local_install_path)
+    logger.info("No julia installation found at '%s'.", julia_directory_in_toplevel)
 
 # If the binary does not exist, the standard search path will be used
 from julia.api import LibJulia
 if os.path.exists(julia_path):
     api = LibJulia.load(julia=julia_path)
 else:
-    logger.info("Looking for julia in user's path")
+    logger.info("Searching for julia in user's path")
     api = LibJulia.load()
 
 # TODO: support mac and win here
