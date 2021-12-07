@@ -79,7 +79,7 @@ if not info.is_pycall_built():
         julia.install()
 
 # TODO: support mac and win here
-sys_image_path = os.path.join(toplevel, "sys_image", "sys_quantum.so")
+sys_image_path = os.path.join(toplevel, "sys_image", "sys_qiskit_alt.so") # "sys_quantum.so")
 sys_image_path_exists = os.path.exists(sys_image_path)
 
 if sys_image_path_exists:

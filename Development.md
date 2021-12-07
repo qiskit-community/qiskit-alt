@@ -71,3 +71,28 @@ For example, a variable `foo = 1` added to `src/QuantumOps.jl` is visible
 in ipython as `QuantumOps.foo`.
 
 I'd like to find a way to enable `Revise` without using magics. I have not yet discovered this.
+
+### Notes
+
+* We sometimes use this incantation at the top of Julia code `ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")` to get the correct python
+interpreter. Note that the built-in Julia shell and Julia `Sys` report different paths for python. In particular the Julia shell
+does not inherit the path from the system shell from which Julia was invoked.
+```julia
+shell> type python   # This is the Julia repl shell
+python is /usr/sbin/python
+
+shell> which python
+/usr/sbin/python
+
+julia> Sys.which("python")
+"/home/username/myrepos/quantum_repos/qiskit_alt/env/bin/python"
+```
+
+* One way to enable Julia threads (on linux, and maybe other platforms) is by setting an environment variable.
+For example `export JULIA_NUM_THREADS=4`. You can check that the threads are available like this.
+```python
+In [1]: from qiskit_alt import Main  # You could just as well import `Base`
+
+In [2]: Main.Threads.nthreads()
+Out[2]: 12
+```

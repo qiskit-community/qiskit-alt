@@ -93,7 +93,7 @@ This package is developed in a virtual environment. The following instructions a
       [More information is here](https://julialang.org/downloads/platform/).
 
 * **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
-  You must rename or delete the system image in `./sys_image/sys_quantum.so` if you want to change the location or version of the
+  You must rename or delete the system image in `./sys_image/sys_qiskit_alt.so` if you want to change the location or version of the
   Julia executable. If an incompatible system image is loaded, julia will crash. It wouldn't take much effort (but some!) to
   detect incompatibilities and issue a user-friendly warning, or error, or take action. In fact, developing a Julia and/or Python
   package for compiling and managing system images might be worthwhile. For the moment, we are rolling our own within qiskit_alt.
@@ -147,7 +147,7 @@ And more Julia code can be moved from `qiskit_alt` into compiled modules.
 What happens during precompilation is described [here](https://julialang.org/blog/2021/01/precompile_tutorial/).
 But, this is not the kind of compilation we are considering here.
 
-* **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_quantum.so` if you later want to use
+* **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_qiskit_alt.so` if you later want to use
 a different version or location of Julia.
 
 ## Using qiskit_alt
@@ -211,7 +211,7 @@ It may be useful in case the automated installation fails.
 
     * If the file  `./qiskit_alt/julia_path.py` exists, then the Julia executable path is read from it. Otherwise the
       standard path for finding executables is used.
-    * If a compiled Julia system image is found in `./sys_image/sys_quantum.so`, then it is loaded. Otherwise the standard
+    * If a compiled Julia system image is found in `./sys_image/sys_qiskit_alt.so`, then it is loaded. Otherwise the standard
       image that ships with Julia is used.
     * The file `Manifest.toml` is created by Julia when first installing packages. If it is missing, it is assumed that nothing
     has been installed. In this case, the [standard procedure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
@@ -241,30 +241,6 @@ and [`QiskitQuantumInfo.jl`](https://github.ibm.com/IBM-Q-Software/QiskitQuantum
 are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/IBM-Q-Software/QuantumRegistry) which contains just
 a handful of packages for this project.
 
-### Notes
-
-* We sometimes use this incantation at the top of Julia code `ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")` to get the correct python
-interpreter. Note that the built-in Julia shell and Julia `Sys` report different paths for python. In particular the Julia shell
-does not inherit the path from the system shell from which Julia was invoked.
-```julia
-shell> type python   # This is the Julia repl shell
-python is /usr/sbin/python
-
-shell> which python
-/usr/sbin/python
-
-julia> Sys.which("python")
-"/home/username/myrepos/quantum_repos/qiskit_alt/env/bin/python"
-```
-
-* One way to enable Julia threads (on linux, and maybe other platforms) is by setting an environment variable.
-For example `export JULIA_NUM_THREADS=4`. You can check that the threads are available like this.
-```python
-In [1]: from qiskit_alt import Main  # You could just as well import `Base`
-
-In [2]: Main.Threads.nthreads()
-Out[2]: 12
-```
 
 ### Communication between Python and Julia
 
@@ -294,7 +270,7 @@ methods for calling dynamically linked libraries. We have not yet explored this.
 * `Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
  This may occur when compiling a system image with `qiskit_alt.compile_qiskit_alt()` after starting `qiskit_alt` with
  a previously compiled system image.
-* Solution: Delete `./sys_image/sys_quantum.so` and restart python.
+* Solution: Delete `./sys_image/sys_qiskit_alt.so` and restart python.
 
 * `Exception 'ArgumentError' occurred while calling julia code: const PyCall = Base.require(Base.PkgId(Base.UUID("438e738f-606a-5dbb-bf0a-cddfbfd45ab0"), "PyCall"))`.
    This may happen when you try `import qiskit_alt`,  but `PyCall` has not yet been installed for the julia version corresponding to the
