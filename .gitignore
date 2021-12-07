@@ -9,4 +9,6 @@ repl_history.jl
 bin/
 demos/.ipynb_checkpoints/
 .envrc
-
+/qiskit_alt.egg-info/
+/qiskit_alt.log
+/julia
