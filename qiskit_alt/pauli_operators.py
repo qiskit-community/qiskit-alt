@@ -1,5 +1,5 @@
 import os
-from .activate_julia import julia
+import julia
 
 from julia import QuantumOps
 from julia import QiskitQuantumInfo

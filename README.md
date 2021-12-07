@@ -207,14 +207,14 @@ It may be useful in case the automated installation fails.
 
 * How to set up the Python virtual environment and install from `requirements.txt` may be found in several places online.
 
-* Downloading and/or loading Julia components is done in `./qiskit_alt/activate_julia.py`.
+* Downloading and/or loading Julia components is done in `./qiskit_alt/julia_project/activate_project.py`
 
     * If the file  `./qiskit_alt/julia_path.py` exists, then the Julia executable path is read from it. Otherwise the
       standard path for finding executables is used.
     * If a compiled Julia system image is found in `./sys_image/sys_qiskit_alt.so`, then it is loaded. Otherwise the standard
       image that ships with Julia is used.
     * The file `Manifest.toml` is created by Julia when first installing packages. If it is missing, it is assumed that nothing
-    has been installed. In this case, the [standard procedure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
+      has been installed. In this case, the [standard procedure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
      is followed.
     * Most of the Julia packages needed are not registered in the General Registry (This is the counterpart to registering a Python
       package with pypi). They are registered in a registry that will be added to your private Julia installation via the `Pkg` cli command:
@@ -231,7 +231,7 @@ Start Julia from a shell at the toplevel of the `qiskit_alt` installation and ru
 import Pkg
 cd("./sys_image")
 Pkg.activate(".")
-include("compile_quantum.jl")
+include("compile_qiskit_alt.jl")
 ```
 
 ## Julia packages
