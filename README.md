@@ -214,6 +214,7 @@ This package is developed in a virtual environment. The following instructions a
     * Unpack, move, or symlink the julia installation to the toplevel of this `qiskit_alt` package.
       For example `jill` installs to `/home/username/packages/julias/julia-1.7/` under linux, so you
       could make a symlink `julia -> /home/username/packages/julias/julia-1.7/`.
+      `qiskit_alt` will search for the executable at `qiskit_alt/julia/bin/julia`.
     * Write the path to the julia executable in `./qiskit_alt/julia_path.py`
        For example, on a Mac, this might be
       ```python
@@ -229,6 +230,11 @@ This package is developed in a virtual environment. The following instructions a
   Julia executable. If an incompatible system image is loaded, julia will crash. It wouldn't take much effort (but some!) to
   detect incompatibilities and issue a user-friendly warning, or error, or take action. In fact, developing a Julia and/or Python
   package for compiling and managing system images might be worthwhile. For the moment, we are rolling our own within qiskit_alt.
+
+* **NOTE** If you allow `qiskit_alt` to search your PATH for julia, rather than specifying the location as described above, *and*
+if `julia` on your path is a script that loads a custom system image, .i.e. `/path/to/julia -J /path/to/custom-sys-image.so`,
+then `qiskit_alt.compile_qiskit_alt()` will likely fail with an error. None of the usual installation methods will create
+such a script, so it is not normally something to be concerned about. If in doubt, check the file `qiskit_alt.log`.
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
