@@ -124,12 +124,24 @@ def compile_qiskit_alt():
     """
     Compile a Julia system image with all requirements for qiskit_alt.
     """
+    if loaded_sys_image_path == sys_image_path:
+        msg = "WARNING: Compiling system image while compiled system image is loaded.\n" \
+            + f"Consider deleting  {sys_image_path} and restarting python."
+        print(msg)
+        logger.info(msg)
     from julia import Pkg
     syspath = os.path.join(toplevel, "sys_image")
     Main.eval('ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")')
     Pkg.activate(syspath)
     logger.info("Compiling: probed Project.toml path: %s", Pkg.project().path)
     Main.cd(syspath)
-    Pkg.resolve()
+    try:
+        Pkg.resolve()
+    except:
+        msg = "Pkg.resolve() failed. Updating packages."
+        print(msg)
+        logger.info(msg)
+        Pkg.update()
+        Pkg.resolve()
     Pkg.instantiate()
     Main.include("compile_quantum.jl")
