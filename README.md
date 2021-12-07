@@ -113,7 +113,8 @@ such a script, so it is not normally something to be concerned about. If in doub
 
 * Install `qiskit_alt` in editable mode, `pip install -e .`
 
-* You may need to start python and do `import julia` and `julia.install()` after pip-installing `julia`.
+* Start python and do `import julia` and `julia.install(julia="./julia/bin/julia")` replacing
+  the path by the path you chose above when installing julia.
 
 * You need to do one of the following
     * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
@@ -274,12 +275,33 @@ is also used to call Python from Julia.
 * An alternative is to create a C-compatible interface on the Julia side and then call it using using Python
 methods for calling dynamically linked libraries. We have not yet explored this.
 
-### Troubleshooting
+## Troubleshooting
 
+#### Upgrading Julia packages
 * To get the most recent Julia packages, try some of
     * Delete `Manifest.toml` and `./sys_image/Manifest.toml`.
-    * Start with a fresh clone of `qiskit_alt`.
     * Start Julia at the command line. And do `Pkg.update()`.
+    * In python, do `from qiskit_alt import julia; from julia import Pkg; Pkg.update()`.
+    * Start with a fresh clone of `qiskit_alt`.
+
+### Errors
+
+* `empty intersection between ElectronicStructure@0.1.1 and project compatibility 0.1.2-*`,
+   where the package name and version may vary.
+*  Solution: Try [Upgrading Julia packages](#upgrading-julia-packages).
+
+* `Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
+ This may occur when compiling a system image with `qiskit_alt.compile_qiskit_alt()` after starting `qiskit_alt` with
+ a previously compiled system image.
+* Solution: Delete `./sys_image/sys_quantum.so` and restart python.
+
+* `Exception 'ArgumentError' occurred while calling julia code: const PyCall = Base.require(Base.PkgId(Base.UUID("438e738f-606a-5dbb-bf0a-cddfbfd45ab0"), "PyCall"))`.
+   This may happen when you try `import qiskit_alt`,  but `PyCall` has not yet been installed for the julia version corresponding to the
+    executable found when starting the import of `qiskit_alt`.
+* Solution. Try `import julia; julia.install(julia="/path/to/julia")` where the path to the julia executable is the same
+ that you chose for `qiskit_alt`. Alternatively, start julia, and do `Pkg.add("PyCall")`. For example, if you have symlinked
+ a julia installation to `qiskit_alt/julia/`, then you would start julia from the `qiskit_alt` toplevel as `./julia/bin/julia`,
+ and type `Pkg.add("PyCall")`.
 
 <!--  LocalWords:  qiskit backend qisit pyjulia pypi julia cd venv env txt repo
  -->
