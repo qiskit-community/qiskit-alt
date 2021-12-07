@@ -22,7 +22,7 @@ For instance, how easy is it to develop a robust Python-Julia package for Qiskit
 What are the advantages and disadvantages vis-a-vis C++/Rust? To whom and at what level should such a package be exposed?
 Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
-* [Motivations](./Motiavations.md)
+* [Motivations](./Motivations.md)
 
 * [Demonstration](#demonstration)
     * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
