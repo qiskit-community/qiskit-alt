@@ -200,16 +200,15 @@ class JuliaProject:
         logger = self.logger
         from julia import Main, Pkg
         if self.loaded_sys_image_path == self.sys_image_path:
-            msg = "WARNING: Compiling system image while compiled system image is loaded.\n" \
-                + f"Consider deleting  {sys_image_path} and restarting python."
-            print(msg)
-            logger.warn(msg)
+            for msg in ("WARNING: Compiling system image while compiled system image is loaded.",
+                        f"Consider deleting  {self.sys_image_path} and restarting python."):
+                print(msg)
+                logger.warn(msg)
         from julia import Pkg
-        syspath = os.path.join(self.toplevel, "sys_image")
         Main.eval('ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")')
-        Pkg.activate(syspath)
+        Pkg.activate(self.sys_image_dir)
         logger.info("Compiling: probed Project.toml path: %s", Pkg.project().path)
-        Main.cd(syspath)
+        Main.cd(self.sys_image_dir)
         try:
             Pkg.resolve()
         except:
@@ -220,4 +219,5 @@ class JuliaProject:
             Pkg.resolve()
         Pkg.instantiate()
         compile_script = "compile_" + self.name + ".jl"
+        logger.info(f"Running compile script {compile_script}")
         Main.include(compile_script)
