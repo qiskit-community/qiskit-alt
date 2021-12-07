@@ -88,7 +88,7 @@ class JuliaProject:
                 print(msg)
             else:
                 msg = "WARNING: ./julia found under toplevel, but it is not a directory as expected."
-                logger.info(msg)
+                logger.warn(msg)
                 print(msg)
         else:
             logger.info("No julia installation found at '%s'.", julia_directory_in_toplevel)
@@ -203,7 +203,7 @@ class JuliaProject:
             msg = "WARNING: Compiling system image while compiled system image is loaded.\n" \
                 + f"Consider deleting  {sys_image_path} and restarting python."
             print(msg)
-            logger.info(msg)
+            logger.warn(msg)
         from julia import Pkg
         syspath = os.path.join(self.toplevel, "sys_image")
         Main.eval('ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")')

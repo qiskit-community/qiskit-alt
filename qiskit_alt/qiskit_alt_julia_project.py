@@ -1,15 +1,19 @@
 import julia
+import logging
 
 from .julia_project import JuliaProject
 
 # The JuliaProject class is generic and should be moved at some point to a
-# separate python package
+# separate python package.
 julia_project = JuliaProject(
     name="qiskit_alt",
-    registry_url = "git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git"
+    registry_url = "git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git",
+    logging_level = logging.INFO # or logging.WARN
 )
 
 logger = julia_project.logger
+
+# Directory of Julia source files for qiskit_alt loaded via Python
 julia_src_dir = julia_project.julia_src_dir
 
 def compile_qiskit_alt():

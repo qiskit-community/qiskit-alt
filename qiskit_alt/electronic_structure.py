@@ -5,8 +5,7 @@ from julia import Main, QuantumOps, QiskitQuantumInfo
 from .pauli_operators import jlSparsePauliOp
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
-# TODO: I think you can call include directly
-Main.eval('include("' + os.path.join(julia_src_dir, 'electronic_structure.jl') + '")')
+Main.include(os.path.join(julia_src_dir, 'electronic_structure.jl'))
 
 def Geometry(qiskit_geometry):
     """
