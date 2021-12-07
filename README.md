@@ -102,6 +102,9 @@ This package is developed in a virtual environment. The following instructions a
 if `julia` on your path is a script that loads a custom system image, .i.e. `/path/to/julia -J /path/to/custom-sys-image.so`,
 then `qiskit_alt.compile_qiskit_alt()` will likely fail with an error. None of the usual installation methods will create
 such a script, so it is not normally something to be concerned about. If in doubt, check the file `qiskit_alt.log`.
+However it is not uncommon for people to put a script named "julia" in their path that
+runs julia with a custom system image. This is why we must support alternative methods for finding
+the executable.
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
