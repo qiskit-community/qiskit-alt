@@ -56,16 +56,30 @@ else:
     logger.info("No julia installation found at '%s'.", julia_directory_in_toplevel)
 
 # If the binary does not exist, the standard search path will be used
-from julia.api import LibJulia
-if os.path.exists(julia_path):
-    api = LibJulia.load(julia=julia_path)
-else:
-    logger.info("Searching for julia in user's path")
-    api = LibJulia.load()
+from julia.api import LibJulia, JuliaInfo
+
+def load_julia(julia_path, logger):
+    if os.path.exists(julia_path):
+        api = LibJulia.load(julia=julia_path)
+        info = JuliaInfo.load(julia=julia_path)
+    else:
+        logger.info("Searching for julia in user's path")
+        api = LibJulia.load()
+        info = JuliaInfo.load()
+    return api, info
+
+(api, info) = load_julia(julia_path, logger)
+logger.info("Loaded LibJulia and JuliaInfo.")
+
+if not info.is_pycall_built():
+    logger.info("PyCall not built. Installing julia module.")
+    if os.path.exists(julia_path):
+        julia.install(julia=julia_path)
+    else:
+        julia.install()
 
 # TODO: support mac and win here
 sys_image_path = os.path.join(toplevel, "sys_image", "sys_quantum.so")
-
 sys_image_path_exists = os.path.exists(sys_image_path)
 
 if sys_image_path_exists:
@@ -78,13 +92,12 @@ else:
 logger.info("Initializing julia")
 api.init_julia()
 
+# TODO replace several calls for info below using the JuliaInfo object
+
 # Import these to reexport
 from julia import Main
 from julia import Base
 logger.info("Julia version %s", Main.string(Main.VERSION))
-
-# This does not work here. Has to be called with a magic
-# Main.eval("using Revise")
 
 loaded_sys_image_path = Main.eval('unsafe_string(Base.JLOptions().image_file)')
 logger.info("Probed system image path %s", loaded_sys_image_path)

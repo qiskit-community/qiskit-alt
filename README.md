@@ -115,6 +115,7 @@ such a script, so it is not normally something to be concerned about. If in doub
 
 * Start python and do `import julia` and `julia.install(julia="./julia/bin/julia")` replacing
   the path by the path you chose above when installing julia.
+  NEW: This step should happen automatically the first time you run `import qiskit_alt`.
 
 * You need to do one of the following
     * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
@@ -302,6 +303,7 @@ methods for calling dynamically linked libraries. We have not yet explored this.
  that you chose for `qiskit_alt`. Alternatively, start julia, and do `Pkg.add("PyCall")`. For example, if you have symlinked
  a julia installation to `qiskit_alt/julia/`, then you would start julia from the `qiskit_alt` toplevel as `./julia/bin/julia`,
  and type `Pkg.add("PyCall")`.
+ NEW: This installation should happen automatically the first time you run `import qiskit_alt`.
 
 <!--  LocalWords:  qiskit backend qisit pyjulia pypi julia cd venv env txt repo
  -->
