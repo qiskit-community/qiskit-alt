@@ -243,7 +243,6 @@ such a script, so it is not normally something to be concerned about. If in doub
   `source ./env/bin/activate` for bash.
 
 * Install required python packages with `pip install -r requirements.txt`. Or install them one by one.
-  pip will clone `qiskit-terra` which takes relatively a long time.
 
 * Install `qiskit_alt` in editable mode, `pip install -e .`
 
@@ -338,9 +337,6 @@ The installation should be as simple as the steps above. But, here is a more det
 It may be useful in case the automated installation fails.
 
 * How to set up the Python virtual environment and install from `requirements.txt` may be found in several places online.
-One detail that is a bit out of the ordinary is that (only temporarily) the development version of qiskit-terra is used.
-`pip` will clone the whole repo, which takes several minutes.
-
 
 * Downloading and/or loading Julia components is done in `./qiskit_alt/activate_julia.py`.
 
