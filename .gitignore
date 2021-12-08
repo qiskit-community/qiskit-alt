@@ -2,6 +2,7 @@ tcode.jl
 tmp*
 env/
 */__pycache__
+*/*/__pycache__
 qiskit-terra/
 Manifest.toml
 sys_image/*.so
@@ -12,3 +13,4 @@ demos/.ipynb_checkpoints/
 /qiskit_alt.egg-info/
 /qiskit_alt.log
 /julia
+*.disable
