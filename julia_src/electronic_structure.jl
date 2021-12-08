@@ -2,7 +2,9 @@
 
 using PyCall
 using ElectronicStructure: Atom, Geometry, MolecularSpec,
-    InteractionOperator, PySCF, MolecularData
+    InteractionOperator, MolecularData
+
+using ElectronicStructurePySCF: PySCF
 
 using QuantumOps: FermiSum
 
