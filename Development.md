@@ -1,4 +1,4 @@
-### Resources
+x### Resources
 
 * [Incorporating Julia Into Python Programs](https://www.peterbaumgartner.com/blog/incorporating-julia-into-python-programs/) discusses using pyjulia and Docker.
 
@@ -7,7 +7,7 @@
 The following enables a workflow, which is explained in more detail further below.
 
 * clone `qiskit_alt`
-* clone the packages in the [QuantumRegistry](https://github.ibm.com/IBM-Q-Software/QuantumRegistry). `QuantumOps`, `ElectronicStructure`, `QiskitQuantumInfo`.
+* clone the packages in the [QuantumRegistry](https://github.ibm.com/John-Lapeyre/QuantumRegistry). `QuantumOps`, `ElectronicStructure`, `QiskitQuantumInfo`.
 You can also use the Julia package manager to do this, via `Pkg.develop("QuantumOps")`, it will clone to `~/.julia/dev/` and also make the changes in the next item.
 But, I prefer to do the steps separately.
 * Start the Julia REPL, enter the package manager mode with `]`. Then do `dev ~/path/to/QuantumOps`. Repeat this for each package you want to develop.
@@ -18,7 +18,7 @@ To revert to the production environment, enter `free QuantumOps`, etc. at the Ju
 
 #### Details
 
-The Julia packages backing qiskit_alt are registered in this registry [https://github.ibm.com/IBM-Q-Software/QuantumRegistry](https://github.ibm.com/IBM-Q-Software/QuantumRegistry).
+The Julia packages backing qiskit_alt are registered in this registry [https://github.ibm.com/John-Lapeyre/QuantumRegistry](https://github.ibm.com/John-Lapeyre/QuantumRegistry).
 The registered packages are also on `github.ibm.com`. But, we want to develop everything locally. In particular, we want to use
 
 * [`Revise.jl`](https://github.com/timholy/Revise.jl). `Revise` monitors source files. When you edit and

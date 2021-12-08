@@ -7,7 +7,7 @@ from .julia_project import JuliaProject
 # separate python package.
 julia_project = JuliaProject(
     name="qiskit_alt",
-    registry_url = "git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git",
+    registry_url = "git@github.ibm.com:John-Lapeyre/QuantumRegistry.git",
     logging_level = logging.INFO # or logging.WARN
 )
 

@@ -219,9 +219,9 @@ It may be useful in case the automated installation fails.
      is followed.
     * Most of the Julia packages needed are not registered in the General Registry (This is the counterpart to registering a Python
       package with pypi). They are registered in a registry that will be added to your private Julia installation via the `Pkg` cli command:
-      `registry add git@github.ibm.com:IBM-Q-Software/QuantumRegistry.git`. You can also add the registry by hand from Julia. A less desirable, but
+      `registry add git@github.ibm.com:John-Lapeyre/QuantumRegistry.git`. You can also add the registry by hand from Julia. A less desirable, but
       workable solution, if the registry fails to install, is to install each package listed in `Project.toml` at the Julia `Pkg` cli or function interface. For
-      example `import Pkg; Pkg.add(url="git@github.ibm.com:IBM-Q-Software/QuantumOps.jl.git")`.
+      example `import Pkg; Pkg.add(url="git@github.ibm.com:John-Lapeyre/QuantumOps.jl.git")`.
     * After the registry `QuantumRegistry` is installed, the Julia project is `activate`d, `resolve`d, and `instantiate`d.
       You can also do each of these steps by hand.
 
@@ -237,9 +237,9 @@ include("compile_qiskit_alt.jl")
 
 ## Julia packages
 
-* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/IBM-Q-Software/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/IBM-Q-Software/ElectronicStructure.jl),
-and [`QiskitQuantumInfo.jl`](https://github.ibm.com/IBM-Q-Software/QiskitQuantumInfo.jl),
-are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/IBM-Q-Software/QuantumRegistry) which contains just
+* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/John-Lapeyre/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/John-Lapeyre/ElectronicStructure.jl),
+and [`QiskitQuantumInfo.jl`](https://github.ibm.com/John-Lapeyre/QiskitQuantumInfo.jl),
+are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/John-Lapeyre/QuantumRegistry) which contains just
 a handful of packages for this project.
 
 
