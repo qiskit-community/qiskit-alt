@@ -1,6 +1,6 @@
 import os
 import julia
-from .qiskit_alt_julia_project import julia_src_dir
+from ._julia_project import julia_src_dir
 from julia import Main, QuantumOps, QiskitQuantumInfo
 from .pauli_operators import jlSparsePauliOp
 
@@ -24,6 +24,7 @@ def Geometry(qiskit_geometry):
     """
     return Main.qiskit_geometry_to_Geometry(qiskit_geometry)
 
+
 def fermionic_hamiltonian(geometry, basis):
     """
     Given a qiskit-nature molecular geometry specification and basis set, return
@@ -34,6 +35,7 @@ def fermionic_hamiltonian(geometry, basis):
     jlgeometry = Geometry(geometry) # Convert Python geometry spec to ElectronicStructure.Geometry
     fermi_op = Main.fermionic_hamiltonian(jlgeometry, basis)
     return fermi_op
+
 
 def jordan_wigner(fermi_op):
     """

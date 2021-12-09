@@ -194,7 +194,6 @@ There are ways to avoid copying, which we have not yet explored.
 You can add more packages (and record them in `Project.toml`) by doing `import julia`, `julia.Pkg.add("PackageName")`.
 You can also do the same by avoiding Python and using the julia cli.
 
-
 ### Manual Steps
 
 The installation should be as simple as the steps above. But, here is a more detailed account of what happens.

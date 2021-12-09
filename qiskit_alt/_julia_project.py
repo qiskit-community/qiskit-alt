@@ -1,16 +1,11 @@
 import julia
 import logging
 
-#from .julia_project import JuliaProject
 from julia_project import JuliaProject
 
-# import pathlib
-# qiskit_alt_path = pathlib.Path(__file__).parent.resolve()
 import os
 qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# The JuliaProject class is generic and should be moved at some point to a
-# separate python package.
 julia_project = JuliaProject(
     name="qiskit_alt",
     package_path=qiskit_alt_path,
@@ -18,6 +13,8 @@ julia_project = JuliaProject(
     logging_level = logging.INFO, # or logging.WARN,
     console_logging=False
 )
+
+julia_project.run()
 
 logger = julia_project.logger
 
