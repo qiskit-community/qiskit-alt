@@ -30,21 +30,19 @@ Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
 * [Installation and configuration notes](#installation-and-configuration-notes)
 
-    * [Compilation](#compilation)
+    * [Compilation](#compilation) Compiling a system image to eliminate compilation at run time.
 
-    * [Using qiskit_alt](#using-qiskit_alt)
+    * [Using qiskit_alt](#using-qiskit_alt) First steps.
 
-    * [Manual Steps](#manual-steps)
+    * [Manual Steps](#manual-steps) Details of automatic installation.
 
-* [Julia Packages](#julia-packages)
-
-* [Notes](#notes)
-
-* [Communication between Python and Julia](#communication-between-python-and-julia)
+* [Julia Packages](#julia-packages) Julia packages that qiskit_alt depends on.
 
 * [Troubleshooting](#troubleshooting)
 
-* [Development](./Development.md).
+* [Communication between Python and Julia](#communication-between-python-and-julia) Options for the language interface.
+
+* [Development](./Development.md). Instructions for developing qiskit_alt.
 
 ## qiskit_alt
 
@@ -227,23 +225,14 @@ Pkg.activate(".")
 include("compile_julia_project.jl")
 ```
 
-## Julia packages
+## Julia Packages
 
-* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/John-Lapeyre/QuantumOps.jl) and [`ElectronicStructure.jl`](https://github.ibm.com/John-Lapeyre/ElectronicStructure.jl),
-and [`QiskitQuantumInfo.jl`](https://github.ibm.com/John-Lapeyre/QiskitQuantumInfo.jl),
+* The Julia repos [`QuantumOps.jl`](https://github.ibm.com/John-Lapeyre/QuantumOps.jl) and
+[`ElectronicStructure.jl`](https://github.ibm.com/John-Lapeyre/ElectronicStructure.jl) and
+[`ElectronicStructurePySCF.jl`](https://github.ibm.com/John-Lapeyre/ElectronicStructurePySCF.jl) and
+[`QiskitQuantumInfo.jl`](https://github.ibm.com/John-Lapeyre/QiskitQuantumInfo.jl)
 are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/John-Lapeyre/QuantumRegistry) which contains just
 a handful of packages for this project.
-
-
-### Communication between Python and Julia
-
-* We are currently using `pyjulia` to call Julia from Python, and its dependency `PyCall.jl`. The latter
-is also used to call Python from Julia.
-
-* An alternative Python package is `juliacall`. This may have some advantages and we may use it in the future.
-
-* An alternative is to create a C-compatible interface on the Julia side and then call it using using Python
-methods for calling dynamically linked libraries. We have not yet explored this.
 
 ## Troubleshooting
 
@@ -260,7 +249,8 @@ methods for calling dynamically linked libraries. We have not yet explored this.
    where the package name and version may vary.
 *  Solution: Try [Upgrading Julia packages](#upgrading-julia-packages).
 
-* `Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
+* NOTE: The following error no longer occurs.
+`Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
  This may occur when compiling a system image with `qiskit_alt.compile_qiskit_alt()` after starting `qiskit_alt` with
  a previously compiled system image.
 * Solution: Delete `./sys_image/sys_qiskit_alt.so` and restart python.
@@ -273,6 +263,17 @@ methods for calling dynamically linked libraries. We have not yet explored this.
  a julia installation to `qiskit_alt/julia/`, then you would start julia from the `qiskit_alt` toplevel as `./julia/bin/julia`,
  and type `Pkg.add("PyCall")`.
  NEW: This installation should happen automatically the first time you run `import qiskit_alt`.
+
+### Communication between Python and Julia
+
+* We are currently using `pyjulia` to call Julia from Python, and its dependency `PyCall.jl`. The latter
+is also used to call Python from Julia.
+
+* An alternative Python package is `juliacall`. This may have some advantages and we may use it in the future.
+
+* An alternative is to create a C-compatible interface on the Julia side and then call it using using Python
+methods for calling dynamically linked libraries. We have not yet explored this.
+
 
 <!--  LocalWords:  qiskit backend qisit pyjulia pypi julia cd venv env txt repo
  -->
