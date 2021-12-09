@@ -78,19 +78,13 @@ This package is developed in a virtual environment. The following instructions a
     * Download a [prebuilt Julia distribution](https://julialang.org/downloads/)
 
 * To allow `qiskit_alt` to find the julia executable you can do one of
+    * Ensure that the julia executable is in your `PATH` environment variable. For example, under
+      linux, `jill` makes a symlink to `/home/username/.local/bin/julia`.
+      [More information is here](https://julialang.org/downloads/platform/).
     * Unpack, move, or symlink the julia installation to the toplevel of this `qiskit_alt` package.
       For example `jill` installs to `/home/username/packages/julias/julia-1.7/` under linux, so you
       could make a symlink `julia -> /home/username/packages/julias/julia-1.7/`.
       `qiskit_alt` will search for the executable at `qiskit_alt/julia/bin/julia`.
-    * Write the path to the julia executable in `./qiskit_alt/julia_path.py`
-       For example, on a Mac, this might be
-      ```python
-       julia_path = "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia"
-       ```
-       Specifying the executable path here will override the folder `julia` described in the previous item.
-    * Ensure that the julia executable is in your `PATH` environment variable. For example, under
-      linux, `jill` makes a symlink to `/home/username/.local/bin/julia`.
-      [More information is here](https://julialang.org/downloads/platform/).
 
 * **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
   You must rename or delete the system image in `./sys_image/sys_qiskit_alt.so` if you want to change the location or version of the
@@ -208,10 +202,9 @@ It may be useful in case the automated installation fails.
 
 * How to set up the Python virtual environment and install from `requirements.txt` may be found in several places online.
 
-* Downloading and/or loading Julia components is done in `./qiskit_alt/julia_project/activate_project.py`
+* Downloading and/or loading Julia components is done in `./qiskit_alt/qiskit_alt_julia_project.py`, which uses
+ the Python package [`julia_project`](https://github.com/jlapeyre/julia_project)
 
-    * If the file  `./qiskit_alt/julia_path.py` exists, then the Julia executable path is read from it. Otherwise the
-      standard path for finding executables is used.
     * If a compiled Julia system image is found in `./sys_image/sys_qiskit_alt.so`, then it is loaded. Otherwise the standard
       image that ships with Julia is used.
     * The file `Manifest.toml` is created by Julia when first installing packages. If it is missing, it is assumed that nothing
@@ -232,7 +225,7 @@ Start Julia from a shell at the toplevel of the `qiskit_alt` installation and ru
 import Pkg
 cd("./sys_image")
 Pkg.activate(".")
-include("compile_qiskit_alt.jl")
+include("compile_julia_project.jl")
 ```
 
 ## Julia packages
