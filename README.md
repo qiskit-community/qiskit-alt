@@ -264,6 +264,26 @@ a handful of packages for this project.
  and type `Pkg.add("PyCall")`.
  NEW: This installation should happen automatically the first time you run `import qiskit_alt`.
 
+#### Errors when trying to import Python packages from your Python virtual environment via Julia and PyCall
+
+If you activate your Python virtual environment in which you have installed a pacakge, say qiskit,
+you may still find that Julia is unable to import it via `PyCall`. In this case,
+setting an environment variable will probably do the trick:
+```shell
+shell> source . env/bin/activate.sh
+shell> julia
+julia> ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
+julia> import PyCall
+julia> PyCall.pyimport("qiskit")
+```
+If you don't set `ENV["PYCALL_JL_RUNTIME_PYTHON"]` then `pyimport` will fail with an error.
+The error messages from `PyCall` will insist that, one way or another, you need to rebuild
+`PyCall` via `Pkg.build("PyCall")`. The documentation to `PyCall` is clear on this
+as well. Of course, would mean that building `PyCall` in one Julia/Python project
+may break it in another, completely separate project. However, as far as I can
+tell, setting the environment variable is enough.
+Note that you call also set `PYCALL_JL_RUNTIME_PYTHON` from your shell before starting julia.
+
 ### Communication between Python and Julia
 
 * We are currently using `pyjulia` to call Julia from Python, and its dependency `PyCall.jl`. The latter

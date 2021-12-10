@@ -1,3 +1,21 @@
+# Notes for Developers
+
+Most of what is written here is generic to Julia. A bit is generic to Julia within Python.
+
+* [Resources](#resources)
+
+* [Development environment](#development-environment)
+
+    * [Details](#details)
+
+* [Revise](#revise) Automatically compiling code into a live session.
+
+* [Example Development Session](#example-development-session)
+
+* [Making a subdirectory for examples](#making-a-subdirectory-for-examples)
+
+* [Troubleshooting](./README.md#troubleshooting)
+
 ### Resources
 
 * [Incorporating Julia Into Python Programs](https://www.peterbaumgartner.com/blog/incorporating-julia-into-python-programs/) discusses using pyjulia and Docker.
@@ -169,7 +187,7 @@ in ipython as `QuantumOps.foo`.
 
 I'd like to find a way to enable `Revise` without using magics. I have not yet discovered this.
 
-### Development example
+### Example Development Session
 
 * Install the [`LocalRegsitry`](https://github.com/GunnarFarneback/LocalRegistry.jl) package to manage our registry.
 
@@ -332,6 +350,20 @@ In [14]: LocalRegistry.register("ElectronicStructure", registry="QuantumRegistry
 # Return to using the version in the registries
 In [15]: Pkg.free("ElectronicStructure")
 ```
+
+### Making a subdirectory for examples
+
+You may want to include a subdirectory for examples or tutorials. Or you may want them in a separate repo.
+A new Julia environment should be defined in a `Project.toml` file. That is, you have files
+`./examples/ex1.py`, etc. and also `./examples/Project.toml`.
+You can create `Project.toml` by cd'ing into `./examples` and doing `Pkg.activate(".")`.
+You populate the project by doing `Pkg.add("somepackage")`.
+When you run the examples, activate the project somehow, from Julia or Python.
+By default, only the packages in your main user-wide project, e.g. `@v1.7` and
+those in `./examples/Project.toml` will be available.
+If you want to develop the examples together with the main package, say `qiskit_alt` (or others),
+then "develop" that package: Activate the examples project, then do `Pkg.develop(path="/path/to/dev/qiskit_alt")`.
+
 
 ### Notes
 
