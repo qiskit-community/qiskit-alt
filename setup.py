@@ -1,12 +1,14 @@
 from setuptools import setup, find_packages
 
+version = {}
+with open("./qiskit_alt/_version.py") as fp:
+    exec(fp.read(), version)
+
 setup(
     name='qiskit_alt',
-    version='0.0.1',
+    version=version['__version__'],
     description='Alternative to parts of qiskit, written in Julia',
-#    url='https://github.com/mypackage.git',
-    # author='Author Name',
-    # author_email='author@gmail.com',
-    packages=find_packages(),
-#    install_requires=['numpy >= 1.11.1', 'matplotlib >= 1.5.1'],
+    url= 'https://github.ibm.com:John-Lapeyre/qiskit_alt.git',
+    author='John Lapeyre',
+    packages=find_packages()
 )
