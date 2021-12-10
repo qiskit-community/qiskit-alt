@@ -1,3 +1,7 @@
+# This Dockerfile is a work-in-progress while we try to figure out
+# the best way to provide a private ssh key to this build process
+# https://github.ibm.com/John-Lapeyre/qiskit_alt/issues/8
+
 FROM fedora:34
 
 RUN dnf install -y git @development-tools gcc-c++ \
