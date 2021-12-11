@@ -55,6 +55,8 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 
 * The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
 
+* Here are [some demonstration notebooks](https://github.ibm.com/John-Lapeyre/QuantumDemos) of the Julia packages behind `qiskit_alt`.
+
 * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
   same thing as the main demonstration in qiskit_alt. This is from JuliaCon 2020.
 
