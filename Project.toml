@@ -10,3 +10,4 @@ ZChop = "8603256b-76ad-53fe-b511-38a38e6437cd"
 [compat]
 ElectronicStructure = ">= 0.1.4"
 ZChop = ">= 0.3.10"
+QuantumOps = ">= 0.1.3"
