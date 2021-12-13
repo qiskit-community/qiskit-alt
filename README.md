@@ -10,17 +10,14 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 The highlights thus far are in [benchmark code](./bench/), which is
 presented in the [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb).
 
+The main application-level demonstration is computing a qubit Hamiltonian as a `qiskit.quantum_info.SparsePauliOp`
+from a Python list specifiying the molecule geometry in the same format as that used by `qiskit_nature`.
+
 * The Jordan-Wigner transform in qiskit_alt is 30 or so times faster than in qiskit-nature.
 * Computing a Fermionic Hamiltonian from pyscf integrals is several times faster, with the factor increasing
   with the problem size.
 * Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
   is many times faster with the factor increasing rapidly in the number of qubits.
-
-The benchmarks are interesting, but in a sense, only mark the state of development of the two implementations.
-There are more general questions than the significance of these particular performance gains.
-For instance, how easy is it to develop a robust Python-Julia package for Qiskit? How complex is it? How plugable is it?
-What are the advantages and disadvantages vis-a-vis C++/Rust? To whom and at what level should such a package be exposed?
-Can and should fruitful designs be ported to C++ or Rust?, Etc.
 
 * [Motivations](./Motivations.md)
 
