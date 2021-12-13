@@ -7,6 +7,11 @@ And here is [how to install Qiskit](https://qiskit.org/documentation/getting_sta
 
 `qiskit_alt` is an experimental package.
 
+## qiskit_alt
+
+This Python package uses a backend written in Julia to implement high performance features for
+standard Qiskit. This package is a proof of concept with little high-level code.
+
 The highlights thus far are in [benchmark code](./bench/), which is
 presented in the [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb).
 
@@ -18,6 +23,8 @@ from a Python list specifiying the molecule geometry in the same format as that 
   with the problem size.
 * Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
   is many times faster with the factor increasing rapidly in the number of qubits.
+
+### Table of contents
 
 * [Motivations](./Motivations.md)
 
@@ -41,10 +48,6 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 * [Development](./Development.md). Instructions for developing qiskit_alt.
 
-## qiskit_alt
-
-This Python package uses a backend written in Julia to implement high performance features for
-standard Qiskit. This package is a proof of concept with little high-level code.
 
 ## Demonstration
 
