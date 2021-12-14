@@ -110,10 +110,6 @@ the executable.
 
 * Install whatever other packages you want. For example `pip install ipython`.
 
-* Start python and do `import julia` and `julia.install(julia="./julia/bin/julia")` replacing
-  the path by the path you chose above when installing julia.
-  NEW: This step should happen automatically the first time you run `import qiskit_alt`.
-
 * You need to do one of the following
     * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
     * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
@@ -262,6 +258,7 @@ a handful of packages for this project.
 * `Exception 'ArgumentError' occurred while calling julia code: const PyCall = Base.require(Base.PkgId(Base.UUID("438e738f-606a-5dbb-bf0a-cddfbfd45ab0"), "PyCall"))`.
    This may happen when you try `import qiskit_alt`,  but `PyCall` has not yet been installed for the julia version corresponding to the
     executable found when starting the import of `qiskit_alt`.
+
 * Solution. Try `import julia; julia.install(julia="/path/to/julia")` where the path to the julia executable is the same
  that you chose for `qiskit_alt`. Alternatively, start julia, and do `Pkg.add("PyCall")`. For example, if you have symlinked
  a julia installation to `qiskit_alt/julia/`, then you would start julia from the `qiskit_alt` toplevel as `./julia/bin/julia`,
