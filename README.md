@@ -108,6 +108,8 @@ the executable.
 
 * Install `qiskit_alt` in editable mode, `pip install -e .`
 
+* Install whatever other packages you want. For example `pip install ipython`.
+
 * Start python and do `import julia` and `julia.install(julia="./julia/bin/julia")` replacing
   the path by the path you chose above when installing julia.
   NEW: This step should happen automatically the first time you run `import qiskit_alt`.
