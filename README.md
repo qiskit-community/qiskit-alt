@@ -117,6 +117,15 @@ the executable.
 * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
   see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
 
+* Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
+```python
+In [1]: import qiskit_alt
+  Activating project at `~/myrepos/quantum_repos/qiskit_alt`
+
+In [2]: %run ./bench/jordan_wigner_alt_time.py
+geometry=h2_geometry, basis='sto3g' 0.82 ms
+...
+```
 
 ### Compilation
 
