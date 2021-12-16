@@ -9,7 +9,7 @@ qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 julia_project = JuliaProject(
     name="qiskit_alt",
     package_path=qiskit_alt_path,
-    preferred_julia_versions = ['latest', '1.7'],
+    preferred_julia_versions = ['1.7', '1.6', 'latest'],
     registry_url = "git@github.ibm.com:John-Lapeyre/QuantumRegistry.git",
     logging_level = logging.INFO, # or logging.WARN,
     console_logging=False
@@ -23,4 +23,8 @@ logger = julia_project.logger
 julia_src_dir = julia_project.julia_src_dir
 
 def compile_qiskit_alt():
+    """
+    Compile a system image for `qiskit_alt` in the subdirectory `./sys_image/`. This
+    system image will be loaded the next time you import `qiskit_alt`.
+    """
     julia_project.compile_julia_project()
