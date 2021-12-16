@@ -179,7 +179,7 @@ It may be useful in case the automated installation fails.
 
 * How to set up the Python virtual environment and install from `requirements.txt` may be found in several places online.
 
-* Downloading and/or loading Julia components is done in `./qiskit_alt/qiskit_alt_julia_project.py`, which uses
+* Downloading and/or loading Julia components is done in `./qiskit_alt/_julia_project.py`, which uses
  the Python package [`julia_project`](https://github.com/jlapeyre/julia_project)
 
     * If a compiled Julia system image is found in `./sys_image/`, then it is loaded. Otherwise the standard
