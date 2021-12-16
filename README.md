@@ -60,11 +60,12 @@ to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/lates
 
 `qiskit_alt` is not available on pypi.
 This package is developed in a virtual environment. The following instructions assume you are using a virtual environment.
+But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
 
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
 * You may allow `qiskit_alt` to download and install Julia for you, using [`jill.py`](https://github.com/johnnychen94/jill.py).
-  Otherwise you can follow instructions for [installing Julia manually](./Install_Julia.md)
+  Otherwise you can follow instructions for [installing Julia manually](./Install_Julia.md).
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
