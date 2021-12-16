@@ -70,33 +70,8 @@ This package is developed in a virtual environment. The following instructions a
 
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
-* Install Julia. Some possibilities are
-    * The [Julia installer `jill`](https://github.com/johnnychen94/jill.py) works for most common platforms. `pip install jill`, then `jill install`.
-      This [table](https://github.com/johnnychen94/jill.py#about-installation-and-symlink-directories) shows where jill installs
-      and symlinks julia on various platforms.
-    * [juliaup](https://github.com/JuliaLang/juliaup) for MSWin uses the Windows store.
-    * Download a [prebuilt Julia distribution](https://julialang.org/downloads/)
-
-* To allow `qiskit_alt` to find the julia executable you can do one of
-    * Ensure that the julia executable is in your `PATH` environment variable. For example, under
-      linux, `jill` makes a symlink to `/home/username/.local/bin/julia`.
-      [More information is here](https://julialang.org/downloads/platform/).
-    * Unpack, move, or symlink the julia installation to the toplevel of this `qiskit_alt` package.
-      For example `jill` installs to `/home/username/packages/julias/julia-1.7/` under linux, so you
-      could make a symlink `julia -> /home/username/packages/julias/julia-1.7/`.
-      `qiskit_alt` will search for the executable at `qiskit_alt/julia/bin/julia`.
-
-* **NOTE** If you have built a Julia system image (see below), then it will be loaded before any of the options above.
-  You must rename or delete the system image in `./sys_image/sys_qiskit_alt.so` if you want to change the location or version of the
-  Julia executable. If an incompatible system image is loaded, julia will crash.
-  
-* **NOTE** If you allow `qiskit_alt` to search your PATH for julia, rather than specifying the location as described above, *and*
-if `julia` on your path is a script that loads a custom system image, .i.e. `/path/to/julia -J /path/to/custom-sys-image.so`,
-then `qiskit_alt.compile_qiskit_alt()` will likely fail with an error. None of the usual installation methods will create
-such a script, so it is not normally something to be concerned about. If in doubt, check the file `qiskit_alt.log`.
-However it is not uncommon for people to put a script named "julia" in their path that
-runs julia with a custom system image. This is why we must support alternative methods for finding
-the executable.
+* You may allow `qiskit_alt` to download and install Julia for you, using [`jill.py`](https://github.com/johnnychen94/jill.py).
+  Otherwise you can follow instructions for [installing Julia manually](./Install_Julia.md)
 
 * Do `python -m venv ./env`, which creates a virtual environment for python packages needed to run `qiskit_alt`.
   You can use whatever name you like in place of the directory `./env`.
@@ -114,8 +89,13 @@ the executable.
     * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
     * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
 
-* The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
-  see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
+* import `qiskit_alt`, say via `ipython`.
+
+    * If no Julia executable is found, `jill.py` will be used to download and install it.
+      Otherwise, `qiskit_alt` will use the julia found by searching as [described here](./Install_Julia.md).
+
+    * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
+      see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
 
 * Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
 ```python
@@ -173,7 +153,7 @@ Out[2]: 0.0
 In [3]: from qiskit_alt import QuantumOps # or from julia import QuantumOps
 
 In [4]: pauli_sum = QuantumOps.rand_op_sum(QuantumOps.Pauli, 3, 4); pauli_sum
-Out[4]: 
+Out[4]:
 <PyCall.jlwrap 4x3 QuantumOps.PauliSum{Vector{Vector{QuantumOps.Paulis.Pauli}}, Vector{Complex{Int64}}}:
 IIZ * (1 + 0im)
 XYI * (1 + 0im)
@@ -184,7 +164,7 @@ In the last example above, `PauliSum` is a Julia object. The `PauliSum` can be c
 a Qiskit `SparsePauliOp` like this.
 ```python
 In [5]: qiskit_alt.PauliSum_to_SparsePauliOp(pauli_sum)
-Out[5]: 
+Out[5]:
 SparsePauliOp(['ZII', 'IYX', 'XIY', 'ZIZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
@@ -293,6 +273,20 @@ as well. Of course, would mean that building `PyCall` in one Julia/Python projec
 may break it in another, completely separate project. However, as far as I can
 tell, setting the environment variable is enough.
 Note that you call also set `PYCALL_JL_RUNTIME_PYTHON` from your shell before starting julia.
+
+### Errors related to the compiled custom system image
+
+* You may want to delete the images in `./sys_image/` and build a new one, if compiling repeatedly.
+  But, this is normally not necessary.
+
+* If you allow `qiskit_alt` to search your PATH for julia, rather than specifying the location as described above, *and*
+if `julia` on your path is a script that loads a custom system image, .i.e. `/path/to/julia -J /path/to/custom-sys-image.so`,
+then `qiskit_alt.compile_qiskit_alt()` will likely fail with an error. None of the usual installation methods will create
+such a script, so it is not normally something to be concerned about. If in doubt, check the file `qiskit_alt.log`.
+However it is not uncommon for people to put a script named "julia" in their path that
+runs julia with a custom system image. This is why we must support alternative methods for finding
+the executable.
+
 
 ### Communication between Python and Julia
 

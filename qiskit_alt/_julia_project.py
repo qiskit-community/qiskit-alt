@@ -9,6 +9,7 @@ qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 julia_project = JuliaProject(
     name="qiskit_alt",
     package_path=qiskit_alt_path,
+    preferred_julia_versions = ['latest', '1.7'],
     registry_url = "git@github.ibm.com:John-Lapeyre/QuantumRegistry.git",
     logging_level = logging.INFO, # or logging.WARN,
     console_logging=False
