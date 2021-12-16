@@ -17,7 +17,7 @@ You can skip everything below if you allow `qiskit_alt` to install Julia for you
     * Download a [prebuilt Julia distribution](https://julialang.org/downloads/)
 
 * To allow `qiskit_alt` to find the julia executable you can do one of
-    * Install Julia with [jill.py`](https://github.com/johnnychen94/jill.py), and `qiskit_alt` will find it,
+    * Install Julia with [`jill.py`](https://github.com/johnnychen94/jill.py), and `qiskit_alt` will find it,
       even if it is not in your PATH.
     * Ensure that the julia executable is in your `PATH` environment variable. For example, under
       linux, `jill` makes a symlink to `/home/username/.local/bin/julia`.

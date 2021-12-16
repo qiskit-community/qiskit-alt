@@ -1,12 +1,5 @@
 # qiskit_alt
 
-## ATTENTION
-
-This package is NOT part of Qiskit. You can find the [Qiskit repositories here](https://github.com/Qiskit).
-And here is [how to install Qiskit](https://qiskit.org/documentation/getting_started.html).
-
-`qiskit_alt` is an experimental package.
-
 ## qiskit_alt
 
 This Python package uses a backend written in Julia to implement high performance features for
@@ -91,8 +84,9 @@ This package is developed in a virtual environment. The following instructions a
 
 * import `qiskit_alt`, say via `ipython`.
 
-    * If no Julia executable is found, `jill.py` will be used to download and install it.
-      Otherwise, `qiskit_alt` will use the julia found by searching as [described here](./Install_Julia.md).
+    * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
+      to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
+     Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
 
     * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
       see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
@@ -128,9 +122,6 @@ And more Julia code can be moved from `qiskit_alt` into compiled modules.
 * "compilation" has different meanings in Julia. Code is always precompiled and cached in a `.ji` file.
 What happens during precompilation is described [here](https://julialang.org/blog/2021/01/precompile_tutorial/).
 But, this is not the kind of compilation we are considering here.
-
-* **AS NOTED ABOVE**, you have to rename or delete the system image in `./sys_image/sys_qiskit_alt.so` if you later want to use
-a different version or location of Julia.
 
 ## Using qiskit_alt
 
@@ -191,7 +182,7 @@ It may be useful in case the automated installation fails.
 * Downloading and/or loading Julia components is done in `./qiskit_alt/qiskit_alt_julia_project.py`, which uses
  the Python package [`julia_project`](https://github.com/jlapeyre/julia_project)
 
-    * If a compiled Julia system image is found in `./sys_image/sys_qiskit_alt.so`, then it is loaded. Otherwise the standard
+    * If a compiled Julia system image is found in `./sys_image/`, then it is loaded. Otherwise the standard
       image that ships with Julia is used.
     * The file `Manifest.toml` is created by Julia when first installing packages. If it is missing, it is assumed that nothing
       has been installed. In this case, the [standard procedure for downloading and installing Julia packages](https://pkgdocs.julialang.org/v1/environments/)
@@ -242,7 +233,7 @@ a handful of packages for this project.
 `Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
  This may occur when compiling a system image with `qiskit_alt.compile_qiskit_alt()` after starting `qiskit_alt` with
  a previously compiled system image.
-* Solution: Delete `./sys_image/sys_qiskit_alt.so` and restart python.
+* Solution: Delete sysetm images in `./sys_image/` and restart python.
 
 * `Exception 'ArgumentError' occurred while calling julia code: const PyCall = Base.require(Base.PkgId(Base.UUID("438e738f-606a-5dbb-bf0a-cddfbfd45ab0"), "PyCall"))`.
    This may happen when you try `import qiskit_alt`,  but `PyCall` has not yet been installed for the julia version corresponding to the
