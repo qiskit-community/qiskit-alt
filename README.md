@@ -62,6 +62,8 @@ to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/lates
 This package is developed in a virtual environment. The following instructions assume you are using a virtual environment.
 But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
 
+* The installation is interactive. To disable questions see the section on environment variables in [`julia_project`](https://github.com/jlapeyre/julia_project).
+
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
 * You may allow `qiskit_alt` to download and install Julia for you, using [`jill.py`](https://github.com/johnnychen94/jill.py).
