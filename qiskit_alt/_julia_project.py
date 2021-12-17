@@ -11,6 +11,7 @@ julia_project = JuliaProject(
     package_path=qiskit_alt_path,
     preferred_julia_versions = ['1.7', '1.6', 'latest'],
     registry_url = "git@github.ibm.com:John-Lapeyre/QuantumRegistry.git",
+    env_prefix = 'QISKIT_ALT_',
     logging_level = logging.INFO, # or logging.WARN,
     console_logging=False
 )

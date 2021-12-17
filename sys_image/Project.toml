@@ -1,5 +1,6 @@
 [deps]
 ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
+IsApprox = "28f27b66-4bd8-47e7-9110-e2746eb8bed7"
 JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
 PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"

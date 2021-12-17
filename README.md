@@ -58,11 +58,14 @@ from a Python list specifiying the molecule geometry in the same format as that 
 `qiskit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
 to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
 
+`qiskit_alt` uses [`julia_project`](https://github.com/jlapeyre/julia_project) for managing Julia dependencies.
+
 `qiskit_alt` is not available on pypi.
 This package is developed in a virtual environment. The following instructions assume you are using a virtual environment.
 But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
 
-* The installation is interactive. To disable questions see the section on environment variables in [`julia_project`](https://github.com/jlapeyre/julia_project).
+* The installation is interactive. How to do a non-interactive installation with environment variables is
+  described below.
 
 * Clone this repository (qiskit_alt) with git and cd to the top level.
 
@@ -103,6 +106,13 @@ In [2]: %run ./bench/jordan_wigner_alt_time.py
 geometry=h2_geometry, basis='sto3g' 0.82 ms
 ...
 ```
+
+* Configuring installation with environment variables. If you set these environment variables, you will not be prompted
+  during installation.
+    * Set `QISKIT_ALT_JULIA_PATH` to the path to a Julia executable (in a Julia installation). This variable takes
+      precedence over other methods of specifying the path to the executable.
+    * Set `QISKIT_ALT_INSTALL_JULIA` to `y` or `n` to confirm or disallow installing julia via `jill.py`.
+    * Set `QISKIT_ALT_COMPILE` to `y` or `n`  to confirm or disallow compiling a system image after installing Julia packages
 
 ### Compilation
 
