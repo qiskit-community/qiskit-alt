@@ -29,3 +29,12 @@ def compile_qiskit_alt():
     system image will be loaded the next time you import `qiskit_alt`.
     """
     julia_project.compile_julia_project()
+
+
+def update_qiskit_alt():
+    """
+    Remove possible stale Manifest.toml files and compiled system image.
+    Update Julia packages and rebuild Manifest.toml file.
+    Before compiling, it's probably a good idea to call this method, then restart Python.
+    """
+    julia_project.update()

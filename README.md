@@ -116,6 +116,11 @@ geometry=h2_geometry, basis='sto3g' 0.82 ms
     * Set `QISKIT_ALT_INSTALL_JULIA` to `y` or `n` to confirm or disallow installing julia via `jill.py`.
     * Set `QISKIT_ALT_COMPILE` to `y` or `n`  to confirm or disallow compiling a system image after installing Julia packages
 
+
+* `qiskit_alt.update()` will delete `Manifest.toml` files; upgrade packages; rebuild the manifest; delete compiled system images.
+  If you call `update()` while running a compiled system image, you should exit Python and start again before compiling
+
+
 ### Compilation
 
 *  To speed up loading and reduce delays due to just-in-time compilation, you can compile a system image for `qiskit_alt` as follows.
@@ -232,6 +237,9 @@ a handful of packages for this project.
 ## Troubleshooting
 
 #### Upgrading Julia packages
+
+* You can call `qiskit_alt.update()` or try the manual steps below.
+
 * To get the most recent Julia packages, try some of
     * Delete `Manifest.toml` and `./sys_image/Manifest.toml`.
     * Start Julia at the command line. And do `Pkg.update()`.
