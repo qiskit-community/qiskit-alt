@@ -55,14 +55,16 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 ## Installation and Configuration Notes
 
-`qiskit_alt` uses [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) to communicate with Julia. It is advisable
-to read the pyjulia [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html)
+* `qiskit_alt` depends on the following two packages. It is probably not necessary to read about them to install `qiskit_alt`.
 
-`qiskit_alt` uses [`julia_project`](https://github.com/jlapeyre/julia_project) for managing Julia dependencies.
+    * [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) is used to communicate with Julia.
+      The [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html) may be useful.
 
-`qiskit_alt` is not available on pypi.
-This package is developed in a virtual environment. The following instructions assume you are using a virtual environment.
-But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
+    * [`julia_project`](https://github.com/jlapeyre/julia_project) for managing Julia dependencies.
+
+* `qiskit_alt` is not available on pypi. This package is developed in a virtual environment.
+   The following instructions assume you are using a virtual environment.
+   But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
 
 * The installation is interactive. How to do a non-interactive installation with environment variables is
   described below.
