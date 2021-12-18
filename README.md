@@ -82,7 +82,7 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 * Install required python packages with `pip install -r requirements.txt`. Or install them one by one.
 
-* Install `qiskit_alt` in editable mode, `pip install -e .`
+* Install `qiskit_alt`. Optionally in editable mode, i.e. `pip install -e .`
 
 * Install whatever other packages you want. For example `pip install ipython`.
 
