@@ -10,5 +10,6 @@ setup(
     description='Alternative to parts of qiskit, written in Julia',
     url= 'https://github.ibm.com:John-Lapeyre/qiskit_alt.git',
     author='John Lapeyre',
-    packages=find_packages()
+    packages=find_packages(),
+    include_package_data=True
 )
