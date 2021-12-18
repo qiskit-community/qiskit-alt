@@ -5,7 +5,7 @@ env/
 */*/__pycache__
 qiskit-terra/
 Manifest.toml
-sys_image/*.so
+**/*.so
 repl_history.jl
 bin/
 demos/.ipynb_checkpoints/

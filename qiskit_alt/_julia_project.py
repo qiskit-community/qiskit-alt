@@ -4,7 +4,8 @@ import logging
 from julia_project import JuliaProject
 
 import os
-qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+qiskit_alt_path = os.path.dirname(os.path.abspath(__file__))
+#qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 julia_project = JuliaProject(
     name="qiskit_alt",
