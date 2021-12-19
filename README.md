@@ -55,14 +55,45 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 ## Installation and Configuration Notes
 
-* `qiskit_alt` depends on the following two packages. It is probably not necessary to read about them to install `qiskit_alt`.
+### Basic
+
+* `qiskit_alt` is not available on pypi. Clone or download this repository.
+
+* Do one of the following
+    * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
+    * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
+
+* Install `qiskit_alt` as you would a typical python package. For example `pip install /path/to/qiskit_alt`.
+
+* Complete installation by importing `qiskit_alt` in python.
+
+    * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
+      to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
+     Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
+
+    * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
+      see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
+
+* Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
+```python
+In [1]: import qiskit_alt
+  Activating project at `~/myrepos/quantum_repos/qiskit_alt`
+
+In [2]: %run ./bench/jordan_wigner_alt_time.py
+geometry=h2_geometry, basis='sto3g' 0.82 ms
+...
+```
+
+### More installation details
+
+* `qiskit_alt` depends on the following two packages. It is probably not necessary to read about them to install `qiskit_alt`, but might help.
 
     * [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) is used to communicate with Julia.
       The [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html) may be useful.
 
     * [`julia_project`](https://github.com/jlapeyre/julia_project) for managing Julia dependencies.
 
-* `qiskit_alt` is not available on pypi. This package is developed in a virtual environment.
+*  This package is developed in a virtual environment.
    The following instructions assume you are using a virtual environment.
    But, this is not necessary. Nor is it necessary to install `qiskit_alt` in editable mode.
 
@@ -86,28 +117,6 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 * Install whatever other packages you want. For example `pip install ipython`.
 
-* You need to do one of the following
-    * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
-    * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
-
-* import `qiskit_alt`, say via `ipython`.
-
-    * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
-      to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
-     Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
-
-    * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
-      see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
-
-* Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
-```python
-In [1]: import qiskit_alt
-  Activating project at `~/myrepos/quantum_repos/qiskit_alt`
-
-In [2]: %run ./bench/jordan_wigner_alt_time.py
-geometry=h2_geometry, basis='sto3g' 0.82 ms
-...
-```
 
 * Configuring installation with environment variables. If you set these environment variables, you will not be prompted
   during installation.
