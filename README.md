@@ -111,12 +111,9 @@ geometry=h2_geometry, basis='sto3g' 0.82 ms
 * Activate the environment using the file required for your shell. For example
   `source ./env/bin/activate` for bash.
 
-* Install required python packages with `pip install -r requirements.txt`. Or install them one by one.
-
 * Install `qiskit_alt`. Optionally in editable mode, i.e. `pip install -e .`
 
 * Install whatever other packages you want. For example `pip install ipython`.
-
 
 * Configuring installation with environment variables. If you set these environment variables, you will not be prompted
   during installation.
