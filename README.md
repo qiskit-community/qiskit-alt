@@ -5,6 +5,9 @@
 This Python package uses a backend written in Julia to implement high performance features for
 standard Qiskit. This package is a proof of concept with little high-level code.
 
+Installing and managing Julia and its packages is automated. So you don't need to learn anything about Julia
+to get started.
+
 The highlights thus far are in [benchmark code](./bench/), which is
 presented in the [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb).
 
@@ -69,7 +72,7 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
     * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
       to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
-     Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
+      Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
 
     * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
       see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.

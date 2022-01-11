@@ -2,7 +2,8 @@
 
 `qiskit_alt` will query to download and install Julia if it can't find the exectuable. Alternatively, you can install Julia as described below.
 
-`qiskit_alt` will find the `jill.py` installation every time it is imported.
+To manage the Julia installation and Julia packages, `qiskit_alt` uses [`julia_project`](https://github.com/jlapeyre/julia_project) and
+[`find_julia`](https://github.com/jlapeyre/find_julia).
 
 
 ## Installing Julia manually
