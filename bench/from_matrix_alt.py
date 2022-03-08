@@ -1,9 +1,14 @@
 # Benchmark qiskit_alt transforming an operator from the computational- to the Pauli basis.
+import qiskit_alt
+qiskit_alt.project.ensure_init()
+
 import timeit
 
 def make_setup_code(nqubits):
     return f"""
-from qiskit_alt import QuantumOps, PauliSum_to_SparsePauliOp
+from qiskit_alt.pauli_operators import PauliSum_to_SparsePauliOp
+import julia  # This and ff line must be changed if we support juliacall
+from julia import QuantumOps
 import numpy as np
 
 m = np.random.rand(2**{nqubits}, 2**{nqubits})

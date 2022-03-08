@@ -1,11 +1,15 @@
 import os
-import julia
-from ._julia_project import julia_src_dir
-from julia import Main, QuantumOps, QiskitQuantumInfo
+from ._julia_project import project
+project.ensure_init()
+
+Main = project.simple_import("Main")
+QuantumOps = project.simple_import("QuantumOps")
+QiskitQuantumInfo = project.simple_import("QiskitQuantumInfo")
 from .pauli_operators import jlSparsePauliOp
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
-Main.include(os.path.join(julia_src_dir, 'electronic_structure.jl'))
+#Main.include(os.path.join(julia_src_dir, 'electronic_structure.jl'))
+Main.include(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'electronic_structure.jl'))
 
 def Geometry(qiskit_geometry):
     """

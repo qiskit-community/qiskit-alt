@@ -1,9 +1,13 @@
 # Benchmark qiskit_alt creating a SparsePauliOp from a list of strings.
+import qiskit_alt
+qiskit_alt.project.ensure_init()
 
 import random
 from timeit import timeit
 
-from qiskit_alt import QuantumOps, PauliSum_to_SparsePauliOp
+import julia
+from julia import QuantumOps
+from qiskit_alt.pauli_operators import PauliSum_to_SparsePauliOp
 
 random.seed(123)
 

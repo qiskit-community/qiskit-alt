@@ -1,9 +1,15 @@
 import os
-import julia
+from ._julia_project import project
+project.ensure_init()
 
-from julia import QuantumOps
-from julia import QiskitQuantumInfo
-from julia import Main
+Main = project.simple_import("Main")
+QuantumOps = project.simple_import("QuantumOps")
+QiskitQuantumInfo = project.simple_import("QiskitQuantumInfo")
+
+# import julia
+# from julia import QuantumOps
+# from julia import QiskitQuantumInfo
+# from julia import Main
 
 from qiskit.quantum_info import Pauli, SparsePauliOp, PauliList
 

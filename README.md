@@ -62,10 +62,6 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 * `qiskit_alt` is not available on pypi. Clone or download this repository.
 
-* Do one of the following
-    * `ssh-keyscan github.ibm.com >> ~/.ssh/known_hosts`
-    * Set this environment variable `export JULIA_SSH_NO_VERIFY_HOSTS=github.ibm.com`
-
 * Install `qiskit_alt` as you would a typical python package. For example `pip install /path/to/qiskit_alt`.
 
 * Complete installation by importing `qiskit_alt` in python.
@@ -78,14 +74,10 @@ from a Python list specifiying the molecule geometry in the same format as that 
       see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
 
 * Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
-```python
-In [1]: import qiskit_alt
-  Activating project at `~/myrepos/quantum_repos/qiskit_alt`
-
-In [2]: %run ./bench/jordan_wigner_alt_time.py
-geometry=h2_geometry, basis='sto3g' 0.82 ms
-...
+```sh
+python ./bench/run_all_bench.py
 ```
+
 
 ### More installation details
 
@@ -126,7 +118,7 @@ geometry=h2_geometry, basis='sto3g' 0.82 ms
     * Set `QISKIT_ALT_COMPILE` to `y` or `n`  to confirm or disallow compiling a system image after installing Julia packages
 
 
-* `qiskit_alt.update()` will delete `Manifest.toml` files; upgrade packages; rebuild the manifest; delete compiled system images.
+* `qiskit_alt.project.update()` will delete `Manifest.toml` files; upgrade packages; rebuild the manifest; delete compiled system images.
   If you call `update()` while running a compiled system image, you should exit Python and start again before compiling
 
 
@@ -135,9 +127,10 @@ geometry=h2_geometry, basis='sto3g' 0.82 ms
 *  To speed up loading and reduce delays due to just-in-time compilation, you can compile a system image for `qiskit_alt` as follows.
 ```python
 [1]: import qiskit_alt
-  Activating project at `~/myrepos/quantum_repos/qiskit_alt`
 
-In [2]: qiskit_alt.compile_qiskit_alt()
+In [2]: qiskit_alt.project.ensure_init()
+
+In [3]: qiskit_alt.project.compile()
 ```
 Compilation takes about four minutes. The new Julia system image will be found  the next time you import `qiskit_alt`.
 
@@ -156,24 +149,35 @@ But, this is not the kind of compilation we are considering here.
 
 This is a very brief introduction.
 
-* The pyjulia interface is exposed via the `julia` module. However you should *not* do `import julia` before `import qiskit_alt`.
+* The pyjulia interface is exposed via the `julia` module. However you should *not* do `import julia` before `import qiskit_alt`,
+and `qiskit_alt.project.ensure_init()`.
 This is because `import julia` will circumvent the facilities described above for choosing the julia executable and the
 compiled system image.
 
-* Julia modules are loaded like this. `import qiskit_alt`; `import julia`; `from julia import PkgName`. (For convenience
-the Julia modules `Main` and `Base` are imported and reexported into and from `qiskit_alt`.)
+* Julia modules are loaded like this.
+```python
+import qiskit_alt
+qiskit_alt.project.ensure_init()
+Main = qiskit_alt.project.julia.Main
+```
+
+`import qiskit_alt`; `import julia`; `from julia import PkgName`.
 After this, all functions and symbols in `PkgName` are available.
 You can do, for example
 ```python
-In [1]: import qiskit_alt, julia  # qiskit_alt first
+In [1]: import qiskit_alt
 
-In [2]: julia.Main.cosd(90)
-Out[2]: 0.0
+In [2]: qiskit_alt.project.ensure_init()
 
-In [3]: from qiskit_alt import QuantumOps # or from julia import QuantumOps
+In [3]: julia= qiskit_alt.project.julia
 
-In [4]: pauli_sum = QuantumOps.rand_op_sum(QuantumOps.Pauli, 3, 4); pauli_sum
-Out[4]:
+In [4]: julia.Main.cosd(90)
+Out[4]: 0.0
+
+In [5]: from julia import QuantumOps
+
+In [6]: pauli_sum = QuantumOps.rand_op_sum(QuantumOps.Pauli, 3, 4); pauli_sum
+Out[6]:
 <PyCall.jlwrap 4x3 QuantumOps.PauliSum{Vector{Vector{QuantumOps.Paulis.Pauli}}, Vector{Complex{Int64}}}:
 IIZ * (1 + 0im)
 XYI * (1 + 0im)
@@ -183,8 +187,10 @@ ZIZ * (1 + 0im)>
 In the last example above, `PauliSum` is a Julia object. The `PauliSum` can be converted to
 a Qiskit `SparsePauliOp` like this.
 ```python
-In [5]: qiskit_alt.PauliSum_to_SparsePauliOp(pauli_sum)
-Out[5]:
+In [7]: from qiskit_alt.pauli_operators import PauliSum_to_SparsePauliOp
+
+In [8]: PauliSum_to_SparsePauliOp(pauli_sum)
+Out[8]:
 SparsePauliOp(['ZII', 'IYX', 'XIY', 'ZIZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
@@ -224,15 +230,6 @@ It may be useful in case the automated installation fails.
     * After the registry `QuantumRegistry` is installed, the Julia project is `activate`d, `resolve`d, and `instantiate`d.
       You can also do each of these steps by hand.
 
-* Compiling `qiskit_alt`. This is not necessary, but will make `qiskit_alt` load faster and cause fewer jit delays due to compilation at run time.
-The Python function `qiskit_alt.compile_qiskit_alt()` will do the equivalent of the following.
-Start Julia from a shell at the toplevel of the `qiskit_alt` installation and run the compile script as follows.
-```julia
-import Pkg
-cd("./sys_image")
-Pkg.activate(".")
-include("compile_julia_project.jl")
-```
 
 ## Julia Packages
 
@@ -243,13 +240,19 @@ include("compile_julia_project.jl")
 are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.ibm.com/John-Lapeyre/QuantumRegistry) which contains just
 a handful of packages for this project.
 
+## Testing
+
+In addtion to the code in the `bench` directory, there are test directories with just a few tests
+in them. They can be run for example via `pytest ./test`. The juliacall tests are in a separate
+folder because they can't be run in the same process as pyjulia tests.
+
 ## Troubleshooting
 
 #### Upgrading Julia packages
 
-* You can call `qiskit_alt.update()` or try the manual steps below.
+* You can call `qiskit_alt.project.update()` or try the manual steps below.
 
-* To get the most recent Julia packages, try some of
+* FIXME: outdated. To get the most recent Julia packages, try some of
     * Delete `Manifest.toml` and `./sys_image/Manifest.toml`.
     * Start Julia at the command line. And do `Pkg.update()`.
     * In python, do `from qiskit_alt import julia; from julia import Pkg; Pkg.update()`.
@@ -263,7 +266,7 @@ a handful of packages for this project.
 
 * NOTE: The following error no longer occurs.
 `Segmentation fault in expression starting at /home/lapeyre/.julia/packages/ElectronicStructure/FMdUn/src/pyscf.jl:10`.
- This may occur when compiling a system image with `qiskit_alt.compile_qiskit_alt()` after starting `qiskit_alt` with
+ This may occur when compiling a system image with `qiskit_alt.project.compile()` after starting `qiskit_alt` with
  a previously compiled system image.
 * Solution: Delete sysetm images in `./sys_image/` and restart python.
 
@@ -304,7 +307,7 @@ Note that you call also set `PYCALL_JL_RUNTIME_PYTHON` from your shell before st
 
 * If you allow `qiskit_alt` to search your PATH for julia, rather than specifying the location as described above, *and*
 if `julia` on your path is a script that loads a custom system image, .i.e. `/path/to/julia -J /path/to/custom-sys-image.so`,
-then `qiskit_alt.compile_qiskit_alt()` will likely fail with an error. None of the usual installation methods will create
+then `qiskit_alt.project.compile()` will likely fail with an error. None of the usual installation methods will create
 such a script, so it is not normally something to be concerned about. If in doubt, check the file `qiskit_alt.log`.
 However it is not uncommon for people to put a script named "julia" in their path that
 runs julia with a custom system image. This is why we must support alternative methods for finding

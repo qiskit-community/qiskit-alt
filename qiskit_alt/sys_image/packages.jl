@@ -1,0 +1,1 @@
+[:QuantumOps, :ElectronicStructure, :QiskitQuantumInfo]

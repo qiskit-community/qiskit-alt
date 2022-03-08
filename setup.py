@@ -14,9 +14,10 @@ setup(
     install_requires=[
         'pyscf>=2.0.1',
         'julia>=0.5.7',
+        'juliacall',
         'qiskit-terra>=0.19.0',
         'qiskit-nature>=0.2.2',
-        'julia_project>=0.0.21'
+        'julia_project>=0.1.4'
     ],
     include_package_data=True
 )

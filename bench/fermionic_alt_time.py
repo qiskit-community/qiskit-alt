@@ -1,4 +1,6 @@
 # Benchmark qiskit_alt constructing Fermionic operators from pyscf integrals.
+import qiskit_alt
+qiskit_alt.project.ensure_init()
 
 import timeit
 
@@ -12,12 +14,13 @@ h2o_geometry = [['O', [0., 0., 0.]],
             ['H', [0.757, 0.586, 0.]],
             ['H', [-0.757, 0.586, 0.]]]
 
+from qiskit_alt.electronic_structure import fermionic_hamiltonian
 #qiskit_alt.fermionic_hamiltonian({geometry}, {basis})
 """
 
 def run_one_basis(basis, geometry, num_repetitions):
     setup_code = make_setup_code(basis, geometry)
-    bench_code = f"qiskit_alt.fermionic_hamiltonian({geometry}, {basis})"
+    bench_code = f"fermionic_hamiltonian({geometry}, {basis})"
     time = timeit.timeit(stmt=bench_code, setup=setup_code, number=num_repetitions)
     t = 1000 * time / num_repetitions
     print(f"geometry={geometry}, basis={basis} {t:0.2f}", "ms")

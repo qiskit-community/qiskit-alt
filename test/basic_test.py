@@ -1,24 +1,31 @@
 import pytest
 import qiskit_alt
-from qiskit_alt import Main
-#from qiskit_alt import julia
+project = qiskit_alt.project
+project.ensure_init() # calljulia="pyjulia"
+import qiskit_alt.electronic_structure
+
+Main = project.julia.Main
 
 def test_always_passes():
     assert True
 
 
+def test_interface_lib():
+    assert qiskit_alt.project.julia.__name__ == 'julia'
+
+
 def test_import_QuantumOps():
-    from qiskit_alt import QuantumOps
+    project.simple_import("QuantumOps")
     assert True
 
 
 def test_import_ElectronicStructure():
-    from qiskit_alt import ElectronicStructure
+    project.simple_import("ElectronicStructure")
     assert True
 
 
 def test_import_QiskitQuantumInfo():
-    from qiskit_alt import QiskitQuantumInfo
+    project.simple_import("QiskitQuantumInfo")
     assert True
 
 
@@ -28,7 +35,7 @@ def conv_geometry():
     # geometry = [['O', [0., 0., 0.]],
     #             ['H', [0.757, 0.586, 0.]],
     #             ['H', [-0.757, 0.586, 0.]]]
-    return qiskit_alt.Geometry(geometry)
+    return qiskit_alt.electronic_structure.Geometry(geometry)
 
 
 def test_Geometry_length(conv_geometry):
@@ -36,7 +43,7 @@ def test_Geometry_length(conv_geometry):
 
 
 def test_Geometry_atom(conv_geometry):
-    atom = qiskit_alt.Main.getindex(conv_geometry, 1)
+    atom = Main.getindex(conv_geometry, 1)
     assert atom.coords == (0.0, 0.0, 0.0)
 
 

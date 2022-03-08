@@ -1,41 +1,31 @@
-import julia
 import logging
-
+import os
 from julia_project import JuliaProject
 
-import os
 qiskit_alt_path = os.path.dirname(os.path.abspath(__file__))
-#qiskit_alt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-julia_project = JuliaProject(
-    name="qiskit_alt",
-    package_path=qiskit_alt_path,
-    preferred_julia_versions = ['1.7', '1.6', 'latest'],
-    registry_url = "git@github.com:Qiskit-Extensions/QuantumRegistry.git",
-    env_prefix = 'QISKIT_ALT_',
-    logging_level = logging.INFO, # or logging.WARN,
-    console_logging=False
-)
+# def _after_init_func():
+#     importlib.import_module('.hellomod', 'qiskit_alt')
 
-julia_project.run()
 
-logger = julia_project.logger
+def new_project(calljulia="pyjulia"):
+    """Return a new `JuliaProject`.
 
-# Directory of Julia source files for qiskit_alt loaded via Python
-julia_src_dir = julia_project.julia_src_dir
-
-def compile_qiskit_alt():
+    Use this if you want to use both `pyjulia` (`julia` module) and `juliacall`
+    in a single session. For example, if are already using `pyjulia`, you can
+    do `new_proj = new_project(calljulia="juliacall")` and then
+    `new_proj.ensure_init()`.
     """
-    Compile a system image for `qiskit_alt` in the subdirectory `./sys_image/`. This
-    system image will be loaded the next time you import `qiskit_alt`.
-    """
-    julia_project.compile_julia_project()
+    return JuliaProject(
+        name="myjuliamod",
+        package_path = qiskit_alt_path,
+        version_spec = "^1.6", # Must be at least 1.6
+        env_prefix = 'MYJULIAMOD_', # env variables prefixed with this may control JuliaProject
+        registry_url = "git@github.com:Qiskit-Extensions/QuantumRegistry.git",
+        logging_level = logging.INFO, # or logging.WARN,
+        console_logging=False,
+        calljulia = calljulia
+        )
 
 
-def update_qiskit_alt():
-    """
-    Remove possible stale Manifest.toml files and compiled system image.
-    Update Julia packages and rebuild Manifest.toml file.
-    Before compiling, it's probably a good idea to call this method, then restart Python.
-    """
-    julia_project.update()
+project = new_project()
