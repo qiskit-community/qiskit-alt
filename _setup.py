@@ -17,7 +17,7 @@ setup(
         'juliacall',
         'qiskit-terra>=0.19.0',
         'qiskit-nature>=0.2.2',
-        'julia_project>=0.1.4'
+        'julia_project>=0.1.6'
     ],
     include_package_data=True
 )
