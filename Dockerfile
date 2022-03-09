@@ -17,6 +17,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 RUN pip install -e .
-RUN ln -fs /usr/bin/julia .
-RUN python3 -c "import julia; julia.install()"
-RUN python3 -c "import qiskit_alt; qiskit_alt.compile_qiskit_alt()"
+RUN python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
+RUN python3 -c "import qiskit_alt; qiskit_alt.project.compile()"
