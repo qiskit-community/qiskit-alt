@@ -4,9 +4,8 @@
 # certain it is the same bug as I was experiencing [garrison].
 FROM fedora:34
 
-RUN dnf install -y git @development-tools gcc-c++ \
-                   python3 python3-devel python3-pip julia
-RUN pip install -U pip
+RUN dnf install -y git @development-tools gcc-c++ python3 python3-devel julia
+RUN python3 -m pip install -U pip
 
 WORKDIR /qiskit_alt
 
@@ -17,5 +16,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 RUN pip install -e .
-RUN python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
+RUN yes | python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
 RUN python3 -c "import qiskit_alt; qiskit_alt.project.compile()"
