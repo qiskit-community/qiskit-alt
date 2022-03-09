@@ -14,7 +14,9 @@ WORKDIR /qiskit_alt
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+RUN julia -e 'using Pkg; pkg"registry add https://github.com/Qiskit-Extensions/QuantumRegistry.git"'
+
 COPY . .
 RUN pip install -e .
-RUN yes | python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
+RUN printf "y\nn\n" | python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
 RUN python3 -c "import qiskit_alt; qiskit_alt.project.compile()"
