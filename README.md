@@ -60,17 +60,16 @@ from a Python list specifiying the molecule geometry in the same format as that 
 
 ### Basic
 
-* `qiskit_alt` is not available on pypi. Clone or download this repository.
+* `qiskit_alt` is available on pypi: `pip install qiskit_alt`
 
-* Install `qiskit_alt` as you would a typical python package. For example `pip install /path/to/qiskit_alt`.
-
-* Complete installation by importing `qiskit_alt` in python.
+* Complete installation by running `import qiskit_alt` followed by `qiskit_alt.project.ensure_init()`. See [`julia_project`](https://github.com/jlapeyre/julia_project)
+  for more information.
 
     * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
       to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
       Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
 
-    * The Julia packages are installed the first time you run `import qiskit_alt` from Python. If this fails,
+    * The Julia packages are installed the first time you run `qiskit_alt.project.ensure_init()` from Python. If this fails,
       see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
 
 * Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
