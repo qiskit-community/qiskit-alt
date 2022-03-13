@@ -1,5 +1,3 @@
-include qiskit_alt/sys_image/*.jl
-include qiskit_alt/sys_image/Project.toml
-include qiskit_alt/Project.toml
-include qiskit_alt/julia_src/*.jl
-
+include src/qiskit_alt/sys_image/*.jl
+include src/qiskit_alt/sys_image/Project.toml
+include src/qiskit_alt/Project.toml

@@ -7,7 +7,6 @@ qiskit_alt_path = os.path.dirname(os.path.abspath(__file__))
 # def _after_init_func():
 #     importlib.import_module('.hellomod', 'qiskit_alt')
 
-
 def new_project(calljulia="pyjulia"):
     """Return a new `JuliaProject`.
 
@@ -17,11 +16,11 @@ def new_project(calljulia="pyjulia"):
     `new_proj.ensure_init()`.
     """
     return JuliaProject(
-        name="myjuliamod",
+        name="qiskit_alt",
         package_path = qiskit_alt_path,
         version_spec = "^1.6", # Must be at least 1.6
         env_prefix = 'MYJULIAMOD_', # env variables prefixed with this may control JuliaProject
-        registry_url = "git@github.com:Qiskit-Extensions/QuantumRegistry.git",
+        registries = {"QuantumRegistry" : "https://github.com/Qiskit-Extensions/QuantumRegistry"},
         logging_level = logging.INFO, # or logging.WARN,
         console_logging=False,
         calljulia = calljulia
