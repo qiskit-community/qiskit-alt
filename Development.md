@@ -70,7 +70,7 @@ julia> Pkg.develop(path="/path/to/package/source/tree/")
 The following enables a workflow, which is explained in more detail further below.
 
 * clone `qiskit_alt`
-* clone the packages in the [QuantumRegistry](https://github.ibm.com/John-Lapeyre/QuantumRegistry).
+* clone the packages in the [QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry).
 `QuantumOps`, `ElectronicStructure`, `ElectronicStructurePySCF`, and `QiskitQuantumInfo`.
 You can do this in one of two ways.
     * Clone them via `Pkg.develop("QuantumOps")`. This looks up the url in your registries and clones to `~/.julia/dev/`.
@@ -106,7 +106,7 @@ So it can be used to reproduce an environment with exactly these immutable versi
 with package metadata, such as a package name, available versions, and download url. These registries are stored
 in `~/.julia/registries/`. When Julia resolves package requirements for a project, it refers to these registries.
 The[General Registry](https://github.com/JuliaRegistries/General) contains thousands of packages.
-We add to this our own [QuantumRegistry](https://github.ibm.com/John-Lapeyre/QuantumRegistry).
+We add to this our own [QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry).
 A package is identified by its UUID. You can use this to distinguish packages with the same name.
 If you type `julia> Pkg.add("MyPackage")`. Julia looks for a package by that name in your registries.
 
@@ -126,8 +126,8 @@ in `Manifest.toml`. We don't keep `Manifest.toml` under VCS. It is always safe t
 be rebuilt from the `Project.toml` and the registries.
 
 The Julia packages backing qiskit_alt are registered in this registry
-[https://github.ibm.com/John-Lapeyre/QuantumRegistry](https://github.ibm.com/John-Lapeyre/QuantumRegistry).
-The registered packages themselves are also on `github.ibm.com`.
+[https://github.com/Qiskit-Extensions/QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry).
+The registered packages themselves are also on `github.com`.
 While developing, we want our `Manifest.toml` to point to local editable source trees rather than
 copies of immutable sources trees that have been downloaded. When developing Python, you typically
 restart frequently because you are working with precompiled components.
@@ -217,7 +217,7 @@ shell> pwd
 # "develop" ElectronicStructure from the url given in the registry
 # This clones the repo and enters the path to the clone in the qiskit_alt project.
 (qiskit_alt) pkg> dev ElectronicStructure
-     Cloning git-repo `git@github.ibm.com:John-Lapeyre/ElectronicStructure.jl.git`
+     Cloning git-repo `https://github.com/Qiskit-Extensions/ElectronicStructure.jl.git`
    Resolving package versions...
     Updating `~/myrepos/quantum_repos/qiskit_alt/Project.toml`
   [f7ec468b] ~ ElectronicStructure v0.1.4 ⇒ v0.1.4 `~/.julia/dev/ElectronicStructure`
@@ -271,7 +271,7 @@ the registry, you may need to open a PR to the main repo.
 ```julia
 (qiskit_alt) pkg> free ElectronicStructure
    Resolving package versions...
-    Updating git-repo `git@github.ibm.com:John-Lapeyre/ElectronicStructure.jl.git`
+    Updating git-repo `https://github.com/Qiskit-Extensions/ElectronicStructure.jl.git`
    Installed ElectronicStructure ─ v0.1.5
     Updating `~/myrepos/quantum_repos/qiskit_alt/Project.toml`
   [f7ec468b] ~ ElectronicStructure v0.1.4 `~/.julia/dev/ElectronicStructure` ⇒ v0.1.5
@@ -330,7 +330,7 @@ In [6]: Pkg.status()
 
 In [7]: Pkg.add("LocalRegistry")  # add LocalRegsitry to the main environment
     Updating registry at `~/.julia/registries/QuantumRegistry`
-    Updating git-repo `git@github.ibm.com:John-Lapeyre/QuantumRegistry.git`
+    Updating git-repo `https://github.com/Qiskit-Extensions/QuantumRegistry.git`
     Updating registry at `~/.julia/registries/General.toml`
    Resolving package versions...
   No Changes to `~/.julia/environments/v1.7/Project.toml`

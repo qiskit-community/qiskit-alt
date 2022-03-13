@@ -8,7 +8,7 @@ setup(
     name='qiskit_alt',
     version=version['__version__'],
     description='Alternative to parts of qiskit, written in Julia',
-    url= 'https://github.ibm.com:John-Lapeyre/qiskit_alt.git',
+    url='https://github.com/Qiskit-Extensions/qiskit-alt',
     author='John Lapeyre',
     packages=find_packages(),
     install_requires=[
