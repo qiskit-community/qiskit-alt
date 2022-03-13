@@ -115,7 +115,7 @@ python ./bench/run_all_bench.py
       precedence over other methods of specifying the path to the executable.
     * Set `QISKIT_ALT_INSTALL_JULIA` to `y` or `n` to confirm or disallow installing julia via `jill.py`.
     * Set `QISKIT_ALT_COMPILE` to `y` or `n`  to confirm or disallow compiling a system image after installing Julia packages
-
+    * Set `QISKIT_ALT_DEPOT` to `y` or `n` to force using or not using a Julia "depot" specific to this project.
 
 * `qiskit_alt.project.update()` will delete `Manifest.toml` files; upgrade packages; rebuild the manifest; delete compiled system images.
   If you call `update()` while running a compiled system image, you should exit Python and start again before compiling
