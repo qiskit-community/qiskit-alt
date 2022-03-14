@@ -11,10 +11,12 @@ WORKDIR /qiskit_alt
 
 # Copy only requirements.txt at this point, so changes to other
 # portions of this repository don't invalidate these image layers.
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+# GJL disable these. Probably not necessary
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
 
-RUN julia -e 'using Pkg; pkg"registry add https://github.com/Qiskit-Extensions/QuantumRegistry.git"'
+# Not necessary
+# RUN julia -e 'using Pkg; pkg"registry add https://github.com/Qiskit-Extensions/QuantumRegistry.git"'
 
 COPY . .
 RUN pip install -e .
