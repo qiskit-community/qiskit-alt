@@ -11,5 +11,9 @@ WORKDIR /qiskit_alt
 
 COPY . .
 RUN pip install -e .
-RUN printf "y\nn\n" | python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
+
+ENV QISKIT_ALT_COMPILE=y
+ENV QISKIT_ALT_DEPOT=n
+
+RUN python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
 RUN python3 -c "import qiskit_alt; qiskit_alt.project.compile()"
