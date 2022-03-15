@@ -9,13 +9,6 @@ RUN python3 -m pip install -U pip
 
 WORKDIR /qiskit_alt
 
-# Copy only requirements.txt at this point, so changes to other
-# portions of this repository don't invalidate these image layers.
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-RUN julia -e 'using Pkg; pkg"registry add https://github.com/Qiskit-Extensions/QuantumRegistry.git"'
-
 COPY . .
 RUN pip install -e .
 RUN printf "y\nn\n" | python3 -c "import qiskit_alt; qiskit_alt.project.ensure_init()"
