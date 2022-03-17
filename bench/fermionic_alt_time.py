@@ -15,6 +15,7 @@ h2o_geometry = [['O', [0., 0., 0.]],
             ['H', [-0.757, 0.586, 0.]]]
 
 from qiskit_alt.electronic_structure import fermionic_hamiltonian
+fermionic_hamiltonian({geometry}, {basis})
 #qiskit_alt.fermionic_hamiltonian({geometry}, {basis})
 """
 

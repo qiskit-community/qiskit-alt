@@ -1,6 +1,6 @@
 # ENV["PYCALL_JL_RUNTIME_PYTHON"] = Sys.which("python")
 
-using PyCall
+#using PyCall
 using ElectronicStructure: Atom, Geometry, MolecularSpec,
     InteractionOperator, MolecularData
 

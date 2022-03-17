@@ -11,7 +11,13 @@ QiskitQuantumInfo = project.simple_import("QiskitQuantumInfo")
 
 # TODO: This could probably be moved to QiskitQuantumInfo.jl
 #Main.include(os.path.join(julia_src_dir, 'electronic_structure.jl'))
+# if Main.is_loaded("PyCall"):
+#     Main.include(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'electronic_structure.jl'))
+
 Main.include(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'electronic_structure.jl'))
+
+if Main.is_loaded("PythonCall"):
+    Main.include(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'es_juliacall.jl'))
 
 def Geometry(qiskit_geometry):
     """

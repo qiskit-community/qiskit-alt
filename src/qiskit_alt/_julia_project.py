@@ -7,7 +7,7 @@ qiskit_alt_path = os.path.dirname(os.path.abspath(__file__))
 # def _after_init_func():
 #     importlib.import_module('.hellomod', 'qiskit_alt')
 
-def new_project(calljulia="pyjulia"):
+def new_project(calljulia="juliacall"):
     """Return a new `JuliaProject`.
 
     Use this if you want to use both `pyjulia` (`julia` module) and `juliacall`
