@@ -1,7 +1,7 @@
 import os
 
 from qiskit.quantum_info import Pauli, SparsePauliOp, PauliList
-from ._julia_project import project
+from .julia_project import project
 project.ensure_init()
 
 Main = project.simple_import("Main")

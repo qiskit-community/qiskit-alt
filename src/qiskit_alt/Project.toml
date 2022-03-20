@@ -1,6 +1,5 @@
 [deps]
 ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
-ElectronicStructurePySCF = "14ae0224-3a94-4a0c-83bc-25b293227ef3"
 QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
 QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
