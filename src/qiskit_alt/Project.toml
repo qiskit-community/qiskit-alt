@@ -6,6 +6,6 @@ Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 ZChop = "8603256b-76ad-53fe-b511-38a38e6437cd"
 
 [compat]
-ElectronicStructure = ">= 0.1.4"
+ElectronicStructure = ">= 0.1.8"
 ZChop = ">= 0.3.10"
-QuantumOps = ">= 0.1.3"
+QuantumOps = ">= 0.1.5"
