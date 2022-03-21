@@ -1,6 +1,6 @@
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
-from ._julia_project import project
+from .julia_project import project
 
 # QuantumOps = project.simple_import("QuantumOps")
 # from julia import QuantumOps, QiskitQuantumInfo, ElectronicStructure

@@ -4,7 +4,7 @@
 using ElectronicStructure: Atom, Geometry, MolecularSpec,
     InteractionOperator, MolecularData
 
-using ElectronicStructurePySCF: PySCF
+# using ElectronicStructurePySCF: PySCF
 
 using QuantumOps: FermiSum
 
