@@ -8,29 +8,7 @@ standard Qiskit. This package is a proof of concept with little high-level code.
 Installing and managing Julia and its packages is automated. So you don't need to learn anything about Julia
 to get started.
 
-The highlights thus far are in [benchmark code](./bench/), which is
-presented in the demonstration notebooks.
-There is one [demonstration notebook using `pyjulia`](./demos/qiskit_alt_demo.ipynb)
-and another [demonstration notebook using `juliacall`](./demos/qiskit_alt_demo_jc.ipynb).
-
-The main application-level demonstration is computing a qubit Hamiltonian as a `qiskit.quantum_info.SparsePauliOp`
-from a Python list specifiying the molecule geometry in the same format as that used by `qiskit_nature`.
-
-* The Jordan-Wigner transform in qiskit_alt is 30 or so times faster than in qiskit-nature.
-* Computing a Fermionic Hamiltonian from pyscf integrals is several times faster, with the factor increasing
-  with the problem size.
-* Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
-  is many times faster with the factor increasing rapidly in the number of qubits.
-
-You might want to skip to [installation instructions](#installation-and-configuration-notes)
-
 ### Table of contents
-
-* [Motivations](./Motivations.md)
-
-* [Demonstration](#demonstration)
-    * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
-      same thing as the main demonstration in qiskit_alt.
 
 * [Installation and configuration notes](#installation-and-configuration-notes)
 
@@ -40,41 +18,44 @@ You might want to skip to [installation instructions](#installation-and-configur
 
     * [Manual Steps](#manual-steps) Details of automatic installation.
 
+* [Introduction](#introduction)
+
+* [Motivations](./Motivations.md)
+
+* [Demonstration](#demonstration)
+    * [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
+      same thing as the main demonstration in qiskit_alt.
+
 * [Julia Packages](#julia-packages) Julia packages that qiskit_alt depends on.
 
 * [Troubleshooting](#troubleshooting)
 
-* [Communication between Python and Julia](#communication-between-python-and-julia) Options for the language interface.
-
 * [Development](./Development.md). Instructions for developing qiskit_alt.
-
-
-## Demonstration
-
-* There are a few demos in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
-
-* The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
-
-* Here are [some demonstration notebooks](https://github.com/Qiskit-Extensions/QuantumOpsDemos) of the Julia packages behind `qiskit_alt`.
-
-* [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
-  same thing as the main demonstration in qiskit_alt. This is from JuliaCon 2020.
 
 ## Installation and Configuration Notes
 
 ### Basic
 
-* `qiskit_alt` is available on pypi: `pip install qiskit_alt`
+* `qiskit_alt` is available on pypi
 
-* Complete installation by running `import qiskit_alt` followed by `qiskit_alt.project.ensure_init()`. See [`julia_project`](https://github.com/jlapeyre/julia_project)
-  for more information.
+```shell
+shell> pip install qiskit_alt
+```
 
-    * If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
-      to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
-      Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
+* Complete installation by running
+```python
+import qiskit_alt
+qiskit_alt.project.ensure_init()
+```
 
-    * The Julia packages are installed the first time you run `qiskit_alt.project.ensure_init()` from Python. If this fails,
-      see the log file qiskit_alt.log and the [manual steps](#manual-steps) below.
+See [`julia_project`](https://github.com/jlapeyre/julia_project) for more options.
+
+* If no Julia executable is found, `jill.py` will be used to download and install it. It is *not* necessary
+  to add the installation path or symlink path to your search PATH to use julia from qiskit_alt.
+  Before offering to install Julia, `qiskit_alt` will search for julia as [described here](./Install_Julia.md).
+
+* The Julia packages are installed the first time you run `qiskit_alt.project.ensure_init()` from Python. If this fails,
+  see the log file qiskit_alt.log. You can open a bug report in the [`qiskit_alt` repo](https://github.com/Qiskit-Extensions/qiskit-alt)
 
 * Check that the installation is not completely broken by running benchmark scripts, with the string "alt" in the name:
 ```sh
@@ -86,15 +67,8 @@ But it can be [downloaded here](./bench/).
 
 ### More installation details
 
-* `qiskit_alt` depends on the following three packages. It is probably not necessary to read about them to install `qiskit_alt`, but might help.
-
-
-    * [pyjulia](https://pyjulia.readthedocs.io/en/latest/index.html) is used to communicate with Julia.
-      The [installation notes](https://pyjulia.readthedocs.io/en/latest/installation.html) may be useful.
-
-    * [juliacall](https://github.com/cjdoris/PythonCall.jl).
-
-    * [`julia_project`](https://github.com/jlapeyre/julia_project) for managing Julia dependencies.
+* `qiskit_alt` depends on [`pyjulia`](https://pyjulia.readthedocs.io/en/latest/index.html)
+   and/or [`juliacall`](https://github.com/cjdoris/PythonCall.jl) for communication between Julia and Python.
 
 
 *  `pyjulia` and `juliacall` are two packages for communication between Python and Julia. You only need
@@ -108,7 +82,7 @@ But it can be [downloaded here](./bench/).
   described below.
 
 * You may allow `qiskit_alt` to download and install Julia for you, using [`jill.py`](https://github.com/johnnychen94/jill.py).
-  Otherwise you can follow instructions for [installing Julia manually](./Install_Julia.md).
+  Otherwise you can follow instructions for [installing Julia with an installation tool](./Install_Julia.md).
 
 * We recommend using a virtual Python environment with `venv` or `conda`. For example `python -m venv ./env`,
   which creates a virtual environment for python packages needed to run `qiskit_alt`.
@@ -132,35 +106,31 @@ But it can be [downloaded here](./bench/).
 * `qiskit_alt.project.update()` will delete `Manifest.toml` files; upgrade packages; rebuild the manifest; delete compiled system images.
   If you call `update()` while running a compiled system image, you should exit Python and start again before compiling
 
+* `qiskit_alt.project` is an instance of `JuliaProject` from the package [`julia_project`](https://github.com/jlapeyre/julia_project).
+   for managing Julia dependencies in Python projects. See more options at [`julia_project`](https://github.com/jlapeyre/julia_project).
 
 ### Compilation
 
-*  To speed up loading and reduce delays due to just-in-time compilation, you can compile a system image for `qiskit_alt` as follows.
+*  We highly recommend compiling a system image for `qiskit_alt` to speed up loading and reduce delays due to just-in-time compilation.
+   You will be prompted to install when installing or upgrading. Compilation may also be done at any time as follows.
+
 ```python
 [1]: import qiskit_alt
 
-In [2]: qiskit_alt.project.ensure_init()
+In [2]: qiskit_alt.project.ensure_init(use_sys_image=False)
 
 In [3]: qiskit_alt.project.compile()
 ```
 Compilation takes about four minutes. The new Julia system image will be found  the next time you import `qiskit_alt`.
+Note that we disabled possibly loading a previously-compiled system image before compiling a new one.
+This avoids some possible stability issues.
 
-* `import qiskit_alt` takes about 8.5s before compilation, and 1.4s after compilation.
-
-* The code is "exercised" during compilation by running the test suites of some of the included packages. Code paths
-that are exercised during compilation will suffer no delay in the future, just like statically compiled libraries.
-More test suites and exercise scripts can be included in the compilation.
-And more Julia code can be moved from `qiskit_alt` into compiled modules.
-
-* "compilation" has different meanings in Julia. Code is always precompiled and cached in a `.ji` file.
-What happens during precompilation is described [here](https://julialang.org/blog/2021/01/precompile_tutorial/).
-But, this is not the kind of compilation we are considering here.
 
 ## Using qiskit_alt
 
 This is a very brief introduction.
 
-* The pyjulia interface is exposed via the `julia` module. The `juliacall` module is called `juliacall`.
+* The `pyjulia` interface is exposed via the `julia` module. The `juliacall` module is called `juliacall`.
 However you should *not* do `import julia` or `import juliacall` before `import qiskit_alt`,
 and `qiskit_alt.project.ensure_init()` (or `qiskit_alt.project.ensure_init(calljulia="pyjulia")` or
   `juliacall` with `qiskit_alt.project.ensure_init(calljulia="juliacall")`)
@@ -210,6 +180,38 @@ Out[8]:
 SparsePauliOp(['ZII', 'IYX', 'XIY', 'ZIZ'],
               coeffs=[1.+0.j, 1.+0.j, 1.+0.j, 1.+0.j])
 ```
+
+## Introduction
+
+The highlights thus far are in [benchmark code](./bench/), which is
+presented in the demonstration notebooks.
+There is one [demonstration notebook using `pyjulia`](./demos/qiskit_alt_demo.ipynb)
+and another [demonstration notebook using `juliacall`](./demos/qiskit_alt_demo_jc.ipynb).
+
+The main application-level demonstration is computing a qubit Hamiltonian as a `qiskit.quantum_info.SparsePauliOp`
+from a Python list specifiying the molecule geometry in the same format as that used by `qiskit_nature`.
+
+* The Jordan-Wigner transform in qiskit_alt is 30 or so times faster than in qiskit-nature.
+* Computing a Fermionic Hamiltonian from pyscf integrals is several times faster, with the factor increasing
+  with the problem size.
+* Converting an operator from the computational basis, as a numpy matrix, to the Pauli basis, as a `qiskit.quantum_info.SparsePauliOp`,
+  is many times faster with the factor increasing rapidly in the number of qubits.
+
+You might want to skip to [installation instructions](#installation-and-configuration-notes)
+
+
+
+## Demonstration
+
+* There are a few demos in this [demonstration benchmark notebook](./demos/qiskit_alt_demo.ipynb)
+
+* The [benchmark code](./bench/) is a good place to get an idea of what qiskit_alt can do.
+
+* Here are [some demonstration notebooks](https://github.com/Qiskit-Extensions/QuantumOpsDemos) of the Julia packages behind `qiskit_alt`.
+
+* [Zapata demo of Jordan-Wigner transformation in Julia](https://www.youtube.com/watch?v=-6VfSgPXe4s&list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR); The
+  same thing as the main demonstration in qiskit_alt. This is from JuliaCon 2020.
+
 
 ### Managing Julia packages
 
