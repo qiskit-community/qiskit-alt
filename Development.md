@@ -1,5 +1,24 @@
 # Notes for Developers
 
+* [Packages supporting qiskit-alt](#packages-supporting-qiskit-alt)
+
+* [Resources](#resources)
+
+* [Development environment](#development-environment)
+
+    * [Details](#details)
+
+* [Revise](#revise) Automatically compiling code into a live session.
+
+* [Example Development Session](#example-development-session)
+
+* [Making a subdirectory for examples](#making-a-subdirectory-for-examples)
+
+* [Compilation of system image](#compiling-a-system-image)
+
+
+### Packages supporting qiskit_alt
+
 The following packages are developed in concert with `qiskit_alt`.
 Some are Julia packages. Some are Python packages. The latter were written specifically to support `qiskit_alt`.
 
@@ -32,19 +51,6 @@ This data is used to exercise code paths when compiling.
   other Julia packages from julia. It was also used to generate [electronic_structure_data](https://github.com/Qiskit-Extensions/electronic_structure_data).
  Most of what is written here is generic to Julia. A bit is generic to Julia within Python.
 
-* [Resources](#resources)
-
-* [Development environment](#development-environment)
-
-    * [Details](#details)
-
-* [Revise](#revise) Automatically compiling code into a live session.
-
-* [Example Development Session](#example-development-session)
-
-* [Making a subdirectory for examples](#making-a-subdirectory-for-examples)
-
-* [Compilation of system image](#compiling-a-system-image)
 
 ### Resources
 
