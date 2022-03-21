@@ -224,7 +224,6 @@ You can also do the same by avoiding Python and using the julia cli.
 
 * The Julia repos [`QuantumOps.jl`](https://github.com/Qiskit-Extensions/QuantumOps.jl) and
 [`ElectronicStructure.jl`](https://github.com/Qiskit-Extensions/ElectronicStructure.jl) and
-[`ElectronicStructurePySCF.jl`](https://github.com/Qiskit-Extensions/ElectronicStructurePySCF.jl) and
 [`QiskitQuantumInfo.jl`](https://github.com/Qiskit-Extensions/QiskitQuantumInfo.jl)
 are not registered in the General Registry, but rather in [`QuantumRegistry`](https://github.com/Qiskit-Extensions/QuantumRegistry) which contains just
 a handful of packages for this project.
