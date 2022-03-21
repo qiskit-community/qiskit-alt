@@ -1,6 +1,36 @@
 # Notes for Developers
 
-Most of what is written here is generic to Julia. A bit is generic to Julia within Python.
+The following packages are developed in concert with `qiskit_alt`.
+Some are Julia packages. Some are Python packages. The latter were written specifically to support `qiskit_alt`.
+
+#### Julia packages
+* [ElectronicStructure.jl](https://github.com/Qiskit-Extensions/ElectronicStructure.jl)
+* [QuantumOps.jl](https://github.com/Qiskit-Extensions/QuantumOps.jl)
+* [QiskitQuantumInfo.jl](https://github.com/Qiskit-Extensions/QiskitQuantumInfo.jl)
+
+#### Python packages
+* [qiskit_alt](https://github.com/Qiskit-Extensions/qiskit-alt)
+* [julia_project](https://github.com/jlapeyre/julia_project)
+* [julia_project_basic](https://github.com/jlapeyre/julia_project_basic)
+* [find_julia](https://github.com/jlapeyre/find_julia)
+* [julia_semver](https://github.com/jlapeyre/julia_semver)
+
+#### Other essential packages
+
+* [QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry)
+  This tells the Julia package manager where to find our Julia packages. It is installed automatically
+  by `qiskit_alt`. It is maintained by [`LocalRegsitry`](https://github.com/GunnarFarneback/LocalRegistry.jl)
+
+* [electronic_structure_data](https://github.com/Qiskit-Extensions/electronic_structure_data)
+This data is used to exercise code paths when compiling.
+
+#### Other non-essential packages
+
+* [QuantumOpsDemos](https://github.com/Qiskit-Extensions/QuantumOpsDemos)
+* [ElectronicStructurePySCF.jl](https://github.com/Qiskit-Extensions/ElectronicStructurePySCF.jl)
+  `qiskit_alt` no longer depends on this package. However, it is useful when working from the
+  other Julia packages from julia. It was also used to generate [electronic_structure_data](https://github.com/Qiskit-Extensions/electronic_structure_data).
+ Most of what is written here is generic to Julia. A bit is generic to Julia within Python.
 
 * [Resources](#resources)
 
@@ -14,7 +44,7 @@ Most of what is written here is generic to Julia. A bit is generic to Julia with
 
 * [Making a subdirectory for examples](#making-a-subdirectory-for-examples)
 
-* [Troubleshooting](./README.md#troubleshooting)
+* [Compilation of system image](#compiling-a-system-image)
 
 ### Resources
 
@@ -60,32 +90,35 @@ julia> Pkg.develop(path="/path/to/package/source/tree/")
 * From the package manager REPL. Enter the jula repl and hit `]`.
 ```julia
 (@v1.7) pkg> activate "."
-(@v1.7) pkg> status
-(@v1.7) pkg> add APackage
-(@v1.7) pkg> develop /path/to/package/source/tree/
+(qiskit_alt) pkg> status
+(qiskit_alt) pkg> add APackage
+(qiskit_alt) pkg> develop /path/to/package/source/tree/
 ```
 
-* From Python. Do `from qiskit_alt import Pkg`. Then the syntax is the same as from the Julia REPL.
+* From Python. Do `Pkg = qiskit_alt.project.julia.Pkg`. Then the syntax is the same as from the Julia REPL.
 
 The following enables a workflow, which is explained in more detail further below.
 
 * clone `qiskit_alt`
-* clone the packages in the [QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry).
-`QuantumOps`, `ElectronicStructure`, `ElectronicStructurePySCF`, and `QiskitQuantumInfo`.
-You can do this in one of two ways.
+* If you install `qiskit_alt` as described [here](https://github.com/Qiskit-Extensions/qiskit-alt#installation-and-configuration-notes)
+  then [QuantumRegistry](https://github.com/Qiskit-Extensions/QuantumRegistry) will be installed for you.
+* For development, you you need to clone these packages `QuantumOps`, `ElectronicStructure`, and `QiskitQuantumInfo`.
+  You can do this in one of two ways.
     * Clone them via `Pkg.develop("QuantumOps")`. This looks up the url in your registries and clones to `~/.julia/dev/`.
       It also writes the path to the downloaded tree to the `Manifest.toml` of your current project, so that your project
       loads the package from the development tree.
-    * Clone them manually into a directory of your choice. For each one, you have to
-      do `Pkg.develop(path="/path/to/source/Package")` after activating the `qiskit_alt` project.
+    * Clone them manually into a directory of your choice. Then, in order for the project to know where you put them,
+      you have to do `Pkg.develop(path="/path/to/source/Package")` after activating the `qiskit_alt` project.
+      Do this for each package.
       I prefer this second method because `~/.julia/dev/` becomes cluttered. But the first method is simpler.
 
-* If you chose the second option above, start the Julia REPL,
-and enter the package manager mode with `]`.
-Then do `dev ~/path/to/QuantumOps`.
-Repeat this for each package you want to develop.
+* If you chose the second option above, an alternative way to "develop" the packages after cloning is to start the Julia REPL
+  and enter the package manager mode with `]`.
+  Then do `dev ~/path/to/QuantumOps`.
+  Repeat this for each package you want to develop.
 
 * Start ipython. Before doing `import qiskit_alt`, enable the magics listed in the section [Revise](#revise).
+  Note that this only works with `pyjulia`, not with `juliacall`.
 
 Now you can edit the source in the cloned Julia packages and the changes will be reflected in your ipython REPL without restarting.
 To revert to the production environment, enter `free QuantumOps`, etc. at the Julia package manager prompt.
@@ -169,6 +202,7 @@ julia>  # hit ']' to enter package management mode
 
 ### Revise
 
+Note: The following only works with `pyjulia` not `juliacall`.
 From the link above, [Incorporating Julia Into Python Programs](https://www.peterbaumgartner.com/blog/incorporating-julia-into-python-programs/),
 I find the following
 ```python
@@ -181,7 +215,7 @@ In [3]: from qiskit_alt import QuantumOps, Main
   Activating project at `~/myrepos/quantum_repos/qiskit_alt`
 ```
 
-Indeed changes to the `QuantumOps` source are reflected immediately at the ipython REPL.
+Indeed, changes to the `QuantumOps` source are reflected immediately at the ipython REPL.
 For example, a variable `foo = 1` added to `src/QuantumOps.jl` is visible
 in ipython as `QuantumOps.foo`.
 
@@ -193,7 +227,7 @@ I'd like to find a way to enable `Revise` without using magics. I have not yet d
 
 ```julia
 # julia repl prompt
-julia> 
+julia>
 
 # Hit `;` to enter shell mode and check our current directory. It is qiskit_alt
 shell> pwd
@@ -289,7 +323,7 @@ of `ElectronicStructure` that we just pushed from the location given in `Quantum
 If necessary, you may want change `Project.toml` in the qiskit_alt top level to require
 the new version of `ElectronicStructure`.
 
-* Delete `./sys_image/sys_qiskit_alt.so` if it exists; it is out of date.
+* Delete `./sys_image/sys_qiskit_alt.so` (or similar name) if it exists; it is out of date.
 * Start ipython and verify the changes.
 ```python
 In [1]: from qiskit_alt import ElectronicStructure
@@ -298,7 +332,7 @@ In [1]: from qiskit_alt import ElectronicStructure
 In [2]: ElectronicStructure.foo
 Out[2]: 2
 ```
-* Run `qiskit_alt.compile_qiskit_alt()` if you like to generate a new system image.
+* Run `qiskit_alt.project.compile()` if you like to generate a new system image.
 
 Alternatively, you can do all of the steps above from `ipython`. For example (with output edited)
 ```python
@@ -312,7 +346,6 @@ In [3]: from julia import Pkg
 In [4]: Pkg.status()
       Status `~/myrepos/quantum_repos/qiskit_alt/Project.toml`
   [f7ec468b] ElectronicStructure v0.1.5 `~/quantum_repos/ElectronicStructure`
-  [14ae0224] ElectronicStructurePySCF v0.1.0
   [438e738f] PyCall v1.92.5
   [8d55b643] QiskitQuantumInfo v0.1.0
   [d0cc4389] QuantumOps v0.1.1
@@ -363,6 +396,17 @@ By default, only the packages in your main user-wide project, e.g. `@v1.7` and
 those in `./examples/Project.toml` will be available.
 If you want to develop the examples together with the main package, say `qiskit_alt` (or others),
 then "develop" that package: Activate the examples project, then do `Pkg.develop(path="/path/to/dev/qiskit_alt")`.
+
+### Compiling a system image
+
+* The code is "exercised" during compilation by running the test suites of some of the included packages. Code paths
+that are exercised during compilation will suffer no delay in the future, just like statically compiled libraries.
+More test suites and exercise scripts can be included in the compilation.
+And more Julia code can be moved from `qiskit_alt` into compiled modules.
+
+* "compilation" has different meanings in Julia. Code is always precompiled and cached in a `.ji` file.
+What happens during precompilation is described [here](https://julialang.org/blog/2021/01/precompile_tutorial/).
+But, this is not the kind of compilation we are considering here.
 
 
 ### Notes
