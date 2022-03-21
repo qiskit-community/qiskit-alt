@@ -44,8 +44,6 @@ You might want to skip to [installation instructions](#installation-and-configur
 
 * [Troubleshooting](#troubleshooting)
 
-* [Communication between Python and Julia](#communication-between-python-and-julia) Options for the language interface.
-
 * [Development](./Development.md). Instructions for developing qiskit_alt.
 
 
