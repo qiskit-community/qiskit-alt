@@ -11,7 +11,7 @@ FROM qiskit_alt_base1
 
 USER quser
 WORKDIR /home/quser
-RUN source ./venv1/bin/activate && python -c \
+RUN source ./venv1/bin/activate && mv ~/packages ~/disable.packages && python -c \
    "import urllib.request; import qiskit_alt; qiskit_alt.project.ensure_init(calljulia='juliacall', install_julia=True, depot=False, compile=True)"
 
 USER root

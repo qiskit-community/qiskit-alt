@@ -7,6 +7,9 @@
 # * Installs most of the dependencies of qiskit_alt in this venv
 #   This makes installing qiskit_alt in another dockerfile faster
 # * The last step is to return to the root user
+#
+# Note that we do everything but install qiskit_alt. This is meant to make it faster
+# to install qiskit_alt, which is the part that we want to do frequently.
 # The image is created with this line:
 # docker build -t qiskit_alt_base  --rm=false -f Dockerfile0 .
 
@@ -30,9 +33,9 @@ RUN chgrp -R quser .
 USER quser
 
 RUN python3 -m venv ./venv1
-RUN source ./venv1/bin/activate && pip install --upgrade pip ipython
-RUN source ./venv1/bin/activate && pip install \
-    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets
+RUN source ./venv1/bin/activate && pip install --upgrade pip ipython \
+    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets jill
+RUN source ./venv1/bin/activate && echo "y" | jill install
 
 USER root
 WORKDIR /root
