@@ -1,0 +1,38 @@
+# This dockerfile prepares a linux enviroment to install qiskit_alt
+# as an unprivileged (normal) user called "quser".
+# * Installs Python and supporting packages.
+# * Installs the fish shell because I find that convenient.
+# * Creates the user "quser"
+# * Installs a Python virtual environment in /home/quser
+# * Installs most of the dependencies of qiskit_alt in this venv
+#   This makes installing qiskit_alt in another dockerfile faster
+# * The last step is to return to the root user
+# The image is created with this line:
+# docker build -t qiskit_alt_base  --rm=false -f Dockerfile0 .
+
+# I used fedora:34 rather than fedora:35 as the base image because of
+# https://bugzilla.redhat.com/show_bug.cgi?id=1988199.
+# Comment 26 there points to an upstream RHEL bug, but I am not
+# certain it is the same bug as I was experiencing [garrison].
+FROM fedora:34
+
+RUN dnf install -y git @development-tools gcc-c++ python3 python3-devel passwd fish
+RUN python3 -m pip install -U pip
+RUN useradd --create-home --shell /bin/bash quser
+RUN echo "quser:quser" | chpasswd
+
+USER quser
+WORKDIR /home/quser
+COPY . .
+USER root
+RUN chown -R quser .
+RUN chgrp -R quser .
+USER quser
+
+RUN python3 -m venv ./venv1
+RUN source ./venv1/bin/activate && pip install --upgrade pip ipython
+RUN source ./venv1/bin/activate && pip install \
+    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets
+
+USER root
+WORKDIR /root
