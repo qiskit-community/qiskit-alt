@@ -33,9 +33,12 @@ RUN chgrp -R quser .
 USER quser
 
 RUN python3 -m venv ./venv1
-RUN source ./venv1/bin/activate && pip install --upgrade pip ipython \
-    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets jill
-RUN source ./venv1/bin/activate && echo "y" | jill install
+RUN source ./venv1/bin/activate && pip install --upgrade pip jill
+# Note 'printf "y\n" | jill install' works at the cli, but not here :(
+RUN source ./venv1/bin/activate && jill install --confirm
+RUN source ./venv1/bin/activate && pip install ipython \
+    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets
+
 
 USER root
 WORKDIR /root
