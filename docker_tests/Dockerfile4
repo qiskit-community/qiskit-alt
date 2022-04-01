@@ -1,0 +1,33 @@
+# 
+
+FROM qiskit_alt_base1
+
+# May want to try this in order to get conda init to work
+SHELL ["/bin/bash", "--login", "-c"]
+
+# Install miniconda
+RUN dnf install -y wget
+ENV CONDA_DIR /opt/conda
+ENV PATH=$CONDA_DIR/bin:$PATH
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+     /bin/bash ~/miniconda.sh -b -p /opt/conda
+
+RUN conda init bash
+RUN conda init fish
+RUN conda config --set auto_activate_base false
+
+USER quser
+WORKDIR /home/quser
+
+# This needed a second time
+ENV CONDA_DIR /opt/conda
+ENV PATH=$CONDA_DIR/bin:$PATH
+
+RUN printf "y\n" |  conda create -n qiskit_alt_env python=3.9
+RUN conda init bash
+RUN conda init fish
+RUN conda config --set auto_activate_base false
+
+USER root
+WORKDIR /root
+

@@ -1,0 +1,19 @@
+# This dockerfile creates an image based on an image in which qiskit_alt has been
+# installed in a virtual environment, but not run. Here, we import and initialize qiskit_alt.
+# No Julia has been installed. So, during initialization,
+# qiskit_alt must download and install Julia and Julia packages.
+# Here we use juliacall. This dockerfile differs from Dockerfile3 only
+# in using juliacall rather than pyjulia
+# An image is built with this command:
+# docker build -t qiskit_alt_3  --rm=false -f Dockerfile3 .
+
+FROM qiskit_alt_base1
+
+USER quser
+WORKDIR /home/quser
+RUN source ./venv1/bin/activate && mv ~/packages ~/disable.packages && python -c \
+   "import urllib.request; import qiskit_alt; qiskit_alt.project.ensure_init(calljulia='juliacall', install_julia=True, depot=False, compile=True)"
+
+USER root
+WORKDIR /root
+

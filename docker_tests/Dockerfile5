@@ -1,0 +1,13 @@
+FROM qiskit_alt_4
+
+USER quser
+WORKDIR /home/quser
+
+RUN /opt/conda/bin/python -m venv ./venv_static
+RUN source ./venv_static/bin/activate && pip install --upgrade pip
+RUN source ./venv_static/bin/activate && pip install -e .
+RUN source ./venv_static/bin/activate && pip install ipython \
+    pyscf julia juliacall qiskit-terra qiskit-nature ipywidgets
+
+USER root
+WORKDIR /root
