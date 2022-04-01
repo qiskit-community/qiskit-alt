@@ -10,7 +10,7 @@
 FROM qiskit_alt_base
 
 USER quser
-WORKDIR /home/quser
+WORKDIR /home/quser/qiskit_alt
 RUN source ./venv1/bin/activate && pip install -e .
 
 USER root

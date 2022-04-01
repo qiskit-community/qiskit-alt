@@ -25,7 +25,7 @@ RUN useradd --create-home --shell /bin/bash quser
 RUN echo "quser:quser" | chpasswd
 
 USER quser
-WORKDIR /home/quser
+WORKDIR /home/quser/qiskit_alt
 COPY . .
 USER root
 RUN chown -R quser .

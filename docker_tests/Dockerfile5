@@ -1,7 +1,7 @@
 FROM qiskit_alt_4
 
 USER quser
-WORKDIR /home/quser
+WORKDIR /home/quser/qiskit_alt
 
 RUN /opt/conda/bin/python -m venv ./venv_static
 RUN source ./venv_static/bin/activate && pip install --upgrade pip

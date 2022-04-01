@@ -17,7 +17,7 @@ RUN conda init fish
 RUN conda config --set auto_activate_base false
 
 USER quser
-WORKDIR /home/quser
+WORKDIR /home/quser/qiskit_alt
 
 # This needed a second time
 ENV CONDA_DIR /opt/conda
