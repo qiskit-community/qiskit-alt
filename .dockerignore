@@ -2,19 +2,18 @@ tcode.jl
 tmp*
 **/__pycache__
 qiskit-terra/
-Manifest.toml
+**/Manifest.toml
 sys_image/*.so
 repl_history.jl
 bin/
 demos/.ipynb_checkpoints/
 .envrc
 
-qiskit_alt.egg-info
-qiskit_alt.log
+**/*.egg-info
+**/*.log
 
 **/.git
 julia
-
 venv
 env
 .direnv
