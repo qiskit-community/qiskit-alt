@@ -1,6 +1,5 @@
 tcode.jl
 tmp*
-env/
 **/__pycache__
 qiskit-terra/
 Manifest.toml
@@ -16,5 +15,6 @@ qiskit_alt.log
 **/.git
 julia
 
+venv
 env
 .direnv
