@@ -42,7 +42,12 @@ def exec_full(filepath):
         exec(compile(file.read(), filepath, 'exec'), global_namespace)
 
 
-for fname in bench_scripts:
-    print(fname)
-    exec_full_dir(fname)
-    print()
+def run_all():
+    for fname in bench_scripts:
+        print(fname)
+        exec_full_dir(fname)
+        print()
+
+
+if __name__ == '__main__':
+    run_all()

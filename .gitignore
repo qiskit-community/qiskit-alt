@@ -1,6 +1,8 @@
 tcode.jl
 tmp*
 env/
+venv/
+dist/
 */__pycache__
 */*/__pycache__
 qiskit-terra/
@@ -10,6 +12,7 @@ repl_history.jl
 bin/
 demos/.ipynb_checkpoints/
 .envrc
+src/qiskit_alt.egg-info/
 /qiskit_alt.egg-info/
 /qiskit_alt.log
 /julia
