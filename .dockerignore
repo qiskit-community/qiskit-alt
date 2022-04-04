@@ -12,8 +12,12 @@ demos/.ipynb_checkpoints/
 **/*.egg-info
 **/*.log
 
+.git
 **/.git
 julia
 venv
 env
+dist
+docker_tests
+demos
 .direnv
