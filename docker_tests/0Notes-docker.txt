@@ -1,7 +1,0 @@
-# This file is only for notes. It is not meant to be executed.
-# To build and run files, I do this.
-
-docker build -t qiskit_alt_all  --rm=false -f Dockerfile .
-docker run -it qiskit_alt_all /bin/bash
-# Or
-docker run -it qiskit_alt_all /usr/bin/su -l quser -s /usr/bin/fish

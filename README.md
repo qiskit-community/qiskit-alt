@@ -231,6 +231,11 @@ a handful of packages for this project.
 ## Testing
 
 The test folder is mostly out of date.
+
+#### Testing installation with docker
+
+See [the readme](./docker_tests/README-docker_tests.md).
+
 <!--
 In addtion to the code in the `bench` directory, there are test directories with just a few tests
 in them. They can be run for example via `pytest ./test`. The juliacall tests are in a separate
