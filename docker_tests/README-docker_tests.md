@@ -1,5 +1,24 @@
 #### Testing installation with docker
 
+Use
+```shell
+run_dockerfile.sh build
+```
+to build the docker image.
+Use
+```shell
+run_dockerfile.sh run
+```
+to run installation tests.
+Use
+```shell
+run_dockerfile.sh
+```
+to first build, then run.
+
+
+#### 'Manual' building and running
+
 You can build the docker image by changing to the `./docker_tests` directory and doing
 ```shell
 docker build -t qiskit_alt -f Dockerfile .. | tee dockerfile.log
