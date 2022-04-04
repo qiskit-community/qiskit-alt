@@ -15,7 +15,16 @@ Use
 run_dockerfile.sh
 ```
 to first build, then run.
-
+Use
+```shell
+run_dockerfile.sh fish
+```
+for an interactive fish shell.
+Use
+```shell
+run_dockerfile.sh bash
+```
+for an interactive bash shell.
 
 #### 'Manual' building and running
 
