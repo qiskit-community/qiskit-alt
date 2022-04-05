@@ -163,9 +163,36 @@ The function `show` is responsible for displaying. And the function method is ca
 
 Let's say we want to print nothing when there are no Pauli operators instead of `* (1 + 0im)`.
 The method(s) are [here](https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21)
+```julia
+function _show_abstract_term(io::IO, term::AbstractTerm)
+    print(io, op_string(term))
+    print(io, " * ")
+    if term.coeff isa Real  # could use CoeffT here.
+        print(io, term.coeff)
+    else
+        print(io, "(", term.coeff, ")")
+    end
+end
 
-
+function Base.show(io::IO, term::AbstractTerm)
+    m = length(term)
+    print(io, m, "-factor", " ", typeof(term), ":\n")
+    _show_abstract_term(io, term)
+end
 ```
+Edit the first function to read
+```julia
+function _show_abstract_term(io::IO, term::AbstractTerm)
+    print(io, op_string(term))
+    if length(term) == 0
+        reuturn nothing
+        end
+...
+```
+Now return to your Julia session and ask to display the term again, and you
+will see it is no longer printed. The package Revise watches the source for changes
+and recompiles only the changed code.
+```julia
 julia> t
 0-factor PauliTerm{Vector{Pauli}, Complex{Int64}}:
 ```
