@@ -85,16 +85,18 @@ import qiskit_alt
 qiskit_alt.project.ensure_init()
 qiskit_alt.project.julia_path
 ```
-qiskit-alt manages julia dependencies in *Julia project*, which is similar to
+qiskit-alt manages julia dependencies in a *Julia project*, which is similar to
 a python virtual environment. You can find the location of the Julia project like this
 ```python
 qiskit_alt.project.project_path
 ```
-If you are using a `venv` virtual environment, you'll see something like
+If you are using a `venv` virtual environment, this will return a path to the
+Julia project that looks something like
 ```
 '/home/quser/qiskit_alt/venv/julia_project/qiskit_alt-1.7.2'.
 ```
-If you are using conda, something like this
+If you are using conda, this will return a path to the
+Julia project that looks something like
 ```
 '/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2'
 ```
