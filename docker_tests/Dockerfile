@@ -52,9 +52,6 @@ RUN conda init bash && conda init fish && conda config --set auto_activate_base 
 USER quser
 WORKDIR /home/quser/qiskit_alt
 
-ENV CONDA_DIR /opt/conda
-ENV PATH=$CONDA_DIR/bin:$PATH
-
 RUN printf "y\n" |  conda create -n qiskit_alt_env python=3.9
 RUN conda init bash && conda init fish && conda config --set auto_activate_base false
 
