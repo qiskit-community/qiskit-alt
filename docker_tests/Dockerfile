@@ -91,3 +91,17 @@ COPY --chown=quser init_test.py run_init_tests.sh ./
 
 USER root
 WORKDIR /root
+
+# Put our fake .juliaup directory on the PATH. We will test that it
+# is rejected by find_julia
+ENV PATH=/home/quser/.juliaup/bin:$PATH
+
+# Set up the fake .juliaup directory and make /usr/bin/julia a symlink
+# These locations are rejected by find_julia
+# However /usr/bin/julia won't be chosen anyway as there are other julias
+# earlier on the path. It will take more work (manipulating PATH) to test this.
+RUN ln -s /home/quser/packages/julias/julia-1.7/bin/julia /usr/bin/julia && \
+    mkdir /home/quser/.juliaup && mkdir /home/quser/.juliaup/bin && \
+    echo "#" > /home/quser/.juliaup/bin/julialauncher && \
+    chmod +x /home/quser/.juliaup/bin/julialauncher && \
+    ln -s /home/quser/.juliaup/bin/julialauncher /home/quser/.juliaup/bin/julia
