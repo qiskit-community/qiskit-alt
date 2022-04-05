@@ -1,6 +1,8 @@
 # Working on Julia packages within qiskit_alt
 
 You can start by using qiskit_alt to set up the Julia project for you.
+Then we will forget about qiskit_alt for the time being and only develop
+a Julia package.
 
 ### Optionally install Julia
 
@@ -67,9 +69,12 @@ Do the first initialization of qiskit-alt.
 ```python
 > ipython
 In [1]: import qiskit_alt
-In [2]: qiskit_alt.project.ensure_init()
+In [2]: qiskit_alt.project.ensure_init(compile=False)
 In [3]: %run bench/run_all_bench.py  # test some features
 ```
+I explicitly used `compile=False` because we want edit packages, which is not possible if they are
+compiled into a system image.
+
 
 ### Develop (that is, work on) a Julia package
 
@@ -162,32 +167,22 @@ show(io::IO, term::QuantumOps.AbstractTerm) in QuantumOps at /home/quser/.julia/
 The function `show` is responsible for displaying. And the function method is called is on line 17 of *abstract_term.jl*.
 
 Let's say we want to print nothing when there are no Pauli operators instead of `* (1 + 0im)`.
-The method(s) are [here](https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21)
+The method is [here](https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21)
 ```julia
-function _show_abstract_term(io::IO, term::AbstractTerm)
-    print(io, op_string(term))
-    print(io, " * ")
-    if term.coeff isa Real  # could use CoeffT here.
-        print(io, term.coeff)
-    else
-        print(io, "(", term.coeff, ")")
-    end
-end
-
 function Base.show(io::IO, term::AbstractTerm)
     m = length(term)
     print(io, m, "-factor", " ", typeof(term), ":\n")
     _show_abstract_term(io, term)
 end
 ```
-Edit the first function to read
+Edit the function to read
 ```julia
-function _show_abstract_term(io::IO, term::AbstractTerm)
-    print(io, op_string(term))
-    if length(term) == 0
+function Base.show(io::IO, term::AbstractTerm)
+    m = length(term)
+    if m == 0
         reuturn nothing
-        end
-...
+    end
+    ...
 ```
 Now return to your Julia session and ask to display the term again, and you
 will see it is no longer printed. The package Revise watches the source for changes
