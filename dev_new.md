@@ -1,6 +1,23 @@
-### Working on Julia packages within qiskit_alt
+# Working on Julia packages within qiskit_alt
 
 You can start by using qiskit_alt to set up the Julia project for you.
+
+### Optionally install Julia
+
+You can let qiskit-alt install Julia for you.
+But, Julia is easy to install (except for those who run into a problem!);
+you may want to try it.
+If you do install julia yourself, qiskit-alt will use this installation.
+To install  Look for either *juliaup* or *jill*.
+(Google for *jill python* because there is another non-python version).
+For instance to use jill, do this:
+```shell
+> pip install jill
+> jill install
+```
+This will install julia and try to put it on your command path.
+
+### Install qiskit-alt in development mode
 
 If you are just using qiskit_alt, you can give the command `pip install qiskit_alt`.
 You might try this just to explore a bit.
@@ -22,7 +39,7 @@ using the standard bash shell, you do (inside the qiskit-alt directory)
 > python -m venv ./venv
 > source ./venv/bin/activate  # Activate this environment
 ```
-Just use the command 'deactivate' alone to deactivate the environment later.
+Just use the command `deactivate` alone to deactivate the environment later.
 
 Alternatively, you may want to use `conda`; i.e. instead of `venv`. Use only one or the other
 at a time.
@@ -51,4 +68,41 @@ Do the first initialization of qiskit-alt.
 > ipython
 In [1]: import qiskit_alt
 In [2]: qiskit_alt.project.ensure_init()
+In [3]: %run bench/run_all_bench.py  # test some features
+```
+
+### Develop (that is, work on) a Julia package
+
+You probably only have one version of Julia installed, and it is on your
+path, so you can start it by typing `julia` at the shell prompt.
+But, it may be that qiskit-alt has installed julia and it is *not* on your
+path. (You can try to fix this. I think you may
+need to put `~/.local/bin` on your path (`PATH` environment variable) if it is not already. Some OSes
+have this on your path already.)
+You can also find the path to the julia executable via qiskit-alt like this
+```python
+import qiskit_alt
+qiskit_alt.project.ensure_init()
+qiskit_alt.project.julia_path
+```
+qiskit-alt manages julia dependencies in *Julia project*, which is similar to
+a python virtual environment. You can find the location of the Julia project like this
+```python
+qiskit_alt.project.project_path
+```
+If you are using a `venv` virtual environment, you'll see something like
+```
+'/home/quser/qiskit_alt/venv/julia_project/qiskit_alt-1.7.2'.
+```
+If you are using conda, something like this
+```
+'/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2'
+```
+
+Start julia and activate the project
+```julia
+julia> import Pkg
+
+julia> Pkg.activate("/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2")
+  Activating project at `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2`
 ```
