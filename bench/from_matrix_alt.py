@@ -28,11 +28,17 @@ def run_one(nqubits, num_repetitions):
     print(f"nqubits={nqubits}, {t:0.2f}", "ms")
     return t
 
-qk_alt_times = []
+
+def run_benchmarks():
+    qk_alt_times = []
+
+    for nqubits, num_repetitions in ((2, 50), (3, 50), (4, 10), (5, 10), (6, 10),
+                                     (7, 10),
+                                     (8, 3)):
+        t = run_one(nqubits, num_repetitions)
+        qk_alt_times.append(t)
+    return qk_alt_times
 
 
-for nqubits, num_repetitions in ((2, 50), (3, 50), (4, 10), (5, 10), (6, 10),
-                                 (7, 10),
-                                 (8, 3)):
-    t = run_one(nqubits, num_repetitions)
-    qk_alt_times.append(t)
+if __name__ == '__main__':
+    qk_alt_times = run_benchmarks()

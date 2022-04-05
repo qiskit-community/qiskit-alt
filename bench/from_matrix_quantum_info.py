@@ -18,9 +18,16 @@ def run_one(nqubits, num_repetitions):
     print(f"nqubits={nqubits}, {t:0.2f}", "ms")
     return t
 
-pyqk_times = []
 
-for nqubits, num_repetitions in ((2, 50), (3, 50), (4, 10), (5, 10), (6, 5),
-                                 (7, 1), (8, 1)):
-    t = run_one(nqubits, num_repetitions)
-    pyqk_times.append(t)
+def run_benchmarks():
+    pyqk_times = []
+
+    for nqubits, num_repetitions in ((2, 50), (3, 50), (4, 10), (5, 10), (6, 5),
+                                     (7, 1), (8, 1)):
+        t = run_one(nqubits, num_repetitions)
+        pyqk_times.append(t)
+    return pyqk_times
+
+
+if __name__ == '__main__':
+    pyqk_times = run_benchmarks()
