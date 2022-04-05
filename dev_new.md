@@ -162,8 +162,7 @@ show(io::IO, term::QuantumOps.AbstractTerm) in QuantumOps at /home/quser/.julia/
 The function `show` is responsible for displaying. And the function method is called is on line 17 of *abstract_term.jl*.
 
 Let's say we want to print nothing when there are no Pauli operators instead of `* (1 + 0im)`.
-The method(s) are
-https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21
+The method(s) are (here)[https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21]
 
 ```
 julia> t
