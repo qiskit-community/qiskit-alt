@@ -191,3 +191,6 @@ and recompiles only the changed code.
 julia> t
 0-factor PauliTerm{Vector{Pauli}, Complex{Int64}}:
 ```
+This may not actually be the best way to deal with this problem. But it illustrates
+the process. If needed, you can fork QuantumOps.jl on github and add the fork as a
+`remote` in the git repository `~/.julia/dev/QuantumOps`. You can then push a PR.
