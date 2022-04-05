@@ -142,3 +142,30 @@ julia> pkg"status  QuantumOps"
 ```
 Note that the status now shows the path in `~/.julia/dev/`. This will persist across
 sessions until QuantumOps is freed via `Pkg.free()`.
+
+Now exit Julia and start again, loading the package Revise first.
+```julia
+julia> using Pkg
+julia> Pkg.activate("/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2");
+julia> using Revise; using QuantumOps;
+```
+
+Issue #12 is about printing of Pauli terms. Let's investigate.
+```julia
+julia> t = PauliTerm()
+0-factor PauliTerm{Vector{Pauli}, Complex{Int64}}:
+ * (1 + 0im)
+
+julia> @which show(stdout, t)
+show(io::IO, term::QuantumOps.AbstractTerm) in QuantumOps at /home/quser/.julia/dev/QuantumOps/src/abstract_term.jl:17
+```
+The function `show` is responsible for displaying. And the function method is called is on line 17 of *abstract_term.jl*.
+
+Let's say we want to print nothing when there are no Pauli operators instead of `* (1 + 0im)`.
+The method(s) are
+https://github.com/Qiskit-Extensions/QuantumOps.jl/blob/d5648bf8779bbe1211bd5c63270bad165384e344/src/abstract_term.jl#L7-L21
+
+```
+julia> t
+0-factor PauliTerm{Vector{Pauli}, Complex{Int64}}:
+```
