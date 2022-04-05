@@ -101,10 +101,44 @@ Julia project that looks something like
 '/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2'
 ```
 
-Start julia and activate the project
+Start julia from a shell and activate the project and load a Julia package
+that is in the project
 ```julia
-julia> import Pkg
+julia> using Pkg
 
 julia> Pkg.activate("/home/quser/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2")
-  Activating project at `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2`
+   Activating project at `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2`
+
+julia> using QuantumOps
+
+julia> rand_op_sum(Pauli, 3, 2)
+2x3 PauliSum{Vector{Vector{Pauli}}, Vector{Complex{Int64}}}:
+IXY * (1 + 0im)
+YYZ * (1 + 0im)
 ```
+
+You can check the status of QuantumOps like this
+```julia
+julia> pkg"status QuantumOps"
+      Status `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2/Project.toml`
+  [d0cc4389] QuantumOps v0.1.5
+```
+
+The copy of the `QuantumOps` package is read-only (although that's not shown above.)
+We need to install an editable copy. So we "develop" the package. This will install
+the git repo in a new location where we can edit it.
+```julia
+julia> pkg"develop QuantumOps"
+    Cloning git-repo `https://github.com/Qiskit-Extensions/QuantumOps.jl`
+   Resolving package versions...
+    Updating `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2/Project.toml`
+  [d0cc4389] ~ QuantumOps v0.1.5 ⇒ v0.1.5 `~/.julia/dev/QuantumOps`
+    Updating `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2/Manifest.toml`
+  [d0cc4389] ~ QuantumOps v0.1.5 ⇒ v0.1.5 `~/.julia/dev/QuantumOps`
+
+julia> pkg"status  QuantumOps"
+      Status `~/.conda/envs/qiskit_alt_env/julia_project/qiskit_alt-1.7.2/Project.toml`
+  [d0cc4389] QuantumOps v0.1.5 `~/.julia/dev/QuantumOps`
+```
+Note that the status now shows the path in `~/.julia/dev/`. This will persist across
+sessions until QuantumOps is freed via `Pkg.free()`.
