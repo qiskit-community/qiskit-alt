@@ -6,7 +6,7 @@ source ./venv1/bin/activate && python init_test.py
 echo
 deactivate
 
-echo "source ./venv1/bin/activate && python init_test.py"
+echo "source ./venv_static/bin/activate && python init_test.py"
 source ./venv_static/bin/activate && python init_test.py
 echo
 deactivate

@@ -16,6 +16,13 @@ def basic_inits():
         for calljulia in ("pyjulia", "juliacall"):
             for depot in ("False", "True"):
                 args = f"compile={_compile}, calljulia='{calljulia}', depot={depot}"
+                coms = f"import qiskit_alt; qiskit_alt.project.ensure_init({args})"
+                all_coms.append(coms)
+                if calljulia == "pyjulia":
+                    other_calljulia = "juliacall"
+                else:
+                    other_calljulia = "pyjulia"
+                args = f"compile={_compile}, calljulia='{other_calljulia}', depot={depot}"
                 coms = f"import qiskit_alt; qiskit_alt.project.ensure_init({args}); qiskit_alt.project.clean_all()"
                 all_coms.append(coms)
     return all_coms
