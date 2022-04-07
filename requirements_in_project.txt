@@ -1,0 +1,2 @@
+julia_project>=0.1.27
+
