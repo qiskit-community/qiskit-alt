@@ -3,5 +3,4 @@ juliacall
 pyscf>=2.0.1
 qiskit-terra>=0.19.0
 qiskit-nature>=0.2.2
-julia_project>=0.1.26
 ipywidgets

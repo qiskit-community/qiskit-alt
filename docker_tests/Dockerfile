@@ -52,6 +52,8 @@ RUN conda init bash && conda init fish && conda config --set auto_activate_base 
 USER quser
 WORKDIR /home/quser/qiskit_alt
 
+## Create a conda environment called qiskit_alt_env
+
 RUN printf "y\n" |  conda create -n qiskit_alt_env python=3.9
 RUN conda init bash && conda init fish && conda config --set auto_activate_base false
 
@@ -64,8 +66,6 @@ RUN /opt/conda/bin/python -m venv ./venv_static && \
     source ./venv_static/bin/activate && pip install --upgrade pip ipython && \
     pip install --requirement requirements.txt
 
-## Create a conda environment called qiskit_alt_env
-
 RUN conda activate qiskit_alt_env && pip install ipython && pip install --requirement requirements.txt
 
 ### Copy all and only files required for pip install of qiskit_alt in dev mode
@@ -74,6 +74,16 @@ COPY --chown=quser requirements.txt setup.cfg  pyproject.toml README.md ./
 COPY --chown=quser src ./src/
 
 ### Install qiskit_alt into the three virtual environments we have created.
+
+COPY --chown=quser requirements_in_project.txt .
+RUN source ./venv1/bin/activate && \
+    pip install --requirement requirements_in_project.txt
+
+RUN /opt/conda/bin/python -m venv ./venv_static && \
+    source ./venv_static/bin/activate && \
+    pip install --requirement requirements_in_project.txt
+
+RUN conda activate qiskit_alt_env && pip install --requirement requirements_in_project.txt
 
 RUN source ./venv1/bin/activate && pip install -e .
 RUN source ./venv_static/bin/activate && pip install -e .
