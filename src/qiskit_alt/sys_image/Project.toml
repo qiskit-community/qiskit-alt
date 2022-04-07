@@ -12,6 +12,7 @@ Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SparseArraysN = "7d983096-c313-11eb-0b95-579bee092dbe"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
 
 [compat]
 ElectronicStructure = ">= 0.1.4"
