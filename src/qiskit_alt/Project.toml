@@ -1,11 +1,12 @@
 [deps]
 ElectronicStructure = "f7ec468b-4310-4c77-90aa-f73697106762"
 QiskitQuantumInfo = "8d55b643-9899-48dd-ae5e-3f792c55f725"
+QuantumCircuits = "ad924a34-1f3f-4025-ae82-e16b6f8ddf61"
 QuantumOps = "d0cc4389-ef80-471f-8a8c-dd305d114ada"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 ZChop = "8603256b-76ad-53fe-b511-38a38e6437cd"
 
 [compat]
 ElectronicStructure = ">= 0.1.8"
-ZChop = ">= 0.3.10"
 QuantumOps = ">= 0.1.5"
+ZChop = ">= 0.3.10"
