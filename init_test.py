@@ -27,7 +27,6 @@ def basic_inits():
                 all_coms.append(coms)
     return all_coms
 
-
 # def basic_inits():
 #     all_coms = ["import sys", "import os", "import sdsdff", "import sdsdff", "import shutil"]
 #     return all_coms

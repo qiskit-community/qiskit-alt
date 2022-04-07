@@ -1,5 +1,7 @@
 #### Testing installation with docker
 
+First install docker. We don't cover how to do that here.
+
 Use
 ```shell
 run_dockerfile.sh build
@@ -25,6 +27,12 @@ Use
 run_dockerfile.sh bash
 ```
 for an interactive bash shell.
+
+```shell
+run_dockerfile.sh rootfish
+```
+for an interactive fish shell as root
+
 
 #### 'Manual' building and running
 
