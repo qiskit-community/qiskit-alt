@@ -10,10 +10,10 @@ Manifest.toml
 **/*.so
 repl_history.jl
 bin/
-demos/.ipynb_checkpoints/
+.ipynb_checkpoints/
 .envrc
 src/qiskit_alt.egg-info/
 /qiskit_alt.egg-info/
-/qiskit_alt.log
+qiskit_alt.log
 /julia
 *.disable
