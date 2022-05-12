@@ -58,7 +58,7 @@ def action_run(image_name, image_tag, user_name, test_file_path, test_file_name)
         "-l",
         user_name,
         "-c",
-        "cd " + image_name + "; sh " + test_file_path + test_file_name,
+        "cd qiskit_alt; sh " + test_file_path + test_file_name,
     ]
     return run_command_list
 
