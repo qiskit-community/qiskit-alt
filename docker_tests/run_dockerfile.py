@@ -14,8 +14,6 @@ def subprocess_execute(command_list):
     Arguments:
     command_list: This is a list of string making the command to be executed.
     """
-    command_string = " ".join(map(str, command_list))
-    print(command_string + "\n")
     sb_pr.run(command_list, text=True, check=True)
 
 
@@ -38,7 +36,7 @@ def action_build(image_name, image_tag, dockerfile_name, docker_path):
         dockerfile_name,
         docker_path,
     ]
-    subprocess_execute(build_command_list)
+    return build_command_list
 
 
 def action_run(image_name, image_tag, user_name, test_file_path, test_file_name):
@@ -62,7 +60,7 @@ def action_run(image_name, image_tag, user_name, test_file_path, test_file_name)
         "-c",
         "cd " + image_name + "; sh " + test_file_path + test_file_name,
     ]
-    subprocess_execute(run_command_list)
+    return run_command_list
 
 
 def action_get_into_fish(image_name, image_tag, user_name):
@@ -85,7 +83,7 @@ def action_get_into_fish(image_name, image_tag, user_name):
         "-s",
         "/usr/bin/fish",
     ]
-    subprocess_execute(get_fish_command_list)
+    return get_fish_command_list
 
 
 def action_get_into_bash(image_name, image_tag, user_name):
@@ -108,7 +106,7 @@ def action_get_into_bash(image_name, image_tag, user_name):
         "-s",
         "/usr/bin/bash",
     ]
-    subprocess_execute(get_bash_command_list)
+    return get_bash_command_list
 
 
 def action_get_into_rootfish(image_name, image_tag):
@@ -128,7 +126,7 @@ def action_get_into_rootfish(image_name, image_tag):
         image_name_with_tag,
         "/usr/bin/fish",
     ]
-    subprocess_execute(get_rootfish_command_list)
+    return get_rootfish_command_list
 
 
 def _cli(
@@ -140,6 +138,7 @@ def _cli(
     test_file_path="./",
     test_file_name="run_init_tests.sh",
     docker_path="..",
+    dry_run="false",
 ):
     """All the arguments of this function are supposed to be passed as command line
         arguments while initiating the python script.
@@ -161,23 +160,40 @@ def _cli(
         user_name: A username in the container.
         test_file_path: The path to the test file which contains all the tests to run.
         docker_path: The working directory for docker.
+        dry_run: Either true or false. If true, then only print action, but don't execute it.
     """
 
+    if dry_run == "false":
+        _dry_run = False
+    elif dry_run == "true":
+        _dry_run = True
+    else:
+        print("dry_run must be either true or false. See ./run_dockerfile.py --help")
+        return
+
+    command_lists = []
+
     if action == "build":
-        action_build(image_name, image_tag, dockerfile_name, docker_path)
+        command_lists.append(action_build(image_name, image_tag, dockerfile_name, docker_path))
     elif action == "run":
-        action_run(image_name, image_tag, user_name, test_file_path, test_file_name)
+        command_lists.append(action_run(image_name, image_tag, user_name, test_file_path, test_file_name))
     elif action == "":
-        action_build(image_name, image_tag, dockerfile_name, docker_path)
-        action_run(image_name, image_tag, user_name, test_file_path, test_file_name)
+        command_lists.append(action_build(image_name, image_tag, dockerfile_name, docker_path))
+        command_lists.append(action_run(image_name, image_tag, user_name, test_file_path, test_file_name))
     elif action == "get_into_fish":
-        action_get_into_fish(image_name, image_tag, user_name)
+        command_lists.append(action_get_into_fish(image_name, image_tag, user_name))
     elif action == "get_into_bash":
-        action_get_into_bash(image_name, image_tag, user_name)
+        command_lists.append(action_get_into_bash(image_name, image_tag, user_name))
     elif action == "get_into_rootfish":
-        action_get_into_rootfish(image_name, image_tag)
+        command_lists.append(action_get_into_rootfish(image_name, image_tag))
     else:
         print("Bad arguments, See ./run_dockerfile.py --help")
+
+    for command_list in command_lists:
+        command_string = " ".join(map(str, command_list))
+        print(command_string + "\n")
+        if not _dry_run:
+            subprocess_execute(command_list)
 
 
 if __name__ == "__main__":
