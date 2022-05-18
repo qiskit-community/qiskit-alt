@@ -4,3 +4,4 @@ pyscf>=2.0.1
 qiskit-terra>=0.19.0
 qiskit-nature>=0.2.2
 ipywidgets
+fire>=0.4.0
