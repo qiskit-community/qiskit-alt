@@ -75,8 +75,8 @@ But it can be [downloaded here](./bench/).
    to import one of them. But, you won't import them directly.
 
 *  When you initialize with `qiskit_alt.project.ensure_init()` the default communication package is chosen.
-   You can also choose explicitly with `qiskit_alt.project.ensure_init(calljula="pyjulia")`
-   or `qiskit_alt.project.ensure_init(calljula="juliacall")`
+   You can also choose explicitly with `qiskit_alt.project.ensure_init(calljulia="pyjulia")`
+   or `qiskit_alt.project.ensure_init(calljulia="juliacall")`
 
 * The installation is interactive. How to do a non-interactive installation with environment variables is
   described below.
