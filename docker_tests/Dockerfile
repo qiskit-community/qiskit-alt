@@ -1,15 +1,9 @@
-# I used fedora:34 rather than fedora:35 as the base image because of
-# https://bugzilla.redhat.com/show_bug.cgi?id=1988199.
-# Comment 26 there points to an upstream RHEL bug, but I am not
-# certain it is the same bug as I was experiencing [garrison].
-FROM fedora:34
+FROM fedora:36
 
 ### Install all needed packages from distribution and remove the package download cache.
-RUN dnf install -y git @development-tools gcc-c++ python3 python3-devel passwd fish emacs wget && \
+### Install and use python 3.9 because pyscf does not work with python 3.10
+RUN dnf install -y git @development-tools gcc-c++ python3.9 python3-devel passwd fish emacs wget && \
       dnf clean dbcache
-
-# Is the followig necessary ?
-RUN python3 -m pip install -U pip
 
 ### Create a user 'quser' and add to sudoers
 
@@ -21,9 +15,9 @@ RUN useradd --create-home --shell /bin/bash quser && echo "quser:quser" | chpass
 WORKDIR /home/quser/qiskit_alt
 USER quser
 
-### Create a virtual envirnoment venv1, install jill.py, and install julia via jill.py
+### Create a virtual environment venv1, install jill.py, and install julia via jill.py
 
-RUN python3 -m venv ./venv1 && source ./venv1/bin/activate && pip install --upgrade pip jill && \
+RUN python3.9 -m venv ./venv1 && source ./venv1/bin/activate && pip install --upgrade pip jill && \
     jill install --confirm
 # Note 'printf "y\n" | jill install' works at the cli, but not here :(
 

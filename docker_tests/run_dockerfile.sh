@@ -25,7 +25,7 @@ elif [[ $1 == "rootfish" ]]
 then
     docker run -it qiskit_alt /usr/bin/fish
 else
-    echo Excpecting argument "build" or "run", got $1
+    echo Expecting argument "build" or "run", got $1
     echo "'run_dockerfile.sh build' to build image"
     echo "'run_dockerfile.sh run' to run tests in container"
     echo "'run_dockerfile.sh' to build, then run."
