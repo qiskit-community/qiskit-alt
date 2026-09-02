@@ -1,3 +1,7 @@
+> [!NOTE]
+> 
+> This package is no longer maintained.  Users are encouraged to use [Qiskit.jl](https://github.com/Qiskit/Qiskit.jl) instead.
+
 # qiskit_alt
 
 ## qiskit_alt
